@@ -1,0 +1,85 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "SpaceContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Space",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Asteroids]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BlackHoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Comets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Constellations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Galaxies]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GalaxyClusters]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GalaxyGroups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Nebulae]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlanetarySystems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Planets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[StarClusters]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Stars]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "bimo\\sqlexpress.Space.dbo",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
