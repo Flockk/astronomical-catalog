@@ -1,0 +1,93 @@
+﻿@model Space.Models.Galaxies
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Galaxies</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxRightAscension)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxRightAscension)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxDeclination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxDeclination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxRedshift)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxRedshift)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxDistance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxDistance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxApparentMagnitude)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxApparentMagnitude)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxRadialVelocity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxRadialVelocity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxRadius)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxRadius)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cons)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Glxcluster)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Glxcluster.GlxclusterName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Glxgroup)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Glxgroup.GlxgroupName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="GlxId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

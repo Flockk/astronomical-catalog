@@ -1,0 +1,66 @@
+﻿@model Space.Models.Planets
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Planets</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlntName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlntName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlntEccentricity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlntEccentricity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlntSemiMajorAxis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlntSemiMajorAxis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlntOrbitalPeriod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlntOrbitalPeriod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlntArgumentOfPerihelion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlntArgumentOfPerihelion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlntMass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlntMass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cons)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Star)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Star.StarName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.PlntId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

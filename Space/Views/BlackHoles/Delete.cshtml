@@ -1,0 +1,63 @@
+﻿@model Space.Models.BlackHoles
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BlackHoles</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BlackholeName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BlackholeName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BlackholeType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BlackholeType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BlackholeRightAscension)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BlackholeRightAscension)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BlackholeDeclination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BlackholeDeclination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BlackholeDistance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BlackholeDistance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cons)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Glx)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Glx.GlxName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="BlackHoleId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

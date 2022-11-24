@@ -1,0 +1,72 @@
+﻿@model Space.Models.StarClusters
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>StarClusters</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterRightAscension)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterRightAscension)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterDeclination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterDeclination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterDistance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterDistance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterAge)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterAge)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarclusterDiameter)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarclusterDiameter)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cons)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Glx)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Glx.GlxName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.StarclusterId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

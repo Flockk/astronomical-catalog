@@ -1,0 +1,85 @@
+﻿@model Space.Models.Galaxies
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Galaxies</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ConsId" class="control-label"></label>
+                <select asp-for="ConsId" class ="form-control" asp-items="ViewBag.ConsId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxclusterId" class="control-label"></label>
+                <select asp-for="GlxclusterId" class ="form-control" asp-items="ViewBag.GlxclusterId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxgroupId" class="control-label"></label>
+                <select asp-for="GlxgroupId" class ="form-control" asp-items="ViewBag.GlxgroupId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxName" class="control-label"></label>
+                <input asp-for="GlxName" class="form-control" />
+                <span asp-validation-for="GlxName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxType" class="control-label"></label>
+                <input asp-for="GlxType" class="form-control" />
+                <span asp-validation-for="GlxType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxRightAscension" class="control-label"></label>
+                <input asp-for="GlxRightAscension" class="form-control" />
+                <span asp-validation-for="GlxRightAscension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxDeclination" class="control-label"></label>
+                <input asp-for="GlxDeclination" class="form-control" />
+                <span asp-validation-for="GlxDeclination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxRedshift" class="control-label"></label>
+                <input asp-for="GlxRedshift" class="form-control" />
+                <span asp-validation-for="GlxRedshift" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxDistance" class="control-label"></label>
+                <input asp-for="GlxDistance" class="form-control" />
+                <span asp-validation-for="GlxDistance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxApparentMagnitude" class="control-label"></label>
+                <input asp-for="GlxApparentMagnitude" class="form-control" />
+                <span asp-validation-for="GlxApparentMagnitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxRadialVelocity" class="control-label"></label>
+                <input asp-for="GlxRadialVelocity" class="form-control" />
+                <span asp-validation-for="GlxRadialVelocity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxRadius" class="control-label"></label>
+                <input asp-for="GlxRadius" class="form-control" />
+                <span asp-validation-for="GlxRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

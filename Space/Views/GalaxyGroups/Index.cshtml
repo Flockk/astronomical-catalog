@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Space.Models.GalaxyGroups>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxgroupName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxgroupType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxgroupRightAscension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxgroupDeclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxgroupRedshift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxgroupName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxgroupType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxgroupRightAscension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxgroupDeclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxgroupRedshift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GlxgroupId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GlxgroupId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GlxgroupId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

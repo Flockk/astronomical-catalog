@@ -1,0 +1,74 @@
+﻿@model Space.Models.StarClusters
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>StarClusters</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="StarclusterId" />
+            <div class="form-group">
+                <label asp-for="ConsId" class="control-label"></label>
+                <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
+                <span asp-validation-for="ConsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxId" class="control-label"></label>
+                <select asp-for="GlxId" class="form-control" asp-items="ViewBag.GlxId"></select>
+                <span asp-validation-for="GlxId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterName" class="control-label"></label>
+                <input asp-for="StarclusterName" class="form-control" />
+                <span asp-validation-for="StarclusterName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterType" class="control-label"></label>
+                <input asp-for="StarclusterType" class="form-control" />
+                <span asp-validation-for="StarclusterType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterRightAscension" class="control-label"></label>
+                <input asp-for="StarclusterRightAscension" class="form-control" />
+                <span asp-validation-for="StarclusterRightAscension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterDeclination" class="control-label"></label>
+                <input asp-for="StarclusterDeclination" class="form-control" />
+                <span asp-validation-for="StarclusterDeclination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterDistance" class="control-label"></label>
+                <input asp-for="StarclusterDistance" class="form-control" />
+                <span asp-validation-for="StarclusterDistance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterAge" class="control-label"></label>
+                <input asp-for="StarclusterAge" class="form-control" />
+                <span asp-validation-for="StarclusterAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarclusterDiameter" class="control-label"></label>
+                <input asp-for="StarclusterDiameter" class="form-control" />
+                <span asp-validation-for="StarclusterDiameter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

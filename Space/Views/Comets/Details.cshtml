@@ -1,0 +1,60 @@
+﻿@model Space.Models.Comets
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Comets</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CometName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CometName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CometOrbitalPeriod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CometOrbitalPeriod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CometSemiMajorAxis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CometSemiMajorAxis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CometPerihelion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CometPerihelion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CometEccentricity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CometEccentricity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CometOrbitalInclination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CometOrbitalInclination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Star)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Star.StarName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CometId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Space.Models.PlanetarySystems>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanetsystemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanetsystemConfirmedPlanets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Glx)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlanetsystemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlanetsystemConfirmedPlanets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Glx.GlxName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PlanetsystemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PlanetsystemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PlanetsystemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

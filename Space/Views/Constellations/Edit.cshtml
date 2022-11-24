@@ -1,0 +1,64 @@
+﻿@model Space.Models.Constellations
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Constellations</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ConsId" />
+            <div class="form-group">
+                <label asp-for="ConsName" class="control-label"></label>
+                <input asp-for="ConsName" class="form-control" />
+                <span asp-validation-for="ConsName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsAbbreviation" class="control-label"></label>
+                <input asp-for="ConsAbbreviation" class="form-control" />
+                <span asp-validation-for="ConsAbbreviation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsSymbolism" class="control-label"></label>
+                <input asp-for="ConsSymbolism" class="form-control" />
+                <span asp-validation-for="ConsSymbolism" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsRightAscension" class="control-label"></label>
+                <input asp-for="ConsRightAscension" class="form-control" />
+                <span asp-validation-for="ConsRightAscension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsDeclination" class="control-label"></label>
+                <input asp-for="ConsDeclination" class="form-control" />
+                <span asp-validation-for="ConsDeclination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsSquare" class="control-label"></label>
+                <input asp-for="ConsSquare" class="form-control" />
+                <span asp-validation-for="ConsSquare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsVisibleInLatitudes" class="control-label"></label>
+                <input asp-for="ConsVisibleInLatitudes" class="form-control" />
+                <span asp-validation-for="ConsVisibleInLatitudes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
