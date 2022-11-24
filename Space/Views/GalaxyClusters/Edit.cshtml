@@ -1,0 +1,59 @@
+﻿@model Space.Models.GalaxyClusters
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>GalaxyClusters</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GlxclusterId" />
+            <div class="form-group">
+                <label asp-for="ConsId" class="control-label"></label>
+                <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
+                <span asp-validation-for="ConsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxclusterName" class="control-label"></label>
+                <input asp-for="GlxclusterName" class="form-control" />
+                <span asp-validation-for="GlxclusterName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxclusterType" class="control-label"></label>
+                <input asp-for="GlxclusterType" class="form-control" />
+                <span asp-validation-for="GlxclusterType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxclusterRightAscension" class="control-label"></label>
+                <input asp-for="GlxclusterRightAscension" class="form-control" />
+                <span asp-validation-for="GlxclusterRightAscension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxclusterDeclination" class="control-label"></label>
+                <input asp-for="GlxclusterDeclination" class="form-control" />
+                <span asp-validation-for="GlxclusterDeclination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxclusterRedshift" class="control-label"></label>
+                <input asp-for="GlxclusterRedshift" class="form-control" />
+                <span asp-validation-for="GlxclusterRedshift" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

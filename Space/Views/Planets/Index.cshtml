@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Space.Models.Planets>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlntName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlntEccentricity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlntSemiMajorAxis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlntOrbitalPeriod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlntArgumentOfPerihelion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlntMass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Star)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlntName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlntEccentricity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlntSemiMajorAxis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlntOrbitalPeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlntArgumentOfPerihelion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlntMass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Star.StarName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PlntId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PlntId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PlntId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

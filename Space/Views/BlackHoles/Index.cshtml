@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Space.Models.BlackHoles>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackholeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackholeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackholeRightAscension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackholeDeclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackholeDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Glx)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackholeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackholeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackholeRightAscension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackholeDeclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackholeDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Glx.GlxName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BlackHoleId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BlackHoleId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BlackHoleId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

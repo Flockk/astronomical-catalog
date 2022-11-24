@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Space.Models.Stars>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StarName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StarApparentMagnitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StarStellarClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StarDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StarDeclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Glx)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Planetsystem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Starcluster)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarApparentMagnitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarStellarClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarDeclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Glx.GlxName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Planetsystem.PlanetsystemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Starcluster.StarclusterName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StarId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StarId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StarId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

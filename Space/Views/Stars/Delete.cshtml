@@ -1,0 +1,75 @@
+﻿@model Space.Models.Stars
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Stars</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarApparentMagnitude)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarApparentMagnitude)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarStellarClass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarStellarClass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarDistance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarDistance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StarDeclination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StarDeclination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cons)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Glx)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Glx.GlxName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Planetsystem)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Planetsystem.PlanetsystemName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Starcluster)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Starcluster.StarclusterName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="StarId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

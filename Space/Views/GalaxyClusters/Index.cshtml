@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Space.Models.GalaxyClusters>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxclusterName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxclusterType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxclusterRightAscension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxclusterDeclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxclusterRedshift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxclusterName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxclusterType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxclusterRightAscension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxclusterDeclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxclusterRedshift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GlxclusterId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GlxclusterId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GlxclusterId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

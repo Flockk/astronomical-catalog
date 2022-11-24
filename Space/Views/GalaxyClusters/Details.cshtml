@@ -1,0 +1,54 @@
+﻿@model Space.Models.GalaxyClusters
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>GalaxyClusters</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxclusterName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxclusterName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxclusterType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxclusterType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxclusterRightAscension)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxclusterRightAscension)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxclusterDeclination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxclusterDeclination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GlxclusterRedshift)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GlxclusterRedshift)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cons)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.GlxclusterId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

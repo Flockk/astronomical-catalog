@@ -1,0 +1,61 @@
+﻿@model Space.Models.Nebulae
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Nebulae</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ConsId" class="control-label"></label>
+                <select asp-for="ConsId" class ="form-control" asp-items="ViewBag.ConsId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlxId" class="control-label"></label>
+                <select asp-for="GlxId" class ="form-control" asp-items="ViewBag.GlxId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NebulaName" class="control-label"></label>
+                <input asp-for="NebulaName" class="form-control" />
+                <span asp-validation-for="NebulaName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NebulaType" class="control-label"></label>
+                <input asp-for="NebulaType" class="form-control" />
+                <span asp-validation-for="NebulaType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NebulaRightAscension" class="control-label"></label>
+                <input asp-for="NebulaRightAscension" class="form-control" />
+                <span asp-validation-for="NebulaRightAscension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NebulaDeclination" class="control-label"></label>
+                <input asp-for="NebulaDeclination" class="form-control" />
+                <span asp-validation-for="NebulaDeclination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NebulaDistance" class="control-label"></label>
+                <input asp-for="NebulaDistance" class="form-control" />
+                <span asp-validation-for="NebulaDistance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

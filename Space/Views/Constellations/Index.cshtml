@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Space.Models.Constellations>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsAbbreviation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsSymbolism)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsRightAscension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsDeclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsSquare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsAbbreviation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsSymbolism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsRightAscension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsDeclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsSquare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsVisibleInLatitudes)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ConsId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ConsId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ConsId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

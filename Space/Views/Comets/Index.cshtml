@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Space.Models.Comets>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CometName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CometOrbitalPeriod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CometSemiMajorAxis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CometPerihelion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CometEccentricity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CometOrbitalInclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Star)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CometName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CometOrbitalPeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CometSemiMajorAxis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CometPerihelion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CometEccentricity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CometOrbitalInclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Star.StarName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CometId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CometId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CometId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

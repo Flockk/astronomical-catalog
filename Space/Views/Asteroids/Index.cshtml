@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Space.Models.Asteroids>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AstDiameter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AstOrbitalEccentricity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AstOrbitalInclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AstArgumentOfPerihelion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AstMeanAnomaly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Star)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AstDiameter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AstOrbitalEccentricity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AstOrbitalInclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AstArgumentOfPerihelion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AstMeanAnomaly)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Star.StarName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AstId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AstId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AstId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

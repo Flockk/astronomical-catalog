@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Space.Models.Galaxies>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxRightAscension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxDeclination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxRedshift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxApparentMagnitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxRadialVelocity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlxRadius)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Glxcluster)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Glxgroup)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxRightAscension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxDeclination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxRedshift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxApparentMagnitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxRadialVelocity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlxRadius)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Glxcluster.GlxclusterName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Glxgroup.GlxgroupName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GlxId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GlxId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GlxId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
