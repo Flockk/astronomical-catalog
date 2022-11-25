@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: Nebulae
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.Nebulae.Include(n => n.Cons).Include(n => n.Glx);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: Nebulae/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Nebulae == null)
@@ -45,17 +43,13 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
-        // GET: Nebulae/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName");
             return View();
         }
 
-        // POST: Nebulae/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance")] Nebulae nebulae)
@@ -66,12 +60,11 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", nebulae.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", nebulae.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", nebulae.GlxId);
             return View(nebulae);
         }
 
-        // GET: Nebulae/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Nebulae == null)
@@ -84,14 +77,11 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", nebulae.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", nebulae.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", nebulae.GlxId);
             return View(nebulae);
         }
 
-        // POST: Nebulae/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance")] Nebulae nebulae)
@@ -121,12 +111,11 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", nebulae.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", nebulae.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", nebulae.GlxId);
             return View(nebulae);
         }
 
-        // GET: Nebulae/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Nebulae == null)
@@ -146,7 +135,6 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
-        // POST: Nebulae/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

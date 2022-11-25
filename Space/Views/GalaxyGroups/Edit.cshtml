@@ -1,12 +1,11 @@
 ﻿@model Space.Models.GalaxyGroups
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Изменение группы галактик";
 }
 
-<h1>Edit</h1>
+<h3>Изменение группы галактик</h3>
 
-<h4>GalaxyGroups</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -44,14 +43,14 @@
                 <span asp-validation-for="GlxgroupRedshift" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {

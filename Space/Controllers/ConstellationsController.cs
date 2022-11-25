@@ -18,7 +18,6 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: Constellations
         public async Task<IActionResult> Index()
         {
               return _context.Constellations != null ? 
@@ -26,7 +25,6 @@ namespace Space.Controllers
                           Problem("Entity set 'SpaceContext.Constellations'  is null.");
         }
 
-        // GET: Constellations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Constellations == null)
@@ -44,15 +42,11 @@ namespace Space.Controllers
             return View(constellations);
         }
 
-        // GET: Constellations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Constellations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ConsId,ConsName,ConsAbbreviation,ConsSymbolism,ConsRightAscension,ConsDeclination,ConsSquare,ConsVisibleInLatitudes")] Constellations constellations)
@@ -66,7 +60,6 @@ namespace Space.Controllers
             return View(constellations);
         }
 
-        // GET: Constellations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Constellations == null)
@@ -82,9 +75,6 @@ namespace Space.Controllers
             return View(constellations);
         }
 
-        // POST: Constellations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ConsId,ConsName,ConsAbbreviation,ConsSymbolism,ConsRightAscension,ConsDeclination,ConsSquare,ConsVisibleInLatitudes")] Constellations constellations)
@@ -117,7 +107,6 @@ namespace Space.Controllers
             return View(constellations);
         }
 
-        // GET: Constellations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Constellations == null)
@@ -135,7 +124,6 @@ namespace Space.Controllers
             return View(constellations);
         }
 
-        // POST: Constellations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

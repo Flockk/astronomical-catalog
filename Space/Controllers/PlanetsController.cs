@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: Planets
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.Planets.Include(p => p.Cons).Include(p => p.Star);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: Planets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Planets == null)
@@ -45,17 +43,13 @@ namespace Space.Controllers
             return View(planets);
         }
 
-        // GET: Planets/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName");
             return View();
         }
 
-        // POST: Planets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PlntId,ConsId,StarId,PlntName,PlntEccentricity,PlntSemiMajorAxis,PlntOrbitalPeriod,PlntArgumentOfPerihelion,PlntMass")] Planets planets)
@@ -66,12 +60,11 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", planets.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planets.ConsId);
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", planets.StarId);
             return View(planets);
         }
 
-        // GET: Planets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Planets == null)
@@ -84,14 +77,11 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", planets.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planets.ConsId);
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", planets.StarId);
             return View(planets);
         }
 
-        // POST: Planets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PlntId,ConsId,StarId,PlntName,PlntEccentricity,PlntSemiMajorAxis,PlntOrbitalPeriod,PlntArgumentOfPerihelion,PlntMass")] Planets planets)
@@ -121,12 +111,11 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", planets.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planets.ConsId);
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", planets.StarId);
             return View(planets);
         }
 
-        // GET: Planets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Planets == null)
@@ -146,7 +135,6 @@ namespace Space.Controllers
             return View(planets);
         }
 
-        // POST: Planets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

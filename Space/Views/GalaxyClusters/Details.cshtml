@@ -1,13 +1,12 @@
 ﻿@model Space.Models.GalaxyClusters
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детали скопления галактик";
 }
 
-<h1>Details</h1>
+<h3>Детали скопления галактик</h3>
 
 <div>
-    <h4>GalaxyClusters</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -44,11 +43,11 @@
             @Html.DisplayNameFor(model => model.Cons)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+            @Html.DisplayFor(model => model.Cons.ConsName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.GlxclusterId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.GlxclusterId">Изменить</a> |
+    <a asp-action="Index">Назад</a>
 </div>

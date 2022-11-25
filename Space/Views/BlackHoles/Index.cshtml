@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Space.Models.BlackHoles>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Чёрные дыры";
 }
 
-<h1>Index</h1>
+<h1>Чёрные дыры</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить</a>
 </p>
 <table class="table">
     <thead>
@@ -55,15 +55,15 @@
                 @Html.DisplayFor(modelItem => item.BlackholeDistance)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+                @Html.DisplayFor(modelItem => item.Cons.ConsName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Glx.GlxName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.BlackHoleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BlackHoleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BlackHoleId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.BlackHoleId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.BlackHoleId">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.BlackHoleId">Удалить</a>
             </td>
         </tr>
 }

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Space.Models.Galaxies>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Галактики";
 }
 
-<h1>Index</h1>
+<h1>Галактики</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить</a>
 </p>
 <table class="table">
     <thead>
@@ -82,7 +82,7 @@
                 @Html.DisplayFor(modelItem => item.GlxRadius)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+                @Html.DisplayFor(modelItem => item.Cons.ConsName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Glxcluster.GlxclusterName)
@@ -91,9 +91,9 @@
                 @Html.DisplayFor(modelItem => item.Glxgroup.GlxgroupName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.GlxId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GlxId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GlxId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.GlxId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.GlxId">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.GlxId">Удалить</a>
             </td>
         </tr>
 }

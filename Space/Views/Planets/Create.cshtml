@@ -1,12 +1,10 @@
 ﻿@model Space.Models.Planets
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Добавление планеты";
 }
 
-<h1>Create</h1>
-
-<h4>Planets</h4>
+<h3>Добавление планеты</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -51,14 +49,14 @@
                 <span asp-validation-for="PlntMass" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Добавить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {

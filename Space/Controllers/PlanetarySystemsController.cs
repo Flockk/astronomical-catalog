@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: PlanetarySystems
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.PlanetarySystems.Include(p => p.Cons).Include(p => p.Glx);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: PlanetarySystems/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.PlanetarySystems == null)
@@ -45,17 +43,13 @@ namespace Space.Controllers
             return View(planetarySystems);
         }
 
-        // GET: PlanetarySystems/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName");
             return View();
         }
 
-        // POST: PlanetarySystems/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets")] PlanetarySystems planetarySystems)
@@ -66,12 +60,11 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", planetarySystems.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planetarySystems.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", planetarySystems.GlxId);
             return View(planetarySystems);
         }
 
-        // GET: PlanetarySystems/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.PlanetarySystems == null)
@@ -84,14 +77,11 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", planetarySystems.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planetarySystems.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", planetarySystems.GlxId);
             return View(planetarySystems);
         }
 
-        // POST: PlanetarySystems/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets")] PlanetarySystems planetarySystems)
@@ -121,12 +111,11 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", planetarySystems.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planetarySystems.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", planetarySystems.GlxId);
             return View(planetarySystems);
         }
 
-        // GET: PlanetarySystems/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.PlanetarySystems == null)
@@ -146,7 +135,6 @@ namespace Space.Controllers
             return View(planetarySystems);
         }
 
-        // POST: PlanetarySystems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

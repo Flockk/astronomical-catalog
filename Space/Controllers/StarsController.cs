@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: Stars
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.Stars.Include(s => s.Cons).Include(s => s.Glx).Include(s => s.Planetsystem).Include(s => s.Starcluster);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: Stars/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Stars == null)
@@ -47,19 +45,15 @@ namespace Space.Controllers
             return View(stars);
         }
 
-        // GET: Stars/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName");
             ViewData["PlanetsystemId"] = new SelectList(_context.PlanetarySystems, "PlanetsystemId", "PlanetsystemName");
             ViewData["StarclusterId"] = new SelectList(_context.StarClusters, "StarclusterId", "StarclusterName");
             return View();
         }
 
-        // POST: Stars/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StarId,ConsId,GlxId,StarclusterId,PlanetsystemId,StarName,StarApparentMagnitude,StarStellarClass,StarDistance,StarDeclination")] Stars stars)
@@ -70,14 +64,13 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", stars.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", stars.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", stars.GlxId);
             ViewData["PlanetsystemId"] = new SelectList(_context.PlanetarySystems, "PlanetsystemId", "PlanetsystemName", stars.PlanetsystemId);
             ViewData["StarclusterId"] = new SelectList(_context.StarClusters, "StarclusterId", "StarclusterName", stars.StarclusterId);
             return View(stars);
         }
 
-        // GET: Stars/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Stars == null)
@@ -90,16 +83,13 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", stars.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", stars.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", stars.GlxId);
             ViewData["PlanetsystemId"] = new SelectList(_context.PlanetarySystems, "PlanetsystemId", "PlanetsystemName", stars.PlanetsystemId);
             ViewData["StarclusterId"] = new SelectList(_context.StarClusters, "StarclusterId", "StarclusterName", stars.StarclusterId);
             return View(stars);
         }
 
-        // POST: Stars/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("StarId,ConsId,GlxId,StarclusterId,PlanetsystemId,StarName,StarApparentMagnitude,StarStellarClass,StarDistance,StarDeclination")] Stars stars)
@@ -129,14 +119,13 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", stars.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", stars.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", stars.GlxId);
             ViewData["PlanetsystemId"] = new SelectList(_context.PlanetarySystems, "PlanetsystemId", "PlanetsystemName", stars.PlanetsystemId);
             ViewData["StarclusterId"] = new SelectList(_context.StarClusters, "StarclusterId", "StarclusterName", stars.StarclusterId);
             return View(stars);
         }
 
-        // GET: Stars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Stars == null)
@@ -158,7 +147,6 @@ namespace Space.Controllers
             return View(stars);
         }
 
-        // POST: Stars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

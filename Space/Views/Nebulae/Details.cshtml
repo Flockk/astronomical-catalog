@@ -1,13 +1,12 @@
 ﻿@model Space.Models.Nebulae
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детали туманности";
 }
 
-<h1>Details</h1>
+<h3>Детали туманности</h3>
 
 <div>
-    <h4>Nebulae</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -44,7 +43,7 @@
             @Html.DisplayNameFor(model => model.Cons)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+            @Html.DisplayFor(model => model.Cons.ConsName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Glx)
@@ -55,6 +54,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.NebulaId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.NebulaId">Изменить</a> |
+    <a asp-action="Index">Назад</a>
 </div>

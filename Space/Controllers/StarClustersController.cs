@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: StarClusters
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.StarClusters.Include(s => s.Cons).Include(s => s.Glx);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: StarClusters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.StarClusters == null)
@@ -45,17 +43,13 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
-        // GET: StarClusters/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName");
             return View();
         }
 
-        // POST: StarClusters/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StarclusterId,ConsId,GlxId,StarclusterName,StarclusterType,StarclusterRightAscension,StarclusterDeclination,StarclusterDistance,StarclusterAge,StarclusterDiameter")] StarClusters starClusters)
@@ -66,12 +60,11 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", starClusters.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", starClusters.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", starClusters.GlxId);
             return View(starClusters);
         }
 
-        // GET: StarClusters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.StarClusters == null)
@@ -84,14 +77,11 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", starClusters.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", starClusters.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", starClusters.GlxId);
             return View(starClusters);
         }
 
-        // POST: StarClusters/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("StarclusterId,ConsId,GlxId,StarclusterName,StarclusterType,StarclusterRightAscension,StarclusterDeclination,StarclusterDistance,StarclusterAge,StarclusterDiameter")] StarClusters starClusters)
@@ -121,12 +111,11 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", starClusters.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", starClusters.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", starClusters.GlxId);
             return View(starClusters);
         }
 
-        // GET: StarClusters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.StarClusters == null)
@@ -146,7 +135,6 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
-        // POST: StarClusters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

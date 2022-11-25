@@ -1,16 +1,14 @@
 ﻿@model Space.Models.Stars
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Изменение звезды";
 }
 
-<h1>Edit</h1>
-
-<h4>Stars</h4>
+<h3>Изменение звезды</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Изменить">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="StarId" />
             <div class="form-group">
@@ -66,7 +64,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Space.Models.GalaxyClusters>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Скопления галактик";
 }
 
-<h1>Index</h1>
+<h1>Скопления галактик</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить</a>
 </p>
 <table class="table">
     <thead>
@@ -52,12 +52,12 @@
                 @Html.DisplayFor(modelItem => item.GlxclusterRedshift)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+                @Html.DisplayFor(modelItem => item.Cons.ConsName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.GlxclusterId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GlxclusterId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GlxclusterId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.GlxclusterId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.GlxclusterId">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.GlxclusterId">Удалить</a>
             </td>
         </tr>
 }

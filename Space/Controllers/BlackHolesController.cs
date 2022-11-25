@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: BlackHoles
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.BlackHoles.Include(b => b.Cons).Include(b => b.Glx);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: BlackHoles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.BlackHoles == null)
@@ -45,17 +43,13 @@ namespace Space.Controllers
             return View(blackHoles);
         }
 
-        // GET: BlackHoles/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName");
             return View();
         }
 
-        // POST: BlackHoles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BlackHoleId,ConsId,GlxId,BlackholeName,BlackholeType,BlackholeRightAscension,BlackholeDeclination,BlackholeDistance")] BlackHoles blackHoles)
@@ -66,12 +60,11 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", blackHoles.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", blackHoles.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", blackHoles.GlxId);
             return View(blackHoles);
         }
 
-        // GET: BlackHoles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.BlackHoles == null)
@@ -84,14 +77,11 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", blackHoles.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", blackHoles.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", blackHoles.GlxId);
             return View(blackHoles);
         }
 
-        // POST: BlackHoles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BlackHoleId,ConsId,GlxId,BlackholeName,BlackholeType,BlackholeRightAscension,BlackholeDeclination,BlackholeDistance")] BlackHoles blackHoles)
@@ -121,12 +111,11 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", blackHoles.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", blackHoles.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", blackHoles.GlxId);
             return View(blackHoles);
         }
 
-        // GET: BlackHoles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.BlackHoles == null)
@@ -146,7 +135,6 @@ namespace Space.Controllers
             return View(blackHoles);
         }
 
-        // POST: BlackHoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

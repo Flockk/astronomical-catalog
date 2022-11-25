@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Space.Models.Stars>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Звёзды";
 }
 
-<h1>Index</h1>
+<h1>Звёзды</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить</a>
 </p>
 <table class="table">
     <thead>
@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.StarDeclination)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+                @Html.DisplayFor(modelItem => item.Cons.ConsName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Glx.GlxName)
@@ -73,9 +73,9 @@
                 @Html.DisplayFor(modelItem => item.Starcluster.StarclusterName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.StarId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.StarId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StarId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.StarId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.StarId">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.StarId">Удалить</a>
             </td>
         </tr>
 }

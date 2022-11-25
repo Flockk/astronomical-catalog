@@ -1,12 +1,11 @@
 ﻿@model Space.Models.StarClusters
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Изменение звёздного скопления";
 }
 
-<h1>Edit</h1>
+<h3>Изменение звёздного скопления</h3>
 
-<h4>StarClusters</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -59,14 +58,14 @@
                 <span asp-validation-for="StarclusterDiameter" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {

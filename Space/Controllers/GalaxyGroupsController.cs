@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: GalaxyGroups
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.GalaxyGroups.Include(g => g.Cons);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: GalaxyGroups/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.GalaxyGroups == null)
@@ -44,16 +42,12 @@ namespace Space.Controllers
             return View(galaxyGroups);
         }
 
-        // GET: GalaxyGroups/Create
         public IActionResult Create()
         {
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation");
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             return View();
         }
 
-        // POST: GalaxyGroups/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GlxgroupId,ConsId,GlxgroupName,GlxgroupType,GlxgroupRightAscension,GlxgroupDeclination,GlxgroupRedshift")] GalaxyGroups galaxyGroups)
@@ -64,11 +58,10 @@ namespace Space.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", galaxyGroups.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", galaxyGroups.ConsId);
             return View(galaxyGroups);
         }
 
-        // GET: GalaxyGroups/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.GalaxyGroups == null)
@@ -81,13 +74,10 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", galaxyGroups.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", galaxyGroups.ConsId);
             return View(galaxyGroups);
         }
 
-        // POST: GalaxyGroups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GlxgroupId,ConsId,GlxgroupName,GlxgroupType,GlxgroupRightAscension,GlxgroupDeclination,GlxgroupRedshift")] GalaxyGroups galaxyGroups)
@@ -117,11 +107,10 @@ namespace Space.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsAbbreviation", galaxyGroups.ConsId);
+            ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", galaxyGroups.ConsId);
             return View(galaxyGroups);
         }
 
-        // GET: GalaxyGroups/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.GalaxyGroups == null)
@@ -140,7 +129,6 @@ namespace Space.Controllers
             return View(galaxyGroups);
         }
 
-        // POST: GalaxyGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

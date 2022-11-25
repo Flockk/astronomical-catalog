@@ -1,13 +1,12 @@
 ﻿@model Space.Models.Asteroids
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детали астероида";
 }
 
-<h1>Details</h1>
+<h3>Детали астероида</h3>
 
 <div>
-    <h4>Asteroids</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -55,6 +54,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.AstId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.AstId">Изменить</a> |
+    <a asp-action="Index">Назад</a>
 </div>

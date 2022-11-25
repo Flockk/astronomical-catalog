@@ -169,6 +169,12 @@ namespace Space.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("cons_id");
 
+                    b.Property<string>("ConsName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("cons_name");
+
                     b.Property<string>("ConsAbbreviation")
                         .IsRequired()
                         .HasMaxLength(3)
@@ -179,12 +185,6 @@ namespace Space.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("TEXT")
                         .HasColumnName("cons_declination");
-
-                    b.Property<string>("ConsName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("cons_name");
 
                     b.Property<string>("ConsRightAscension")
                         .HasMaxLength(17)
@@ -208,10 +208,10 @@ namespace Space.Migrations
 
                     b.HasKey("ConsId");
 
-                    b.HasIndex(new[] { "ConsAbbreviation" }, "UQ_Constellations_cons_abbreviation")
+                    b.HasIndex(new[] { "ConsName" }, "UQ_Constellations_cons_name")
                         .IsUnique();
 
-                    b.HasIndex(new[] { "ConsName" }, "UQ_Constellations_cons_name")
+                    b.HasIndex(new[] { "ConsAbbreviation" }, "UQ_Constellations_cons_abbreviation")
                         .IsUnique();
 
                     b.HasIndex(new[] { "ConsSymbolism" }, "UQ_Constellations_cons_symbolism")

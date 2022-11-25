@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Space.Models.Comets>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Кометы";
 }
 
-<h1>Index</h1>
+<h1>Кометы</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить</a>
 </p>
 <table class="table">
     <thead>
@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Star.StarName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CometId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CometId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CometId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CometId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.CometId">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.CometId">Удалить</a>
             </td>
         </tr>
 }

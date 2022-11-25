@@ -1,13 +1,12 @@
 ﻿@model Space.Models.Planets
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детали планеты";
 }
 
-<h1>Details</h1>
+<h3>Детали планеты</h3>
 
 <div>
-    <h4>Planets</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -50,7 +49,7 @@
             @Html.DisplayNameFor(model => model.Cons)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cons.ConsAbbreviation)
+            @Html.DisplayFor(model => model.Cons.ConsName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Star)
@@ -61,6 +60,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PlntId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.PlntId">Изменить</a> |
+    <a asp-action="Index">Назад</a>
 </div>

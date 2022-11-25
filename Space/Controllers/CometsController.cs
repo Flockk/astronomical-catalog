@@ -18,14 +18,12 @@ namespace Space.Controllers
             _context = context;
         }
 
-        // GET: Comets
         public async Task<IActionResult> Index()
         {
             var spaceContext = _context.Comets.Include(c => c.Star);
             return View(await spaceContext.ToListAsync());
         }
 
-        // GET: Comets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Comets == null)
@@ -44,16 +42,12 @@ namespace Space.Controllers
             return View(comets);
         }
 
-        // GET: Comets/Create
         public IActionResult Create()
         {
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName");
             return View();
         }
 
-        // POST: Comets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CometId,StarId,CometName,CometOrbitalPeriod,CometSemiMajorAxis,CometPerihelion,CometEccentricity,CometOrbitalInclination")] Comets comets)
@@ -68,7 +62,6 @@ namespace Space.Controllers
             return View(comets);
         }
 
-        // GET: Comets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Comets == null)
@@ -85,9 +78,6 @@ namespace Space.Controllers
             return View(comets);
         }
 
-        // POST: Comets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CometId,StarId,CometName,CometOrbitalPeriod,CometSemiMajorAxis,CometPerihelion,CometEccentricity,CometOrbitalInclination")] Comets comets)
@@ -121,7 +111,6 @@ namespace Space.Controllers
             return View(comets);
         }
 
-        // GET: Comets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Comets == null)
@@ -140,7 +129,6 @@ namespace Space.Controllers
             return View(comets);
         }
 
-        // POST: Comets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Space.Models.PlanetarySystems>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Планетные системы";
 }
 
-<h1>Index</h1>
+<h1>Планетные системы</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить</a>
 </p>
 <table class="table">
     <thead>
@@ -37,15 +37,15 @@
                 @Html.DisplayFor(modelItem => item.PlanetsystemConfirmedPlanets)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsAbbreviation)
+                @Html.DisplayFor(modelItem => item.Cons.ConsName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Glx.GlxName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PlanetsystemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PlanetsystemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PlanetsystemId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.PlanetsystemId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.PlanetsystemId">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.PlanetsystemId">Удалить</a>
             </td>
         </tr>
 }
