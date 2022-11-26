@@ -13,7 +13,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ConsId" />
             <div class="form-group">
-                <partial name="_ConsImage" />
+                <partial name="_ConsImage" class="form-control"/>
+                <input asp-for="ConsImage" class="form-control" />
+
             </div>
             <div class="form-group">
                 <label asp-for="ConsName" class="control-label"></label>
@@ -46,10 +48,6 @@
                 <span asp-validation-for="ConsSquare" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConsVisibleInLatitudes" class="control-label"></label>
-                <input asp-for="ConsVisibleInLatitudes" class="form-control" />
-                <span asp-validation-for="ConsVisibleInLatitudes" class="text-danger"></span>
-
                 <label asp-for="ConsVisibleInLatitudes" class="control-label"></label>
                 <input asp-for="ConsVisibleInLatitudes" class="form-control" />
                 <span asp-validation-for="ConsVisibleInLatitudes" class="text-danger"></span>

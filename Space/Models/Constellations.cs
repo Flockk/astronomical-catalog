@@ -35,7 +35,7 @@ namespace Space.Models
         [DisplayName("Видно в широтах")]
         public string ConsVisibleInLatitudes { get; set; }
 
-        public string ConsImage { get; set; }  
+        public string ConsImage { get; set; }
 
         public virtual ICollection<BlackHoles> BlackHoles { get; set; }
         public virtual ICollection<Galaxies> Galaxies { get; set; }

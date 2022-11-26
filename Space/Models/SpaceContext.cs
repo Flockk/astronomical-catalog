@@ -292,6 +292,7 @@ namespace Space.Models
 	                .HasMaxLength(50)
 	                .HasColumnName("glxcluster_image");
 
+
 				entity.HasOne(d => d.Cons)
                     .WithMany(p => p.GalaxyClusters)
                     .HasForeignKey(d => d.ConsId)
@@ -500,6 +501,10 @@ namespace Space.Models
                     .WithMany(p => p.StarClusters)
                     .HasForeignKey(d => d.GlxId)
                     .HasConstraintName("FK_StarClusters_Galaxies");
+
+                entity.Property(e => e.StarclusterImage)
+                    .HasMaxLength(50)
+                    .HasColumnName("starcluster_image");
             });
 
             modelBuilder.Entity<Stars>(entity =>

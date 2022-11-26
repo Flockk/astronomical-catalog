@@ -34,6 +34,9 @@ namespace Space.Models
         public virtual Constellations Cons { get; set; }
         [DisplayName("Галактика")]
         public virtual Galaxies Glx { get; set; }
+
+        public string StarclusterImage { get; set; }
+
         public virtual ICollection<Stars> Stars { get; set; }
     }
 }
