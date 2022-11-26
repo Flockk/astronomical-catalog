@@ -6,14 +6,15 @@
 
 <h3>Изменение созвездия</h3>
 
-<partial name="_ConsImage" />
-
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ConsId" />
+            <div class="form-group">
+                <partial name="_ConsImage" />
+            </div>
             <div class="form-group">
                 <label asp-for="ConsName" class="control-label"></label>
                 <input asp-for="ConsName" class="form-control" />
@@ -45,6 +46,10 @@
                 <span asp-validation-for="ConsSquare" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ConsVisibleInLatitudes" class="control-label"></label>
+                <input asp-for="ConsVisibleInLatitudes" class="form-control" />
+                <span asp-validation-for="ConsVisibleInLatitudes" class="text-danger"></span>
+
                 <label asp-for="ConsVisibleInLatitudes" class="control-label"></label>
                 <input asp-for="ConsVisibleInLatitudes" class="form-control" />
                 <span asp-validation-for="ConsVisibleInLatitudes" class="text-danger"></span>

@@ -11,7 +11,9 @@ namespace Space.Models
         }
 
         public int StarclusterId { get; set; }
+        [DisplayName("Созвездие")]
         public int? ConsId { get; set; }
+        [DisplayName("Галактика")]
         public int? GlxId { get; set; }
         [DisplayName("Название")]
         public string StarclusterName { get; set; }

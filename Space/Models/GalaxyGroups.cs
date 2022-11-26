@@ -25,6 +25,8 @@ namespace Space.Models
         [DisplayName("Красное смещение")]
         public double? GlxgroupRedshift { get; set; }
 
+        public string GlxgroupImage { get; set; }
+
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         public virtual ICollection<Galaxies> Galaxies { get; set; }

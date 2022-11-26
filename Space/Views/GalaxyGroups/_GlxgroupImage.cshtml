@@ -1,0 +1,8 @@
+﻿@model Space.Models.GalaxyGroups
+
+@{
+	var imgText = "";
+	imgText = Model.GlxgroupName.Trim();
+}
+
+<img src="@Model.GlxgroupImage" width="400" height="400" class="img-fluid"  alt="@imgText" title="@imgText"/>

@@ -12,7 +12,7 @@ using Space.Models;
 namespace Space.Migrations
 {
     [DbContext(typeof(SpaceContext))]
-    [Migration("20221126154833_InitialCreate")]
+    [Migration("20221126170010_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -306,11 +306,6 @@ namespace Space.Migrations
                     b.Property<int?>("GlxgroupId")
                         .HasColumnType("int")
                         .HasColumnName("glxgroup_id");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.HasKey("GlxId")
                         .HasName("PK__Galaxies");

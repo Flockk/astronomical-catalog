@@ -94,8 +94,7 @@ namespace Space.Migrations
                     glxapparentmagnitude = table.Column<double>(name: "glx_apparent_magnitude", type: "float", nullable: true),
                     glxradialvelocity = table.Column<int>(name: "glx_radial_velocity", type: "int", nullable: true),
                     glxradius = table.Column<double>(name: "glx_radius", type: "float", nullable: true),
-                    glximage = table.Column<string>(name: "glx_image", type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
+                    glximage = table.Column<string>(name: "glx_image", type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -541,6 +540,7 @@ namespace Space.Migrations
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

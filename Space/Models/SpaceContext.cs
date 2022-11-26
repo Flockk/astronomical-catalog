@@ -330,6 +330,10 @@ namespace Space.Models
                     .HasMaxLength(11)
                     .HasColumnName("glxgroup_type");
 
+                entity.Property(e => e.GlxgroupImage)
+                    .HasMaxLength(50)
+                    .HasColumnName("glxgroup_image");
+
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.GalaxyGroups)
                     .HasForeignKey(d => d.ConsId)

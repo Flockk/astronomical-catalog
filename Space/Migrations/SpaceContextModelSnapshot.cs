@@ -304,11 +304,6 @@ namespace Space.Migrations
                         .HasColumnType("int")
                         .HasColumnName("glxgroup_id");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.HasKey("GlxId")
                         .HasName("PK__Galaxies");
 
@@ -412,6 +407,11 @@ namespace Space.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)")
                         .HasColumnName("glxgroup_type");
+
+                    b.Property<string>("GlxgroupImage")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("glxgroup_image");
 
                     b.HasKey("GlxgroupId");
 
