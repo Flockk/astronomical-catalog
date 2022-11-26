@@ -1,0 +1,8 @@
+﻿@model Space.Models.Galaxies
+
+@{
+	var imgText = "";
+	imgText = "Галактика" + " " + Model.GlxName.Trim();
+}
+
+<img src="@Model.GlxImage" width="400" height="400" class="img-fluid"  alt="@imgText" title="@imgText"/>

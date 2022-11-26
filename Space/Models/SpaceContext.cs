@@ -234,7 +234,11 @@ namespace Space.Models
                     .HasMaxLength(14)
                     .HasColumnName("glx_type");
 
-                entity.Property(e => e.GlxclusterId).HasColumnName("glxcluster_id");
+				entity.Property(e => e.GlxImage)
+	                .HasMaxLength(50)
+	                .HasColumnName("glx_image");
+
+				entity.Property(e => e.GlxclusterId).HasColumnName("glxcluster_id");
 
                 entity.Property(e => e.GlxgroupId).HasColumnName("glxgroup_id");
 

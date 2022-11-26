@@ -48,7 +48,11 @@ namespace Space.Models
         public virtual GalaxyClusters Glxcluster { get; set; }
         [DisplayName("Группа галактик")]
         public virtual GalaxyGroups Glxgroup { get; set; }
-        public virtual ICollection<BlackHoles> BlackHoles { get; set; }
+
+		public string GlxImage { get; set; }
+
+
+		public virtual ICollection<BlackHoles> BlackHoles { get; set; }
         public virtual ICollection<Nebulae> Nebulae { get; set; }
         public virtual ICollection<PlanetarySystems> PlanetarySystems { get; set; }
         public virtual ICollection<StarClusters> StarClusters { get; set; }
