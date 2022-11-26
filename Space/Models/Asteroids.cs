@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Space.Models
 {
@@ -24,5 +25,6 @@ namespace Space.Models
 
         [DisplayName("Звезда")]
         public virtual Stars Star { get; set; }
+
     }
 }

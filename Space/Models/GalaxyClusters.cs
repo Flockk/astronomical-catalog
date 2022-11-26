@@ -27,6 +27,9 @@ namespace Space.Models
 
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
-        public virtual ICollection<Galaxies> Galaxies { get; set; }
+
+		public string GlxclusterImage { get; set; }
+
+		public virtual ICollection<Galaxies> Galaxies { get; set; }
     }
 }

@@ -256,7 +256,7 @@ namespace Space.Models
                     .WithMany(p => p.Galaxies)
                     .HasForeignKey(d => d.GlxgroupId)
                     .HasConstraintName("FK_Galaxies_To_GalaxyGroups");
-            });
+			});
 
             modelBuilder.Entity<GalaxyClusters>(entity =>
             {
@@ -288,11 +288,16 @@ namespace Space.Models
                     .HasMaxLength(20)
                     .HasColumnName("glxcluster_type");
 
-                entity.HasOne(d => d.Cons)
+				entity.Property(e => e.GlxclusterImage)
+	                .HasMaxLength(50)
+	                .HasColumnName("glxcluster_image");
+
+				entity.HasOne(d => d.Cons)
                     .WithMany(p => p.GalaxyClusters)
                     .HasForeignKey(d => d.ConsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GalaxyClusters_To_Constellations");
+
             });
 
             modelBuilder.Entity<GalaxyGroups>(entity =>

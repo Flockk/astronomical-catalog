@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Space.Models
 {
@@ -57,5 +58,6 @@ namespace Space.Models
         public virtual ICollection<PlanetarySystems> PlanetarySystems { get; set; }
         public virtual ICollection<StarClusters> StarClusters { get; set; }
         public virtual ICollection<Stars> Stars { get; set; }
+
     }
 }

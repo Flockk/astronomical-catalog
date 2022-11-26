@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Space.Models;
@@ -11,50 +12,56 @@ using Space.Models;
 namespace Space.Migrations
 {
     [DbContext(typeof(SpaceContext))]
-    [Migration("20221124100511_InitialCreate")]
+    [Migration("20221126154833_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Space.Models.Asteroids", b =>
                 {
                     b.Property<int>("AstId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("ast_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AstId"));
+
                     b.Property<double?>("AstArgumentOfPerihelion")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("ast_argument_of_perihelion");
 
                     b.Property<int?>("AstDiameter")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("ast_diameter");
 
                     b.Property<double?>("AstMeanAnomaly")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("ast_mean_anomaly");
 
                     b.Property<string>("AstName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("ast_name");
 
                     b.Property<double?>("AstOrbitalEccentricity")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("ast_orbital_eccentricity");
 
                     b.Property<double?>("AstOrbitalInclination")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("ast_orbital_inclination");
 
                     b.Property<int?>("StarId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("star_id");
 
                     b.HasKey("AstId");
@@ -71,22 +78,24 @@ namespace Space.Migrations
                 {
                     b.Property<int>("BlackHoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("blackHole_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlackHoleId"));
 
                     b.Property<string>("BlackholeDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("blackhole_declination");
 
                     b.Property<double?>("BlackholeDistance")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("blackhole_distance");
 
                     b.Property<string>("BlackholeName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("blackhole_name");
 
                     b.Property<TimeSpan?>("BlackholeRightAscension")
@@ -95,15 +104,15 @@ namespace Space.Migrations
 
                     b.Property<string>("BlackholeType")
                         .HasMaxLength(14)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(14)")
                         .HasColumnName("blackhole_type");
 
                     b.Property<int>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<int?>("GlxId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_id");
 
                     b.HasKey("BlackHoleId");
@@ -122,37 +131,39 @@ namespace Space.Migrations
                 {
                     b.Property<int>("CometId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("comet_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CometId"));
+
                     b.Property<double?>("CometEccentricity")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("comet_eccentricity");
 
                     b.Property<string>("CometName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("comet_name");
 
                     b.Property<double?>("CometOrbitalInclination")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("comet_orbital_inclination");
 
                     b.Property<double?>("CometOrbitalPeriod")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("comet_orbital_period");
 
                     b.Property<double?>("CometPerihelion")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("comet_perihelion");
 
                     b.Property<double?>("CometSemiMajorAxis")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("comet_semi_major_axis");
 
                     b.Property<int?>("StarId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("star_id");
 
                     b.HasKey("CometId");
@@ -169,44 +180,51 @@ namespace Space.Migrations
                 {
                     b.Property<int>("ConsId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConsId"));
 
                     b.Property<string>("ConsAbbreviation")
                         .IsRequired()
                         .HasMaxLength(3)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(3)")
                         .HasColumnName("cons_abbreviation");
 
                     b.Property<string>("ConsDeclination")
                         .HasMaxLength(15)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(15)")
                         .HasColumnName("cons_declination");
+
+                    b.Property<string>("ConsImage")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("cons_image");
 
                     b.Property<string>("ConsName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("cons_name");
 
                     b.Property<string>("ConsRightAscension")
                         .HasMaxLength(17)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(17)")
                         .HasColumnName("cons_right_ascension");
 
                     b.Property<int?>("ConsSquare")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_square");
 
                     b.Property<string>("ConsSymbolism")
                         .IsRequired()
                         .HasMaxLength(22)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(22)")
                         .HasColumnName("cons_symbolism");
 
                     b.Property<string>("ConsVisibleInLatitudes")
                         .HasMaxLength(15)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(15)")
                         .HasColumnName("cons_visible_in_latitudes");
 
                     b.HasKey("ConsId");
@@ -227,42 +245,49 @@ namespace Space.Migrations
                 {
                     b.Property<int>("GlxId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GlxId"));
+
                     b.Property<int?>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<double?>("GlxApparentMagnitude")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("glx_apparent_magnitude");
 
                     b.Property<string>("GlxDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("glx_declination");
 
                     b.Property<int?>("GlxDistance")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_distance");
+
+                    b.Property<string>("GlxImage")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("glx_image");
 
                     b.Property<string>("GlxName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("glx_name");
 
                     b.Property<int?>("GlxRadialVelocity")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_radial_velocity");
 
                     b.Property<double?>("GlxRadius")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("glx_radius");
 
                     b.Property<double?>("GlxRedshift")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("glx_redshift");
 
                     b.Property<TimeSpan?>("GlxRightAscension")
@@ -271,16 +296,21 @@ namespace Space.Migrations
 
                     b.Property<string>("GlxType")
                         .HasMaxLength(14)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(14)")
                         .HasColumnName("glx_type");
 
                     b.Property<int?>("GlxclusterId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glxcluster_id");
 
                     b.Property<int?>("GlxgroupId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glxgroup_id");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.HasKey("GlxId")
                         .HasName("PK__Galaxies");
@@ -301,26 +331,33 @@ namespace Space.Migrations
                 {
                     b.Property<int>("GlxclusterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glxcluster_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GlxclusterId"));
+
                     b.Property<int>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<string>("GlxclusterDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("glxcluster_declination");
+
+                    b.Property<string>("GlxclusterImage")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("glxcluster_image");
 
                     b.Property<string>("GlxclusterName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(30)")
                         .HasColumnName("glxcluster_name");
 
                     b.Property<double?>("GlxclusterRedshift")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("glxcluster_redshift");
 
                     b.Property<TimeSpan?>("GlxclusterRightAscension")
@@ -329,7 +366,7 @@ namespace Space.Migrations
 
                     b.Property<string>("GlxclusterType")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("glxcluster_type");
 
                     b.HasKey("GlxclusterId");
@@ -346,26 +383,28 @@ namespace Space.Migrations
                 {
                     b.Property<int>("GlxgroupId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glxgroup_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GlxgroupId"));
+
                     b.Property<int?>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<string>("GlxgroupDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("glxgroup_declination");
 
                     b.Property<string>("GlxgroupName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("glxgroup_name");
 
                     b.Property<double?>("GlxgroupRedshift")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("glxgroup_redshift");
 
                     b.Property<TimeSpan?>("GlxgroupRightAscension")
@@ -374,7 +413,7 @@ namespace Space.Migrations
 
                     b.Property<string>("GlxgroupType")
                         .HasMaxLength(11)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(11)")
                         .HasColumnName("glxgroup_type");
 
                     b.HasKey("GlxgroupId");
@@ -391,30 +430,32 @@ namespace Space.Migrations
                 {
                     b.Property<int>("NebulaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("nebula_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NebulaId"));
+
                     b.Property<int>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<int?>("GlxId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_id");
 
                     b.Property<string>("NebulaDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("nebula_declination");
 
                     b.Property<int?>("NebulaDistance")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("nebula_distance");
 
                     b.Property<string>("NebulaName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("nebula_name");
 
                     b.Property<TimeSpan?>("NebulaRightAscension")
@@ -423,7 +464,7 @@ namespace Space.Migrations
 
                     b.Property<string>("NebulaType")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("nebula_type");
 
                     b.HasKey("NebulaId")
@@ -443,25 +484,27 @@ namespace Space.Migrations
                 {
                     b.Property<int>("PlanetsystemId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("planetsystem_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlanetsystemId"));
+
                     b.Property<int?>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<int?>("GlxId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_id");
 
                     b.Property<byte>("PlanetsystemConfirmedPlanets")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("tinyint")
                         .HasColumnName("planetsystem_confirmed_planets");
 
                     b.Property<string>("PlanetsystemName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("planetsystem_name");
 
                     b.HasKey("PlanetsystemId");
@@ -480,41 +523,43 @@ namespace Space.Migrations
                 {
                     b.Property<int>("PlntId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("plnt_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlntId"));
+
                     b.Property<int?>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<double?>("PlntArgumentOfPerihelion")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("plnt_argument_of_perihelion");
 
                     b.Property<double?>("PlntEccentricity")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("plnt_eccentricity");
 
                     b.Property<double?>("PlntMass")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("plnt_mass");
 
                     b.Property<string>("PlntName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("plnt_name");
 
                     b.Property<double?>("PlntOrbitalPeriod")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("plnt_orbital_period");
 
                     b.Property<double?>("PlntSemiMajorAxis")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("plnt_semi_major_axis");
 
                     b.Property<int?>("StarId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("star_id");
 
                     b.HasKey("PlntId");
@@ -533,38 +578,40 @@ namespace Space.Migrations
                 {
                     b.Property<int>("StarclusterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("starcluster_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StarclusterId"));
+
                     b.Property<int?>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<int?>("GlxId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_id");
 
                     b.Property<int?>("StarclusterAge")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("starcluster_age");
 
                     b.Property<string>("StarclusterDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("starcluster_declination");
 
                     b.Property<double?>("StarclusterDiameter")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("starcluster_diameter");
 
                     b.Property<double?>("StarclusterDistance")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("starcluster_distance");
 
                     b.Property<string>("StarclusterName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("starcluster_name");
 
                     b.Property<TimeSpan?>("StarclusterRightAscension")
@@ -573,7 +620,7 @@ namespace Space.Migrations
 
                     b.Property<string>("StarclusterType")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("starcluster_type");
 
                     b.HasKey("StarclusterId");
@@ -592,47 +639,49 @@ namespace Space.Migrations
                 {
                     b.Property<int>("StarId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("star_id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StarId"));
+
                     b.Property<int?>("ConsId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("cons_id");
 
                     b.Property<int?>("GlxId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("glx_id");
 
                     b.Property<int?>("PlanetsystemId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("planetsystem_id");
 
                     b.Property<double?>("StarApparentMagnitude")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("star_apparent_magnitude");
 
                     b.Property<string>("StarDeclination")
                         .HasMaxLength(20)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("star_declination");
 
                     b.Property<double?>("StarDistance")
-                        .HasColumnType("REAL")
+                        .HasColumnType("float")
                         .HasColumnName("star_distance");
 
                     b.Property<string>("StarName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("star_name");
 
                     b.Property<string>("StarStellarClass")
                         .HasMaxLength(10)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("star_stellar_class");
 
                     b.Property<int?>("StarclusterId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("starcluster_id");
 
                     b.HasKey("StarId");
