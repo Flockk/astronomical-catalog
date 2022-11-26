@@ -15,7 +15,7 @@ namespace Space.Models
             PlanetarySystems = new HashSet<PlanetarySystems>();
             Planets = new HashSet<Planets>();
             StarClusters = new HashSet<StarClusters>();
-            Stars = new HashSet<Stars>();
+            Stars = new HashSet<Stars>(); 
         }
 
         [DisplayName("Созвездие")]
@@ -34,6 +34,8 @@ namespace Space.Models
         public int? ConsSquare { get; set; }
         [DisplayName("Видно в широтах")]
         public string ConsVisibleInLatitudes { get; set; }
+
+        public string ConsImage { get; set; }  
 
         public virtual ICollection<BlackHoles> BlackHoles { get; set; }
         public virtual ICollection<Galaxies> Galaxies { get; set; }

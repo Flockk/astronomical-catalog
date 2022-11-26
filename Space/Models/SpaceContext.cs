@@ -189,6 +189,10 @@ namespace Space.Models
                 entity.Property(e => e.ConsVisibleInLatitudes)
                     .HasMaxLength(15)
                     .HasColumnName("cons_visible_in_latitudes");
+
+                entity.Property(e => e.ConsImage)
+                    .HasMaxLength(50)
+                    .HasColumnName("cons_image");
             });
 
             modelBuilder.Entity<Galaxies>(entity =>
