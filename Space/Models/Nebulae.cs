@@ -22,6 +22,8 @@ namespace Space.Models
         [DisplayName("Расстояние")]
         public int? NebulaDistance { get; set; }
 
+        public string NebulaImage { get; set; }
+
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Галактика")]

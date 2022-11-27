@@ -4,7 +4,7 @@
     ViewData["Title"] = "Изменение туманности";
 }
 
-<h3>Изменение туманности</h1>
+<h3>Изменение туманности</h3>
 
 <hr />
 <div class="row">
@@ -12,6 +12,9 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="NebulaId" />
+            <div class="form-group">
+                <partial name="_NebulaImage" />
+            </div>
             <div class="form-group">
                 <label asp-for="ConsId" class="control-label"></label>
                 <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>

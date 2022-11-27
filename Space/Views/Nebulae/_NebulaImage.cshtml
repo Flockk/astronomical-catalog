@@ -1,0 +1,8 @@
+﻿@model Space.Models.Nebulae
+
+@{
+	var imgText = "";
+	imgText = Model.NebulaName.Trim();
+}
+
+<img src="@Model.NebulaImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />

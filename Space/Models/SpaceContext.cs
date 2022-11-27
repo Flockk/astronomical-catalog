@@ -374,6 +374,10 @@ namespace Space.Models
                     .HasMaxLength(20)
                     .HasColumnName("nebula_type");
 
+                entity.Property(e => e.NebulaImage)
+                    .HasMaxLength(50)
+                    .HasColumnName("nebula_image");
+
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.Nebulae)
                     .HasForeignKey(d => d.ConsId)

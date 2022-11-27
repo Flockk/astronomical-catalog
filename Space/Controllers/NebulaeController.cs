@@ -52,7 +52,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance")] Nebulae nebulae)
+        public async Task<IActionResult> Create([Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance,NebulaImage")] Nebulae nebulae)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance")] Nebulae nebulae)
+        public async Task<IActionResult> Edit(int id, [Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance,NebulaImage")] Nebulae nebulae)
         {
             if (id != nebulae.NebulaId)
             {
