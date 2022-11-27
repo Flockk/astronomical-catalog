@@ -52,7 +52,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets")] PlanetarySystems planetarySystems)
+        public async Task<IActionResult> Create([Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets,PlanetsystemImage")] PlanetarySystems planetarySystems)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets")] PlanetarySystems planetarySystems)
+        public async Task<IActionResult> Edit(int id, [Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets,PlanetsystemImage")] PlanetarySystems planetarySystems)
         {
             if (id != planetarySystems.PlanetsystemId)
             {

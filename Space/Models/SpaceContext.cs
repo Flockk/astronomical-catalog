@@ -191,7 +191,7 @@ namespace Space.Models
                     .HasColumnName("cons_visible_in_latitudes");
 
                 entity.Property(e => e.ConsImage)
-                    .HasMaxLength(50)
+                    .HasMaxLength(255)
                     .HasColumnName("cons_image");
             });
 
@@ -235,7 +235,7 @@ namespace Space.Models
                     .HasColumnName("glx_type");
 
 				entity.Property(e => e.GlxImage)
-	                .HasMaxLength(50)
+	                .HasMaxLength(255)
 	                .HasColumnName("glx_image");
 
 				entity.Property(e => e.GlxclusterId).HasColumnName("glxcluster_id");
@@ -289,7 +289,7 @@ namespace Space.Models
                     .HasColumnName("glxcluster_type");
 
 				entity.Property(e => e.GlxclusterImage)
-	                .HasMaxLength(50)
+	                .HasMaxLength(255)
 	                .HasColumnName("glxcluster_image");
 
 
@@ -332,7 +332,7 @@ namespace Space.Models
                     .HasColumnName("glxgroup_type");
 
                 entity.Property(e => e.GlxgroupImage)
-                    .HasMaxLength(50)
+                    .HasMaxLength(255)
                     .HasColumnName("glxgroup_image");
 
                 entity.HasOne(d => d.Cons)
@@ -375,7 +375,7 @@ namespace Space.Models
                     .HasColumnName("nebula_type");
 
                 entity.Property(e => e.NebulaImage)
-                    .HasMaxLength(50)
+                    .HasMaxLength(255)
                     .HasColumnName("nebula_image");
 
                 entity.HasOne(d => d.Cons)
@@ -409,6 +409,10 @@ namespace Space.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("planetsystem_name");
+
+                entity.Property(e => e.PlanetsystemImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("planetsystem_image");
 
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.PlanetarySystems)
@@ -507,7 +511,7 @@ namespace Space.Models
                     .HasConstraintName("FK_StarClusters_Galaxies");
 
                 entity.Property(e => e.StarclusterImage)
-                    .HasMaxLength(50)
+                    .HasMaxLength(255)
                     .HasColumnName("starcluster_image");
             });
 

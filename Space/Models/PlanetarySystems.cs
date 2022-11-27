@@ -21,6 +21,9 @@ namespace Space.Models
         [DisplayName("Подтверждённых планет")]
         public byte PlanetsystemConfirmedPlanets { get; set; }
 
+        public string PlanetsystemImage { get; set; }
+
+
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Галактика")]
