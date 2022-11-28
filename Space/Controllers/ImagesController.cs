@@ -22,36 +22,6 @@ namespace Space.Controllers
             return View(planets);
         }
 
-        [HttpPost]
-        public ActionResult Create(Planets planets)
-        {
-            string uniqueFileName = UploadedFile(planets, uniqueFileName);
-
-            planets.PlntImage = uniqueFileName;
-
-            _context.Attach(planets);
-            _context.Entry(planets).State = EntityState.Added;
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private string UploadedFile(Planets planets, string? uniqueFileName)
-        {
-            string? uniqueFileName = null;
-
-            if (planets.UploadedImage != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Img");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + planets.UploadedImage.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    planets.UploadedImage.CopyTo(fileStream);
-                } 
-            }
-            return uniqueFileName;
-        }
-
         public IActionResult Index()
         {
             List<Planets> planets;

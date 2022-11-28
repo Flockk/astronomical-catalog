@@ -24,6 +24,12 @@ namespace Space.Controllers
             return View(await spaceContext.ToListAsync());
         }
 
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Asteroids == null)

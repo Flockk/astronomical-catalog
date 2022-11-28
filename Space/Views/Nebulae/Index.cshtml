@@ -9,6 +9,12 @@
 <p>
     <a asp-action="Create">Добавить</a>
 </p>
+
+<p>
+    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+    <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
+</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -28,9 +34,6 @@
                 @Html.DisplayNameFor(model => model.NebulaDistance)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NebulaImage)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Cons)
             </th>
             <th>
@@ -41,7 +44,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="Search">
             <td>
                 @Html.DisplayFor(modelItem => item.NebulaName)
             </td>
@@ -57,9 +60,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NebulaDistance)
             </td>
-                <th>
-                    @Html.DisplayNameFor(model => model.NebulaImage)
-                </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Cons.ConsName)
             </td>
@@ -75,3 +75,25 @@
 }
     </tbody>
 </table>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1) {
+                return true
+            }
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
