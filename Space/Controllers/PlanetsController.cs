@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 
+
 namespace Space.Controllers
 {
     public class PlanetsController : Controller
     {
         private readonly SpaceContext _context;
+
 
         public PlanetsController(SpaceContext context)
         {
@@ -49,6 +51,7 @@ namespace Space.Controllers
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName");
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

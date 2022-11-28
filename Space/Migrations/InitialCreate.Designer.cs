@@ -12,7 +12,7 @@ using Space.Models;
 namespace Space.Migrations
 {
     [DbContext(typeof(SpaceContext))]
-    [Migration("20221126170010_InitialCreate")]
+    [Migration("20221127211935_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -197,8 +197,8 @@ namespace Space.Migrations
                         .HasColumnName("cons_declination");
 
                     b.Property<string>("ConsImage")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("cons_image");
 
                     b.Property<string>("ConsName")
@@ -268,8 +268,8 @@ namespace Space.Migrations
                         .HasColumnName("glx_distance");
 
                     b.Property<string>("GlxImage")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("glx_image");
 
                     b.Property<string>("GlxName")
@@ -341,8 +341,8 @@ namespace Space.Migrations
                         .HasColumnName("glxcluster_declination");
 
                     b.Property<string>("GlxclusterImage")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("glxcluster_image");
 
                     b.Property<string>("GlxclusterName")
@@ -391,6 +391,11 @@ namespace Space.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("glxgroup_declination");
+
+                    b.Property<string>("GlxgroupImage")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("glxgroup_image");
 
                     b.Property<string>("GlxgroupName")
                         .IsRequired()
@@ -447,6 +452,11 @@ namespace Space.Migrations
                         .HasColumnType("int")
                         .HasColumnName("nebula_distance");
 
+                    b.Property<string>("NebulaImage")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("nebula_image");
+
                     b.Property<string>("NebulaName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -496,6 +506,11 @@ namespace Space.Migrations
                         .HasColumnType("tinyint")
                         .HasColumnName("planetsystem_confirmed_planets");
 
+                    b.Property<string>("PlanetsystemImage")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("planetsystem_image");
+
                     b.Property<string>("PlanetsystemName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -534,6 +549,11 @@ namespace Space.Migrations
                     b.Property<double?>("PlntEccentricity")
                         .HasColumnType("float")
                         .HasColumnName("plnt_eccentricity");
+
+                    b.Property<string>("PlntImage")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("plnt_image");
 
                     b.Property<double?>("PlntMass")
                         .HasColumnType("float")
@@ -602,6 +622,11 @@ namespace Space.Migrations
                     b.Property<double?>("StarclusterDistance")
                         .HasColumnType("float")
                         .HasColumnName("starcluster_distance");
+
+                    b.Property<string>("StarclusterImage")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("starcluster_image");
 
                     b.Property<string>("StarclusterName")
                         .IsRequired()

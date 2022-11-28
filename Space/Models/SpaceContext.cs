@@ -35,6 +35,7 @@ namespace Space.Models
         public virtual DbSet<Planets> Planets { get; set; }
         public virtual DbSet<StarClusters> StarClusters { get; set; }
         public virtual DbSet<Stars> Stars { get; set; }
+        public virtual DbSet<Planets> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -462,6 +463,10 @@ namespace Space.Models
                     .WithMany(p => p.Planets)
                     .HasForeignKey(d => d.StarId)
                     .HasConstraintName("FK_Planets_Stars");
+
+                entity.Property(e => e.PlntImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("plnt_image");
             });
 
             modelBuilder.Entity<StarClusters>(entity =>

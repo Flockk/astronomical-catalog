@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Space.Models
 {
@@ -24,9 +25,15 @@ namespace Space.Models
         [DisplayName("Масса (M\x2097)")]
         public double? PlntMass { get; set; }
 
+        public string PlntImage { get; set; }
+
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Звезда")]
         public virtual Stars Star { get; set; }
+
+        [DisplayName("Изображение")]
+        [NotMapped]
+        public IFormFile UploadedImage { get; set; }
     }
 }

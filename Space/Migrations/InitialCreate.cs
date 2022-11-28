@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Space.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -22,7 +24,7 @@ namespace Space.Migrations
                     consdeclination = table.Column<string>(name: "cons_declination", type: "nvarchar(15)", maxLength: 15, nullable: true),
                     conssquare = table.Column<int>(name: "cons_square", type: "int", nullable: true),
                     consvisibleinlatitudes = table.Column<string>(name: "cons_visible_in_latitudes", type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    consimage = table.Column<string>(name: "cons_image", type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    consimage = table.Column<string>(name: "cons_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,7 +43,7 @@ namespace Space.Migrations
                     glxclusterrightascension = table.Column<TimeSpan>(name: "glxcluster_right_ascension", type: "time(0)", nullable: true),
                     glxclusterdeclination = table.Column<string>(name: "glxcluster_declination", type: "nvarchar(20)", maxLength: 20, nullable: true),
                     glxclusterredshift = table.Column<double>(name: "glxcluster_redshift", type: "float", nullable: true),
-                    glxclusterimage = table.Column<string>(name: "glxcluster_image", type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    glxclusterimage = table.Column<string>(name: "glxcluster_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,7 +66,8 @@ namespace Space.Migrations
                     glxgrouptype = table.Column<string>(name: "glxgroup_type", type: "nvarchar(11)", maxLength: 11, nullable: true),
                     glxgrouprightascension = table.Column<TimeSpan>(name: "glxgroup_right_ascension", type: "time(0)", nullable: true),
                     glxgroupdeclination = table.Column<string>(name: "glxgroup_declination", type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    glxgroupredshift = table.Column<double>(name: "glxgroup_redshift", type: "float", nullable: true)
+                    glxgroupredshift = table.Column<double>(name: "glxgroup_redshift", type: "float", nullable: true),
+                    glxgroupimage = table.Column<string>(name: "glxgroup_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,7 +97,7 @@ namespace Space.Migrations
                     glxapparentmagnitude = table.Column<double>(name: "glx_apparent_magnitude", type: "float", nullable: true),
                     glxradialvelocity = table.Column<int>(name: "glx_radial_velocity", type: "int", nullable: true),
                     glxradius = table.Column<double>(name: "glx_radius", type: "float", nullable: true),
-                    glximage = table.Column<string>(name: "glx_image", type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    glximage = table.Column<string>(name: "glx_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -157,7 +160,8 @@ namespace Space.Migrations
                     nebulatype = table.Column<string>(name: "nebula_type", type: "nvarchar(20)", maxLength: 20, nullable: true),
                     nebularightascension = table.Column<TimeSpan>(name: "nebula_right_ascension", type: "time(0)", nullable: true),
                     nebuladeclination = table.Column<string>(name: "nebula_declination", type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    nebuladistance = table.Column<int>(name: "nebula_distance", type: "int", nullable: true)
+                    nebuladistance = table.Column<int>(name: "nebula_distance", type: "int", nullable: true),
+                    nebulaimage = table.Column<string>(name: "nebula_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -183,7 +187,8 @@ namespace Space.Migrations
                     consid = table.Column<int>(name: "cons_id", type: "int", nullable: true),
                     glxid = table.Column<int>(name: "glx_id", type: "int", nullable: true),
                     planetsystemname = table.Column<string>(name: "planetsystem_name", type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    planetsystemconfirmedplanets = table.Column<byte>(name: "planetsystem_confirmed_planets", type: "tinyint", nullable: false)
+                    planetsystemconfirmedplanets = table.Column<byte>(name: "planetsystem_confirmed_planets", type: "tinyint", nullable: false),
+                    planetsystemimage = table.Column<string>(name: "planetsystem_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -214,7 +219,8 @@ namespace Space.Migrations
                     starclusterdeclination = table.Column<string>(name: "starcluster_declination", type: "nvarchar(20)", maxLength: 20, nullable: true),
                     starclusterdistance = table.Column<double>(name: "starcluster_distance", type: "float", nullable: true),
                     starclusterage = table.Column<int>(name: "starcluster_age", type: "int", nullable: true),
-                    starclusterdiameter = table.Column<double>(name: "starcluster_diameter", type: "float", nullable: true)
+                    starclusterdiameter = table.Column<double>(name: "starcluster_diameter", type: "float", nullable: true),
+                    starclusterimage = table.Column<string>(name: "starcluster_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -333,7 +339,8 @@ namespace Space.Migrations
                     plntsemimajoraxis = table.Column<double>(name: "plnt_semi_major_axis", type: "float", nullable: true),
                     plntorbitalperiod = table.Column<double>(name: "plnt_orbital_period", type: "float", nullable: true),
                     plntargumentofperihelion = table.Column<double>(name: "plnt_argument_of_perihelion", type: "float", nullable: true),
-                    plntmass = table.Column<double>(name: "plnt_mass", type: "float", nullable: true)
+                    plntmass = table.Column<double>(name: "plnt_mass", type: "float", nullable: true),
+                    plntimage = table.Column<string>(name: "plnt_image", type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
