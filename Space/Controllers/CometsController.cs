@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -18,49 +14,10 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index()
         {
-            ViewData["CometNameSortParm"] = sortOrder == "CometName" ? "CometName_desc" : "CometName";
-            ViewData["CometOrbitalPeriodSortParm"] = sortOrder == "CometOrbitalPeriod" ? "CometOrbitalPeriod_desc" : "CometOrbitalPeriod";
-            ViewData["CometSemiMajorAxisSortParm"] = sortOrder == "CometSemiMajorAxis" ? "CometSemiMajorAxis_desc" : "CometSemiMajorAxis";
-            ViewData["CometPerihelionSortParm"] = sortOrder == "CometPerihelion" ? "CometPerihelion_desc" : "CometPerihelion";
-            ViewData["CometEccentricitySortParm"] = sortOrder == "CometEccentricity" ? "CometEccentricity_desc" : "CometEccentricity";
-            ViewData["CometOrbitalInclinationSortParm"] = sortOrder == "CometOrbitalInclination" ? "CometOrbitalInclination_desc" : "CometOrbitalInclination";
-            ViewData["StarSortParmSortParm"] = sortOrder == "Star" ? "Star_desc" : "Star";
-
-
-            var comets = from c in _context.Comets.Include(c => c.Star)
-                            select c;
-
-            if (string.IsNullOrEmpty(sortOrder))
-            {
-                sortOrder = "CometName";
-                sortOrder = "CometOrbitalPeriod";
-                sortOrder = "CometSemiMajorAxis";
-                sortOrder = "CometPerihelion";
-                sortOrder = "CometEccentricity";
-                sortOrder = "CometOrbitalInclination";
-                sortOrder = "Star";
-
-            }
-
-            bool descending = false;
-            if (sortOrder.EndsWith("_desc"))
-            {
-                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
-                descending = true;
-            }
-
-            if (descending)
-            {
-                comets = comets.OrderByDescending(e => EF.Property<object>(e, sortOrder));
-            }
-            else
-            {
-                comets = comets.OrderBy(e => EF.Property<object>(e, sortOrder));
-            }
-
-            return View(await comets.AsNoTracking().ToListAsync());
+            var spaceContext = _context.Comets.Include(c => c.Star);
+            return View(await spaceContext.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

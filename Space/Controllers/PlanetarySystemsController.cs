@@ -18,41 +18,10 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index()
         {
-            ViewData["PlanetsystemNameSortParm"] = sortOrder == "PlanetsystemName" ? "PlanetsystemName_desc" : "PlanetsystemName";
-            ViewData["PlanetsystemConfirmedPlanetsSortParm"] = sortOrder == "PlanetsystemConfirmedPlanets" ? "PlanetsystemConfirmedPlanets_desc" : "PlanetsystemConfirmedPlanets";
-            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
-            ViewData["GlxSortParm"] = sortOrder == "Glx" ? "Glx_desc" : "Glx";
-
-            var planetarySystems = from p in _context.PlanetarySystems.Include(p => p.Cons).Include(p => p.Glx)
-                            select p;
-
-            if (string.IsNullOrEmpty(sortOrder))
-            {
-                sortOrder = "PlanetsystemName";
-                sortOrder = "PlanetsystemConfirmedPlanets";
-                sortOrder = "Cons";
-                sortOrder = "Glx";
-            }
-
-            bool descending = false;
-            if (sortOrder.EndsWith("_desc"))
-            {
-                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
-                descending = true;
-            }
-
-            if (descending)
-            {
-                planetarySystems = planetarySystems.OrderByDescending(e => EF.Property<object>(e, sortOrder));
-            }
-            else
-            {
-                planetarySystems = planetarySystems.OrderBy(e => EF.Property<object>(e, sortOrder));
-            }
-
-            return View(await planetarySystems.AsNoTracking().ToListAsync());
+            var spaceContext = _context.PlanetarySystems.Include(p => p.Cons).Include(p => p.Glx);
+            return View(await spaceContext.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

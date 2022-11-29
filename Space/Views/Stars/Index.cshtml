@@ -6,51 +6,48 @@
 
 <h1>Звёзды</h1>
 
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <p>
     <a asp-action="Create">Добавить</a>
 </p>
+<hr/>
 
-<p>
-    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-    <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
-</p>
-
-<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarNameSortParm"]">@Html.DisplayNameFor(model => model.StarName)</a>
+                @Html.DisplayNameFor(model => model.StarName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarApparentMagnitudeSortParm"]">@Html.DisplayNameFor(model => model.StarApparentMagnitude)</a>
+                @Html.DisplayNameFor(model => model.StarApparentMagnitude)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarStellarClassSortParm"]">@Html.DisplayNameFor(model => model.StarStellarClass)</a>
+                @Html.DisplayNameFor(model => model.StarStellarClass)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarDistanceSortParm"]">@Html.DisplayNameFor(model => model.StarDistance)</a>
+                @Html.DisplayNameFor(model => model.StarDistance)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarDeclinationSortParm"]">@Html.DisplayNameFor(model => model.StarDeclination)</a>
+                @Html.DisplayNameFor(model => model.StarDeclination)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
+                @Html.DisplayNameFor(model => model.Cons)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxSortParm"]">@Html.DisplayNameFor(model => model.Glx)</a>
+                @Html.DisplayNameFor(model => model.Glx)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlanetsystemSortParm"]">@Html.DisplayNameFor(model => model.Planetsystem)</a>
+                @Html.DisplayNameFor(model => model.Planetsystem)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterSortParm"]">@Html.DisplayNameFor(model => model.Starcluster)</a>
+                @Html.DisplayNameFor(model => model.Starcluster)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr class="Search">
+        <tr class="Поиск">
             <td>
                 @Html.DisplayFor(modelItem => item.StarName)
             </td>
@@ -88,24 +85,17 @@
     </tbody>
 </table>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        function Contains(text_one, text_two){
-            if (text_one.indexOf(text_two) != -1){
-                return true
-            }
-        }
-        $("#Search").keyup(function(){
-            var searchText = $("#Search").val().toLowerCase();
-            $(".Search").each(function(){
-                if(!Contains($(this).text().toLowerCase(), searchText)){
-                    $(this).hide();
-                }
-                else{
-                    $(this).show();
-                }
-            });
+@section Scripts {
+
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/customerDatatable.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
         });
-    });
-</script>
+    </script>
+
+}

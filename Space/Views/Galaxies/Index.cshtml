@@ -6,124 +6,115 @@
 
 <h1>Галактики</h1>
 
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <p>
     <a asp-action="Create">Добавить</a>
 </p>
+<hr />
 
-<p>
-    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-    <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
-</p>
-
-<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxNameSortParm"]">@Html.DisplayNameFor(model => model.GlxName)</a>
+                @Html.DisplayNameFor(model => model.GlxName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxTypeSortParm"]">@Html.DisplayNameFor(model => model.GlxType)</a>
+                @Html.DisplayNameFor(model => model.GlxType)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.GlxRightAscension)</a>
+                @Html.DisplayNameFor(model => model.GlxRightAscension)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxDeclinationSortParm"]">@Html.DisplayNameFor(model => model.GlxDeclination)</a>
+                @Html.DisplayNameFor(model => model.GlxDeclination)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRedshiftSortParm"]">@Html.DisplayNameFor(model => model.GlxRedshift)</a>
+                @Html.DisplayNameFor(model => model.GlxRedshift)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxDistanceSortParm"]">@Html.DisplayNameFor(model => model.GlxDistance)</a>
+                @Html.DisplayNameFor(model => model.GlxDistance)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxApparentMagnitudeSortParm"]">@Html.DisplayNameFor(model => model.GlxApparentMagnitude)</a>
-            </th>
-                        <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRadialVelocitySortParm"]">@Html.DisplayNameFor(model => model.GlxRadialVelocity)</a>
+                @Html.DisplayNameFor(model => model.GlxApparentMagnitude)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRadiusSortParm"]">@Html.DisplayNameFor(model => model.GlxRadius)</a>
+                @Html.DisplayNameFor(model => model.GlxRadialVelocity)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
+                @Html.DisplayNameFor(model => model.GlxRadius)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxclusterSortParm"]">@Html.DisplayNameFor(model => model.Glxcluster)</a>
+                @Html.DisplayNameFor(model => model.Cons)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupSortParm"]">@Html.DisplayNameFor(model => model.Glxgroup)</a>
+                @Html.DisplayNameFor(model => model.Glxcluster)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Glxgroup)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="Search">
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxRightAscension)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxDeclination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxRedshift)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxDistance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxApparentMagnitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxRadialVelocity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GlxRadius)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Glxcluster.GlxclusterName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Glxgroup.GlxgroupName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.GlxId">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.GlxId">Детали</a> |
-                <a asp-action="Delete" asp-route-id="@item.GlxId">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="Поиск">
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxRightAscension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxDeclination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxRedshift)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxApparentMagnitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxRadialVelocity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GlxRadius)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cons.ConsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Glxcluster.GlxclusterName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Glxgroup.GlxgroupName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.GlxId">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.GlxId">Детали</a> |
+                    <a asp-action="Delete" asp-route-id="@item.GlxId">Удалить</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        function Contains(text_one, text_two) {
-            if (text_one.indexOf(text_two) != -1) {
-                return true
-            }
-        }
-        $("#Search").keyup(function () {
-            var searchText = $("#Search").val().toLowerCase();
-            $(".Search").each(function () {
-                if (!Contains($(this).text().toLowerCase(), searchText)) {
-                    $(this).hide();
-                }
-                else {
-                    $(this).show();
-                }
-            });
+@section Scripts {
+
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/customerDatatable.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
         });
-    });
-</script>
+    </script>
+
+}

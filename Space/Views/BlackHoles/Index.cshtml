@@ -6,94 +6,85 @@
 
 <h1>Чёрные дыры</h1>
 
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <p>
     <a asp-action="Create">Добавить</a>
 </p>
+<hr />
 
-<p>
-    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-    <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
-</p>
-
-<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["BlackholeNameSortParm"]">@Html.DisplayNameFor(model => model.BlackholeName)</a>
+                @Html.DisplayNameFor(model => model.BlackholeName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["BlackholeTypeSortParm"]">@Html.DisplayNameFor(model => model.BlackholeType)</a>
+                @Html.DisplayNameFor(model => model.BlackholeType)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["BlackholeRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.BlackholeRightAscension)</a>
+                @Html.DisplayNameFor(model => model.BlackholeRightAscension)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["BlackholeDeclinationSortParm"]">@Html.DisplayNameFor(model => model.BlackholeDeclination)</a>
+                @Html.DisplayNameFor(model => model.BlackholeDeclination)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["BlackholeDistanceSortParm"]">@Html.DisplayNameFor(model => model.BlackholeDistance)</a>
+                @Html.DisplayNameFor(model => model.BlackholeDistance)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
+                @Html.DisplayNameFor(model => model.Cons)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxSortParm"]">@Html.DisplayNameFor(model => model.Glx)</a>
+                @Html.DisplayNameFor(model => model.Glx)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="Search">
-            <td>
-                @Html.DisplayFor(modelItem => item.BlackholeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlackholeType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlackholeRightAscension)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlackholeDeclination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlackholeDistance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Glx.GlxName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BlackHoleId">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.BlackHoleId">Детали</a> |
-                <a asp-action="Delete" asp-route-id="@item.BlackHoleId">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="Поиск">
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlackholeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlackholeType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlackholeRightAscension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlackholeDeclination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlackholeDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cons.ConsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Glx.GlxName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BlackHoleId">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.BlackHoleId">Детали</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BlackHoleId">Удалить</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        function Contains(text_one, text_two) {
-            if (text_one.indexOf(text_two) != -1) {
-                return true
-            }
-        }
-        $("#Search").keyup(function () {
-            var searchText = $("#Search").val().toLowerCase();
-            $(".Search").each(function () {
-                if (!Contains($(this).text().toLowerCase(), searchText)) {
-                    $(this).hide();
-                }
-                else {
-                    $(this).show();
-                }
-            });
+@section Scripts {
+
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/customerDatatable.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
         });
-    });
-</script>
+    </script>
+
+}

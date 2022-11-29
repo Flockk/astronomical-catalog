@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 
@@ -18,47 +13,11 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index()
         {
-            ViewData["ConsNameSortParm"] = sortOrder == "ConsName" ? "ConsName_desc" : "ConsName";
-            ViewData["ConsAbbreviationSortParm"] = sortOrder == "ConsAbbreviation" ? "ConsAbbreviation_desc" : "ConsAbbreviation";
-            ViewData["ConsSymbolismSortParm"] = sortOrder == "ConsSymbolism" ? "ConsSymbolism_desc" : "ConsSymbolism";
-            ViewData["ConsRightAscensionSortParm"] = sortOrder == "ConsRightAscension" ? "ConsRightAscension_desc" : "ConsRightAscension";
-            ViewData["ConsDeclinationSortParm"] = sortOrder == "ConsDeclination" ? "ConsDeclination_desc" : "ConsDeclination";
-            ViewData["ConsSquareSortParm"] = sortOrder == "ConsSquare" ? "ConsSquare_desc" : "ConsSquare";
-            ViewData["ConsVisibleInLatitudesSortParm"] = sortOrder == "ConsVisibleInLatitudes" ? "ConsVisibleInLatitudes_desc" : "ConsVisibleInLatitudes";
-
-            var constellations = from c in _context.Constellations
-                            select c;
-
-            if (string.IsNullOrEmpty(sortOrder))
-            {
-                sortOrder = "ConsName";
-                sortOrder = "ConsAbbreviation";
-                sortOrder = "ConsSymbolism";
-                sortOrder = "ConsRightAscension";
-                sortOrder = "ConsDeclination";
-                sortOrder = "ConsSquare";
-                sortOrder = "ConsVisibleInLatitudes";
-            }
-
-            bool descending = false;
-            if (sortOrder.EndsWith("_desc"))
-            {
-                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
-                descending = true;
-            }
-
-            if (descending)
-            {
-                constellations = constellations.OrderByDescending(e => EF.Property<object>(e, sortOrder));
-            }
-            else
-            {
-                constellations = constellations.OrderBy(e => EF.Property<object>(e, sortOrder));
-            }
-
-            return View(await constellations.AsNoTracking().ToListAsync());
+            return _context.Constellations != null ?
+                        View(await _context.Constellations.ToListAsync()) :
+                        Problem("Entity set 'SpaceContext.Constellations'  is null.");
         }
 
         public async Task<IActionResult> Details(int? id)

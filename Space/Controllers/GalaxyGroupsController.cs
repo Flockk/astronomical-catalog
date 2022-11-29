@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -18,45 +14,10 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index()
         {
-            ViewData["GlxgroupNameSortParm"] = sortOrder == "GlxgroupName" ? "GlxgroupName_desc" : "GlxgroupName";
-            ViewData["GlxgroupTypeSortParm"] = sortOrder == "GlxgroupType" ? "GlxgroupType_desc" : "GlxgroupType";
-            ViewData["GlxgroupRightAscensionSortParm"] = sortOrder == "GlxgroupRightAscension" ? "GlxgroupRightAscension_desc" : "GlxgroupRightAscension";
-            ViewData["GlxgroupDeclinationSortParm"] = sortOrder == "GlxgroupDeclination" ? "GlxgroupDeclination_desc" : "GlxgroupDeclination";
-            ViewData["GlxgroupRedshiftSortParm"] = sortOrder == "GlxgroupRedshift" ? "GlxgroupRedshift_desc" : "GlxgroupRedshift";
-            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
-
-            var galaxyGroups = from g in _context.GalaxyGroups.Include(g => g.Cons)
-                            select g;
-
-            if (string.IsNullOrEmpty(sortOrder))
-            {
-                sortOrder = "GlxgroupName";
-                sortOrder = "GlxgroupType";
-                sortOrder = "GlxgroupRightAscension";
-                sortOrder = "GlxgroupDeclination";
-                sortOrder = "GlxgroupRedshift";
-                sortOrder = "Cons";
-            }
-
-            bool descending = false;
-            if (sortOrder.EndsWith("_desc"))
-            {
-                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
-                descending = true;
-            }
-
-            if (descending)
-            {
-                galaxyGroups = galaxyGroups.OrderByDescending(e => EF.Property<object>(e, sortOrder));
-            }
-            else
-            {
-                galaxyGroups = galaxyGroups.OrderBy(e => EF.Property<object>(e, sortOrder));
-            }
-
-            return View(await galaxyGroups.AsNoTracking().ToListAsync());
+            var spaceContext = _context.GalaxyGroups.Include(g => g.Cons);
+            return View(await spaceContext.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

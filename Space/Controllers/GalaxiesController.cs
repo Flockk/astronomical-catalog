@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -18,57 +14,10 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index()
         {
-            ViewData["GlxNameSortParm"] = sortOrder == "GlxName" ? "GlxName_desc" : "GlxName";
-            ViewData["GlxTypeSortParm"] = sortOrder == "GlxType" ? "GlxType_desc" : "GlxType";
-            ViewData["GlxRightAscensionSortParm"] = sortOrder == "GlxRightAscension" ? "GlxRightAscension_desc" : "GlxRightAscension";
-            ViewData["GlxDeclinationSortParm"] = sortOrder == "GlxDeclination" ? "GlxDeclination_desc" : "GlxDeclination";
-            ViewData["GlxRedshiftSortParm"] = sortOrder == "GlxRedshift" ? "GlxRedshift_desc" : "GlxRedshift";
-            ViewData["GlxDistanceSortParm"] = sortOrder == "GlxDistance" ? "GlxDistance_desc" : "GlxDistance";
-            ViewData["GlxApparentMagnitudeSortParm"] = sortOrder == "GlxApparentMagnitude" ? "GlxApparentMagnitude_desc" : "GlxApparentMagnitude";
-            ViewData["GlxRadialVelocitySortParm"] = sortOrder == "GlxRadialVelocity" ? "GlxRadialVelocity_desc" : "GlxRadialVelocity";
-            ViewData["GlxRadiusSortParm"] = sortOrder == "GlxRadius" ? "GlxRadius_desc" : "GlxRadius";
-            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
-            ViewData["GlxclusterSortParm"] = sortOrder == "Glxcluster" ? "Glxcluster_desc" : "Glxcluster";
-            ViewData["GlxgroupSortParm"] = sortOrder == "Glxgroup" ? "Glxgroup_desc" : "Glxgroup";
-
-            var galaxies = from g in _context.Galaxies.Include(g => g.Cons).Include(g => g.Glxcluster).Include(g => g.Glxgroup)
-                            select g;
-
-            if (string.IsNullOrEmpty(sortOrder))
-            {
-                sortOrder = "GlxName";
-                sortOrder = "GlxType";
-                sortOrder = "GlxRightAscension";
-                sortOrder = "GlxDeclination";
-                sortOrder = "GlxRedshift";
-                sortOrder = "GlxDistance";
-                sortOrder = "GlxApparentMagnitude";
-                sortOrder = "GlxRadialVelocity";
-                sortOrder = "GlxRadius";
-                sortOrder = "Cons";
-                sortOrder = "Glxcluster";
-                sortOrder = "Glxgroup";
-            }
-
-            bool descending = false;
-            if (sortOrder.EndsWith("_desc"))
-            {
-                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
-                descending = true;
-            }
-
-            if (descending)
-            {
-                galaxies = galaxies.OrderByDescending(e => EF.Property<object>(e, sortOrder));
-            }
-            else
-            {
-                galaxies = galaxies.OrderBy(e => EF.Property<object>(e, sortOrder));
-            }
-
-            return View(await galaxies.AsNoTracking().ToListAsync());
+            var spaceContext = _context.Galaxies.Include(g => g.Cons).Include(g => g.Glxcluster).Include(g => g.Glxgroup);
+            return View(await spaceContext.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
