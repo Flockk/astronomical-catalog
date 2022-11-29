@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 
@@ -18,16 +19,47 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var spaceContext = _context.Asteroids.Include(a => a.Star);
-            return View(await spaceContext.ToListAsync());
-        }
+            ViewData["AstNameSortParm"] = sortOrder == "AstName" ? "AstName_desc" : "AstName";
+            ViewData["AstDiameterSortParm"] = sortOrder == "AstDiameter" ? "AstDiameter_desc" : "AstDiameter";
+            ViewData["AstOrbitalEccentricitySortParm"] = sortOrder == "AstOrbitalEccentricity" ? "AstOrbitalEccentricity_desc" : "AstOrbitalEccentricity";
+            ViewData["AstOrbitalInclinationSortParm"] = sortOrder == "AstOrbitalInclination" ? "AstOrbitalInclination_desc" : "AstOrbitalInclination";
+            ViewData["AstArgumentOfPerihelionSortParm"] = sortOrder == "AstArgumentOfPerihelion" ? "AstArgumentOfPerihelion_desc" : "AstArgumentOfPerihelion";
+            ViewData["AstMeanAnomalySortParm"] = sortOrder == "AstMeanAnomaly" ? "AstMeanAnomaly_desc" : "AstMeanAnomaly";
+            ViewData["StarSortParm"] = sortOrder == "Star" ? "Star_desc" : "Star";
 
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
+            var asteroids = from a in _context.Asteroids.Include(a => a.Star)
+                            select a;
+
+            if (string.IsNullOrEmpty(sortOrder))
+            {
+                sortOrder = "AstName";
+                sortOrder = "AstDiameter";
+                sortOrder = "AstOrbitalEccentricity";
+                sortOrder = "AstOrbitalInclination";
+                sortOrder = "AstArgumentOfPerihelion";
+                sortOrder = "AstMeanAnomaly";
+                sortOrder = "Star";
+            }
+
+            bool descending = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
+                descending = true;
+            }
+
+            if (descending)
+            {
+                asteroids = asteroids.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                asteroids = asteroids.OrderBy(e => EF.Property<object>(e, sortOrder));
+            }
+
+            return View(await asteroids.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

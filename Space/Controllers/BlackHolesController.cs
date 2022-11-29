@@ -18,10 +18,48 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var spaceContext = _context.BlackHoles.Include(b => b.Cons).Include(b => b.Glx);
-            return View(await spaceContext.ToListAsync());
+            ViewData["BlackholeNameSortParm"] = sortOrder == "BlackholeName" ? "BlackholeName_desc" : "BlackholeName";
+            ViewData["BlackholeTypeSortParm"] = sortOrder == "BlackholeType" ? "BlackholeType_desc" : "BlackholeType";
+            ViewData["BlackholeRightAscensionSortParm"] = sortOrder == "BlackholeRightAscension" ? "BlackholeRightAscension_desc" : "BlackholeRightAscension";
+            ViewData["BlackholeDeclinationSortParm"] = sortOrder == "BlackholeDeclination" ? "BlackholeDeclination_desc" : "BlackholeDeclination";
+            ViewData["BlackholeDistanceSortParm"] = sortOrder == "BlackholeDistance" ? "BlackholeDistance_desc" : "BlackholeDistance";
+            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
+            ViewData["GlxSortParm"] = sortOrder == "Glx" ? "Glx_desc" : "Glx";
+
+
+            var blackHoles = from b in _context.BlackHoles.Include(b => b.Cons).Include(b => b.Glx)
+                            select b;
+
+            if (string.IsNullOrEmpty(sortOrder))
+            {
+                sortOrder = "BlackholeName";
+                sortOrder = "BlackholeType";
+                sortOrder = "BlackholeRightAscension";
+                sortOrder = "BlackholeDeclination";
+                sortOrder = "BlackholeDistance";
+                sortOrder = "Cons";
+                sortOrder = "Glx";
+            }
+
+            bool descending = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
+                descending = true;
+            }
+
+            if (descending)
+            {
+                blackHoles = blackHoles.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                blackHoles = blackHoles.OrderBy(e => EF.Property<object>(e, sortOrder));
+            }
+
+            return View(await blackHoles.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

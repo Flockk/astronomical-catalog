@@ -15,29 +15,29 @@
     <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ConsName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsNameSortParm"]">@Html.DisplayNameFor(model => model.ConsName)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsAbbreviation)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsAbbreviationSortParm"]">@Html.DisplayNameFor(model => model.ConsAbbreviation)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsSymbolism)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSymbolismSortParm"]">@Html.DisplayNameFor(model => model.ConsSymbolism)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsRightAscension)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.ConsRightAscension)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsDeclination)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsDeclinationSortParm"]">@Html.DisplayNameFor(model => model.ConsDeclination)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsSquare)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSquareSortParm"]">@Html.DisplayNameFor(model => model.ConsSquare)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsVisibleInLatitudesSortParm"]">@Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)</a>
             </th>
             <th></th>
         </tr>

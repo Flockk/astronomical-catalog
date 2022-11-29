@@ -18,10 +18,45 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var spaceContext = _context.GalaxyClusters.Include(g => g.Cons);
-            return View(await spaceContext.ToListAsync());
+            ViewData["GlxclusterNameSortParm"] = sortOrder == "GlxclusterName" ? "GlxclusterName_desc" : "GlxclusterName";
+            ViewData["GlxclusterTypeSortParm"] = sortOrder == "GlxclusterType" ? "GlxclusterType_desc" : "GlxclusterType";
+            ViewData["GlxclusterRightAscensionSortParm"] = sortOrder == "GlxclusterRightAscension" ? "GlxclusterRightAscension_desc" : "GlxclusterRightAscension";
+            ViewData["GlxclusterDeclinationSortParm"] = sortOrder == "GlxclusterDeclination" ? "GlxclusterDeclination_desc" : "GlxclusterDeclination";
+            ViewData["GlxclusterRedshiftSortParm"] = sortOrder == "GlxclusterRedshift" ? "GlxclusterRedshift_desc" : "GlxclusterRedshift";
+            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
+
+            var galaxyClusters = from g in _context.GalaxyClusters.Include(g => g.Cons)
+                            select g;
+
+            if (string.IsNullOrEmpty(sortOrder))
+            {
+                sortOrder = "GlxclusterName";
+                sortOrder = "GlxclusterType";
+                sortOrder = "GlxclusterRightAscension";
+                sortOrder = "GlxclusterDeclination";
+                sortOrder = "GlxclusterRedshift";
+                sortOrder = "Cons";
+            }
+
+            bool descending = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
+                descending = true;
+            }
+
+            if (descending)
+            {
+                galaxyClusters = galaxyClusters.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                galaxyClusters = galaxyClusters.OrderBy(e => EF.Property<object>(e, sortOrder));
+            }
+
+            return View(await galaxyClusters.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

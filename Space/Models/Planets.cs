@@ -18,7 +18,7 @@ namespace Space.Models
         public double? PlntEccentricity { get; set; }
         [DisplayName("Большая полуось (а.е.)")]
         public double? PlntSemiMajorAxis { get; set; }
-        [DisplayName("Период обращения (лет)")]
+        [DisplayName("Период обращения (дней)")]
         public double? PlntOrbitalPeriod { get; set; }
         [DisplayName("Аргумент перицентра (°)")]
         public double? PlntArgumentOfPerihelion { get; set; }

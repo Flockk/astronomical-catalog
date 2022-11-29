@@ -18,10 +18,51 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var spaceContext = _context.Stars.Include(s => s.Cons).Include(s => s.Glx).Include(s => s.Planetsystem).Include(s => s.Starcluster);
-            return View(await spaceContext.ToListAsync());
+            ViewData["StarNameSortParm"] = sortOrder == "StarName" ? "StarName_desc" : "StarName";
+            ViewData["StarApparentMagnitudeSortParm"] = sortOrder == "StarApparentMagnitude" ? "StarApparentMagnitude_desc" : "StarApparentMagnitude";
+            ViewData["StarStellarClassSortParm"] = sortOrder == "StarStellarClass" ? "StarStellarClass_desc" : "StarStellarClass";
+            ViewData["StarDistanceSortParm"] = sortOrder == "StarDistance" ? "StarDistance_desc" : "StarDistance";
+            ViewData["StarDeclinationSortParm"] = sortOrder == "StarDeclination" ? "StarDeclination_desc" : "StarDeclination";
+            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
+            ViewData["GlxSortParm"] = sortOrder == "Glx" ? "Glx_desc" : "Glx";
+            ViewData["PlanetsystemSortParm"] = sortOrder == "Planetsystem" ? "Planetsystem_desc" : "Planetsystem";
+            ViewData["StarclusterSortParm"] = sortOrder == "Starcluster" ? "Starcluster_desc" : "Starcluster";
+
+            var stars = from s in _context.Stars.Include(s => s.Cons).Include(s => s.Glx).Include(s => s.Planetsystem).Include(s => s.Starcluster)
+                            select s;
+
+            if (string.IsNullOrEmpty(sortOrder))
+            {
+                sortOrder = "StarName";
+                sortOrder = "StarApparentMagnitude";
+                sortOrder = "StarStellarClass";
+                sortOrder = "StarDistance";
+                sortOrder = "StarDeclination";
+                sortOrder = "Cons";
+                sortOrder = "Glx";
+                sortOrder = "Planetsystem";
+                sortOrder = "Starcluster";
+            }
+
+            bool descending = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
+                descending = true;
+            }
+
+            if (descending)
+            {
+                stars = stars.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                stars = stars.OrderBy(e => EF.Property<object>(e, sortOrder));
+            }
+
+            return View(await stars.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

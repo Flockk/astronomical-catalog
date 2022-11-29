@@ -1,0 +1,8 @@
+﻿@model Space.Models.Planets
+
+@{
+	var imgText = "";
+	imgText = Model.PlntName.Trim();
+}
+
+<img src="@Model.PlntImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />

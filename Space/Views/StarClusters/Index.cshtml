@@ -15,35 +15,35 @@
     <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterNameSortParm"]">@Html.DisplayNameFor(model => model.StarclusterName)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterTypeSortParm"]">@Html.DisplayNameFor(model => model.StarclusterType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterRightAscension)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.StarclusterRightAscension)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterDeclination)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterDeclinationSortParm"]">@Html.DisplayNameFor(model => model.StarclusterDeclination)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterDistance)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterDistanceSortParm"]">@Html.DisplayNameFor(model => model.StarclusterDistance)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterAge)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterAgeSortParm"]">@Html.DisplayNameFor(model => model.StarclusterAge)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarclusterDiameter)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarclusterDiameterParm"]">@Html.DisplayNameFor(model => model.StarclusterDiameter)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cons)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Glx)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxSortParm"]">@Html.DisplayNameFor(model => model.Glx)</a>
             </th>
             <th></th>
         </tr>

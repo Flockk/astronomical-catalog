@@ -15,30 +15,31 @@
     <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NebulaName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NebulaNameSortParm"]">@Html.DisplayNameFor(model => model.NebulaName)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NebulaType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NebulaTypeSortParm"]">@Html.DisplayNameFor(model => model.NebulaType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NebulaRightAscension)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NebulaRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.NebulaRightAscension)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NebulaDeclination)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NebulaDeclinationSortParm"]">@Html.DisplayNameFor(model => model.NebulaDeclination)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NebulaDistance)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NebulaDistanceSortParm"]">@Html.DisplayNameFor(model => model.NebulaDistance)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cons)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Glx)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxSortParm"]">@Html.DisplayNameFor(model => model.Glx)</a>
             </th>
+            <th></th>
             <th></th>
         </tr>
     </thead>

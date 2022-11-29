@@ -15,32 +15,32 @@
     <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PlntName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlntNameSortParm"]">@Html.DisplayNameFor(model => model.PlntName)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlntEccentricity)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlntEccentricitySortParm"]">@Html.DisplayNameFor(model => model.PlntEccentricity)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlntSemiMajorAxis)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlntSemiMajorAxisSortParm"]">@Html.DisplayNameFor(model => model.PlntSemiMajorAxis)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlntOrbitalPeriod)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlntOrbitalPeriodSortParm"]">@Html.DisplayNameFor(model => model.PlntOrbitalPeriod)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlntArgumentOfPerihelion)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlntArgumentOfPerihelionSortParm"]">@Html.DisplayNameFor(model => model.PlntArgumentOfPerihelion)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlntMass)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PlntMassSortParm"]">@Html.DisplayNameFor(model => model.PlntMass)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cons)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Star)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StarSortParm"]">@Html.DisplayNameFor(model => model.Star)</a>
             </th>
             <th></th>
         </tr>

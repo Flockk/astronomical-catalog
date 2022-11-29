@@ -1,5 +1,7 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Space.Models
 {
@@ -15,6 +17,8 @@ namespace Space.Models
         public string BlackholeName { get; set; }
         [DisplayName("Тип")]
         public string BlackholeType { get; set; }
+
+        [DataType(DataType.Time)]
         [DisplayName("Прямое восхождение")]
         public TimeSpan? BlackholeRightAscension { get; set; }
         [DisplayName("Склонение")]

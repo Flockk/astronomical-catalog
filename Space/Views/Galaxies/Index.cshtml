@@ -15,44 +15,44 @@
     <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.GlxName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxNameSortParm"]">@Html.DisplayNameFor(model => model.GlxName)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxTypeSortParm"]">@Html.DisplayNameFor(model => model.GlxType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxRightAscension)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.GlxRightAscension)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxDeclination)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxDeclinationSortParm"]">@Html.DisplayNameFor(model => model.GlxDeclination)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxRedshift)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRedshiftSortParm"]">@Html.DisplayNameFor(model => model.GlxRedshift)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxDistance)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxDistanceSortParm"]">@Html.DisplayNameFor(model => model.GlxDistance)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxApparentMagnitude)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxApparentMagnitudeSortParm"]">@Html.DisplayNameFor(model => model.GlxApparentMagnitude)</a>
+            </th>
+                        <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRadialVelocitySortParm"]">@Html.DisplayNameFor(model => model.GlxRadialVelocity)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxRadialVelocity)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxRadiusSortParm"]">@Html.DisplayNameFor(model => model.GlxRadius)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxRadius)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cons)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxclusterSortParm"]">@Html.DisplayNameFor(model => model.Glxcluster)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Glxcluster)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Glxgroup)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupSortParm"]">@Html.DisplayNameFor(model => model.Glxgroup)</a>
             </th>
             <th></th>
         </tr>

@@ -15,26 +15,26 @@
     <input type="text" id="Search" placeholder="Поиск" class="form-control" autocomplete="off" />
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.GlxgroupName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupNameSortParm"]">@Html.DisplayNameFor(model => model.GlxgroupName)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxgroupType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupTypeSortParm"]">@Html.DisplayNameFor(model => model.GlxgroupType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxgroupRightAscension)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupRightAscensionSortParm"]">@Html.DisplayNameFor(model => model.GlxgroupRightAscension)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxgroupDeclination)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupDeclinationSortParm"]">@Html.DisplayNameFor(model => model.GlxgroupDeclination)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GlxgroupRedshift)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GlxgroupRedshiftSortParm"]">@Html.DisplayNameFor(model => model.GlxgroupRedshift)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cons)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsSortParm"]">@Html.DisplayNameFor(model => model.Cons)</a>
             </th>
             <th></th>
         </tr>

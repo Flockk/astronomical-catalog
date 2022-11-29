@@ -18,10 +18,47 @@ namespace Space.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var spaceContext = _context.Nebulae.Include(n => n.Cons).Include(n => n.Glx);
-            return View(await spaceContext.ToListAsync());
+            ViewData["NebulaNameSortParm"] = sortOrder == "NebulaName" ? "NebulaName_desc" : "NebulaName";
+            ViewData["NebulaTypeSortParm"] = sortOrder == "NebulaType" ? "NebulaType_desc" : "NebulaType";
+            ViewData["NebulaRightAscensionSortParm"] = sortOrder == "NebulaRightAscension" ? "NebulaRightAscension_desc" : "NebulaRightAscension";
+            ViewData["NebulaDeclinationSortParm"] = sortOrder == "NebulaDeclination" ? "NebulaDeclination_desc" : "NebulaDeclination";
+            ViewData["NebulaDistanceSortParm"] = sortOrder == "NebulaDistance" ? "NebulaDistance_desc" : "NebulaDistance";
+            ViewData["ConsSortParm"] = sortOrder == "Cons" ? "Cons_desc" : "Cons";
+            ViewData["GlxSortParm"] = sortOrder == "Glx" ? "Glx_desc" : "Glx";
+
+            var nebulae = from n in _context.Nebulae.Include(n => n.Cons).Include(n => n.Glx)
+                            select n;
+
+            if (string.IsNullOrEmpty(sortOrder))
+            {
+                sortOrder = "NebulaName";
+                sortOrder = "NebulaType";
+                sortOrder = "NebulaRightAscension";
+                sortOrder = "NebulaDeclination";
+                sortOrder = "NebulaDistance";
+                sortOrder = "Cons";
+                sortOrder = "Glx";
+            }
+
+            bool descending = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
+                descending = true;
+            }
+
+            if (descending)
+            {
+                nebulae = nebulae.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                nebulae = nebulae.OrderBy(e => EF.Property<object>(e, sortOrder));
+            }
+
+            return View(await nebulae.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
