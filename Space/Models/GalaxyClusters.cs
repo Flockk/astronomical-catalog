@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Space.Models
 {
@@ -14,14 +15,23 @@ namespace Space.Models
         public int GlxclusterId { get; set; }
         [DisplayName("Созвездие")]
         public int ConsId { get; set; }
+
+        [Required(ErrorMessage = "Не указано название скопления галактик")]
+        [StringLength(30, ErrorMessage = "Длина строки должна быть до 30 символов")]
         [DisplayName("Название")]
         public string GlxclusterName { get; set; }
+
+        [StringLength(20, ErrorMessage = "Длина строки должна быть до 20 символов")]
         [DisplayName("Тип")]
         public string GlxclusterType { get; set; }
+
         [DisplayName("Прямое восхождение")]
         public TimeSpan? GlxclusterRightAscension { get; set; }
+
+        [StringLength(20, ErrorMessage = "Длина строки должна быть до 20 символов")]
         [DisplayName("Склонение")]
         public string GlxclusterDeclination { get; set; }
+
         [DisplayName("Красное смещение")]
         public double? GlxclusterRedshift { get; set; }
 

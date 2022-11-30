@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Space.Models
 {
@@ -20,18 +21,35 @@ namespace Space.Models
 
         [DisplayName("Созвездие")]
         public int ConsId { get; set; }
+
+        [Required(ErrorMessage = "Не указано название созвездия")]
+        [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         [DisplayName("Название")]
         public string ConsName { get; set; }
+
+        [Required(ErrorMessage = "Не указано сокращение созвездия")]
+        [StringLength(3, ErrorMessage = "Длина строки должна быть до 3 символов")]
         [DisplayName("Сокращение")]
         public string ConsAbbreviation { get; set; }
+
+        [Required(ErrorMessage = "Не указан символ созвездия")]
+        [StringLength(22, ErrorMessage = "Длина строки должна быть до 22 символов")]
         [DisplayName("Символ")]
         public string ConsSymbolism { get; set; }
+
+        [StringLength(17, ErrorMessage = "Длина строки должна быть до 17 символов")]
         [DisplayName("Прямое восхождение")]
         public string ConsRightAscension { get; set; }
+
+        [StringLength(15, ErrorMessage = "Длина строки должна быть до 15 символов")]
         [DisplayName("Склонение")]
         public string ConsDeclination { get; set; }
+
+        [Range(0.000001, int.MaxValue, ErrorMessage = "Плоащдь должна быть положительна")]
         [DisplayName("Площадь (кв. °)")]
         public int? ConsSquare { get; set; }
+
+        [StringLength(20, ErrorMessage = "Длина строки должна быть до 20 символов")]
         [DisplayName("Видно в широтах")]
         public string ConsVisibleInLatitudes { get; set; }
 

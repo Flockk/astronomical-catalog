@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Space.Models
 {
@@ -16,8 +17,14 @@ namespace Space.Models
         public int? ConsId { get; set; }
         [DisplayName("Галактика")]
         public int? GlxId { get; set; }
+
+        [Required(ErrorMessage = "Не указано название планетной системы")]
+        [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         [DisplayName("Название")]
         public string PlanetsystemName { get; set; }
+
+        [Required(ErrorMessage = "Не указано количество подтверждённых планет")]
+        [Range(0.000001, byte.MaxValue, ErrorMessage = "Количество подтверждённых планет должно быть положительно")]
         [DisplayName("Подтверждённых планет")]
         public byte PlanetsystemConfirmedPlanets { get; set; }
 
