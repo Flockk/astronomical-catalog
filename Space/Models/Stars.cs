@@ -52,6 +52,7 @@ namespace Space.Models
         public virtual PlanetarySystems Planetsystem { get; set; }
         [DisplayName("Звёздное скопление")]
         public virtual StarClusters Starcluster { get; set; }
+
         public virtual ICollection<Asteroids> Asteroids { get; set; }
         public virtual ICollection<Comets> Comets { get; set; }
         public virtual ICollection<Planets> Planets { get; set; }

@@ -58,7 +58,7 @@ namespace Space.Models
         [DisplayName("Радиус (кпк)")]
         public double? GlxRadius { get; set; }
 
-        [DisplayName("Созвевздие")]
+        [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Скопление галактик")]
         public virtual GalaxyClusters Glxcluster { get; set; }

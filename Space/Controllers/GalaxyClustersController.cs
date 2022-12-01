@@ -133,7 +133,9 @@ namespace Space.Controllers
             {
                 return Problem("Entity set 'SpaceContext.GalaxyClusters'  is null.");
             }
-            var galaxyClusters = await _context.GalaxyClusters.FindAsync(id);
+            var galaxyClusters = await _context.GalaxyClusters
+                .Include(g => g.Galaxies)
+                .FirstOrDefaultAsync(m => m.GlxclusterId == id);
             if (galaxyClusters != null)
             {
                 _context.GalaxyClusters.Remove(galaxyClusters);

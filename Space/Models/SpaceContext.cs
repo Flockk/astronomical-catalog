@@ -68,6 +68,7 @@ namespace Space.Models
                 entity.HasOne(d => d.Star)
                     .WithMany(p => p.Asteroids)
                     .HasForeignKey(d => d.StarId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Asteroids_Stars");
             });
 
@@ -106,12 +107,13 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.BlackHoles)
                     .HasForeignKey(d => d.ConsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_BlackHoles_To_Constellations");
 
                 entity.HasOne(d => d.Glx)
                     .WithMany(p => p.BlackHoles)
                     .HasForeignKey(d => d.GlxId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_BlackHoles_To_Galaxies");
             });
 
@@ -144,6 +146,7 @@ namespace Space.Models
                 entity.HasOne(d => d.Star)
                     .WithMany(p => p.Comets)
                     .HasForeignKey(d => d.StarId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Comets_Stars");
             });
 
@@ -246,16 +249,19 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.Galaxies)
                     .HasForeignKey(d => d.ConsId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Galaxies_To_Constellations");
 
                 entity.HasOne(d => d.Glxcluster)
                     .WithMany(p => p.Galaxies)
                     .HasForeignKey(d => d.GlxclusterId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Galaxies_To_GalaxyClusters");
 
                 entity.HasOne(d => d.Glxgroup)
                     .WithMany(p => p.Galaxies)
                     .HasForeignKey(d => d.GlxgroupId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Galaxies_To_GalaxyGroups");
 			});
 
@@ -297,7 +303,7 @@ namespace Space.Models
 				entity.HasOne(d => d.Cons)
                     .WithMany(p => p.GalaxyClusters)
                     .HasForeignKey(d => d.ConsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_GalaxyClusters_To_Constellations");
 
             });
@@ -339,6 +345,7 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.GalaxyGroups)
                     .HasForeignKey(d => d.ConsId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_GalaxyGroups_To_Constellations");
             });
 
@@ -382,12 +389,13 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.Nebulae)
                     .HasForeignKey(d => d.ConsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Nebulae_To_Constellations");
 
                 entity.HasOne(d => d.Glx)
                     .WithMany(p => p.Nebulae)
                     .HasForeignKey(d => d.GlxId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Nebulae_Galaxies");
             });
 
@@ -418,11 +426,13 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.PlanetarySystems)
                     .HasForeignKey(d => d.ConsId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_PlanetarySystems_To_Constellations");
 
                 entity.HasOne(d => d.Glx)
                     .WithMany(p => p.PlanetarySystems)
                     .HasForeignKey(d => d.GlxId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_PlanetarySystems_Galaxies");
             });
 
@@ -457,11 +467,13 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.Planets)
                     .HasForeignKey(d => d.ConsId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Planets_To_Constellations");
 
                 entity.HasOne(d => d.Star)
                     .WithMany(p => p.Planets)
                     .HasForeignKey(d => d.StarId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Planets_Stars");
 
                 entity.Property(e => e.PlntImage)
@@ -508,11 +520,13 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.StarClusters)
                     .HasForeignKey(d => d.ConsId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_StarClusters_To_Constellations");
 
                 entity.HasOne(d => d.Glx)
                     .WithMany(p => p.StarClusters)
                     .HasForeignKey(d => d.GlxId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_StarClusters_Galaxies");
 
                 entity.Property(e => e.StarclusterImage)
@@ -557,21 +571,25 @@ namespace Space.Models
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.Stars)
                     .HasForeignKey(d => d.ConsId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Stars_Constellations");
 
                 entity.HasOne(d => d.Glx)
                     .WithMany(p => p.Stars)
                     .HasForeignKey(d => d.GlxId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Stars_To_Galaxies");
 
                 entity.HasOne(d => d.Planetsystem)
                     .WithMany(p => p.Stars)
                     .HasForeignKey(d => d.PlanetsystemId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Stars_To_PlanetarySystems");
 
                 entity.HasOne(d => d.Starcluster)
                     .WithMany(p => p.Stars)
                     .HasForeignKey(d => d.StarclusterId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Stars_To_StarClusters");
             });
 

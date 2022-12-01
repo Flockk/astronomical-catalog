@@ -145,7 +145,13 @@ namespace Space.Controllers
             {
                 return Problem("Entity set 'SpaceContext.Galaxies'  is null.");
             }
-            var galaxies = await _context.Galaxies.FindAsync(id);
+            var galaxies = await _context.Galaxies
+                .Include(g => g.Stars)
+                .Include(g => g.BlackHoles)
+                .Include(g => g.Nebulae)
+                .Include(g => g.PlanetarySystems)
+                .Include(g => g.StarClusters)
+                .FirstOrDefaultAsync(m => m.GlxId == id);
             if (galaxies != null)
             {
                 _context.Galaxies.Remove(galaxies);

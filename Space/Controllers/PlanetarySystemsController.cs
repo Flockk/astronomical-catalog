@@ -143,7 +143,9 @@ namespace Space.Controllers
             {
                 return Problem("Entity set 'SpaceContext.PlanetarySystems'  is null.");
             }
-            var planetarySystems = await _context.PlanetarySystems.FindAsync(id);
+            var planetarySystems = await _context.PlanetarySystems
+                .Include(p => p.Stars)
+                .FirstOrDefaultAsync(m => m.PlanetsystemId == id);
             if (planetarySystems != null)
             {
                 _context.PlanetarySystems.Remove(planetarySystems);

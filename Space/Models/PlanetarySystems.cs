@@ -36,5 +36,6 @@ namespace Space.Models
         [DisplayName("Галактика")]
         public virtual Galaxies Glx { get; set; }
         public virtual ICollection<Stars> Stars { get; set; }
+
     }
 }

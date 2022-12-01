@@ -127,7 +127,17 @@ namespace Space.Controllers
             {
                 return Problem("Entity set 'SpaceContext.Constellations'  is null.");
             }
-            var constellations = await _context.Constellations.FindAsync(id);
+            var constellations = await _context.Constellations
+                .Include(c => c.BlackHoles)
+                .Include(c => c.Galaxies)
+                .Include(c => c.GalaxyClusters)
+                .Include(c => c.GalaxyGroups)
+                .Include(c => c.Nebulae)
+                .Include(c => c.PlanetarySystems)
+                .Include(c => c.Planets)
+                .Include(c => c.StarClusters)
+                .Include(c => c.Stars)
+                .FirstOrDefaultAsync(e => e.ConsId == id);
             if (constellations != null)
             {
                 _context.Constellations.Remove(constellations);

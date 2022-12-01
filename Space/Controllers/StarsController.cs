@@ -151,7 +151,11 @@ namespace Space.Controllers
             {
                 return Problem("Entity set 'SpaceContext.Stars'  is null.");
             }
-            var stars = await _context.Stars.FindAsync(id);
+            var stars = await _context.Stars
+                .Include(s => s.Asteroids)
+                .Include(s => s.Comets)
+                .Include(s => s.Planets)
+                .FirstOrDefaultAsync(m => m.StarId == id);
             if (stars != null)
             {
                 _context.Stars.Remove(stars);
