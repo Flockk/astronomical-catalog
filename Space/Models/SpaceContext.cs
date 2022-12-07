@@ -448,7 +448,7 @@ namespace Space.Models
                 entity.Property(e => e.ConsId).HasColumnName("cons_id");
 
                 entity.Property(e => e.PlntArgumentOfPerihelion).HasColumnName("plnt_argument_of_perihelion");
-
+                
                 entity.Property(e => e.PlntEccentricity).HasColumnName("plnt_eccentricity");
 
                 entity.Property(e => e.PlntMass).HasColumnName("plnt_mass");

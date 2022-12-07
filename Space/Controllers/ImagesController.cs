@@ -6,17 +6,17 @@ namespace Space.Controllers
 {
     public class ImagesController : Controller
     {
-        private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly SpaceContext _context;
 
         public ImagesController(SpaceContext context, IWebHostEnvironment webhost)
         {
             _context = context;
-            webHostEnvironment = webhost;
+            _webHostEnvironment = webhost;
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(IFormFile image)
         {
             Planets planets = new Planets();
             return View(planets);

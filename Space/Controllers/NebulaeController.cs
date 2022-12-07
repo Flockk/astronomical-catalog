@@ -9,9 +9,12 @@ namespace Space.Controllers
     {
         private readonly SpaceContext _context;
 
-        public NebulaeController(SpaceContext context)
+        private readonly IWebHostEnvironment _webhost;
+
+        public NebulaeController(SpaceContext context, IWebHostEnvironment webhost)
         {
             _context = context;
+            _webhost = webhost;
         }
 
         public async Task<IActionResult> Index()
@@ -48,10 +51,17 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance,NebulaImage")] Nebulae nebulae)
+        public async Task<IActionResult> Create([Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance,NebulaImage")] Nebulae nebulae, IFormFile image)
         {
             if (ModelState.IsValid)
             {
+                if(image != null)
+                {
+                    var name = Path.Combine(_webhost.WebRootPath + "/Img", Path.GetFileName(image.FileName));
+                    await image.CopyToAsync(new FileStream(name, FileMode.Create));
+                    nebulae.NebulaImage = "Img/" + image.FileName;
+                }
+
                 _context.Add(nebulae);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
