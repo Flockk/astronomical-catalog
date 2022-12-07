@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 
@@ -58,7 +57,6 @@ namespace Space.Controllers
                 SpaceContext spaceContext = new SpaceContext();
 
                 var data = new Constellations()
-
                 {
                     ConsId = constellations.ConsId,
                     ConsName = constellations.ConsName,

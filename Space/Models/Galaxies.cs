@@ -15,7 +15,6 @@ namespace Space.Models
             Stars = new HashSet<Stars>();
         }
 
-
         [DisplayName("Галактика")]
         public int GlxId { get; set; }
         [DisplayName("Созвездие")]

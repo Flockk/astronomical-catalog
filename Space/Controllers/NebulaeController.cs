@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -63,7 +62,6 @@ namespace Space.Controllers
                 SpaceContext spaceContext = new SpaceContext();
 
                 var data = new Nebulae()
-
                 {
                     NebulaId = nebulae.NebulaId,
                     ConsId = nebulae.ConsId,

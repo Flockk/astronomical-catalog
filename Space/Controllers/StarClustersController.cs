@@ -62,7 +62,6 @@ namespace Space.Controllers
                 SpaceContext spaceContext = new SpaceContext();
 
                 var data = new StarClusters()
-
                 {
                     StarclusterId = starClusters.StarclusterId,
                     ConsId = starClusters.ConsId,

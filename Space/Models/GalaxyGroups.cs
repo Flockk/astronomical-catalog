@@ -13,6 +13,7 @@ namespace Space.Models
 
         [DisplayName("Группа галактик")]
         public int GlxgroupId { get; set; }
+
         [DisplayName("Созвездие")]
         public int? ConsId { get; set; }
 
@@ -24,12 +25,14 @@ namespace Space.Models
         [StringLength(11, ErrorMessage = "Длина строки должна быть до 11 символов")]
         [DisplayName("Тип")]
         public string GlxgroupType { get; set; }
+
         [DisplayName("Прямое восхождение")]
         public TimeSpan? GlxgroupRightAscension { get; set; }
 
         [StringLength(20, ErrorMessage = "Длина строки должна быть до 20 символов")]
         [DisplayName("Склонение")]
         public string GlxgroupDeclination { get; set; }
+
         [DisplayName("Красное смещение")]
         public double? GlxgroupRedshift { get; set; }
 

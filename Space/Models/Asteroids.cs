@@ -8,6 +8,7 @@ namespace Space.Models
     {
         [DisplayName("Астероид")]
         public int AstId { get; set; }
+
         [DisplayName("Звезда")]
         public int? StarId { get; set; }
 

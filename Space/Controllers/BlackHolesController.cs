@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -48,11 +49,31 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlackHoleId,ConsId,GlxId,BlackholeName,BlackholeType,BlackholeRightAscension,BlackholeDeclination,BlackholeDistance")] BlackHoles blackHoles)
+        public async Task<IActionResult> Create(BlackHoles blackHoles, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(blackHoles);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/BlackHoles/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/BlackHoles/" + fileName;
+
+                var data = new BlackHoles()
+                {
+                    BlackHoleId = blackHoles.BlackHoleId,
+                    ConsId = blackHoles.ConsId,
+                    GlxId = blackHoles.GlxId,
+                    BlackholeName = blackHoles.BlackholeName,
+                    BlackholeType = blackHoles.BlackholeType,
+                    BlackholeRightAscension = blackHoles.BlackholeRightAscension,
+                    BlackholeDeclination = blackHoles.BlackholeDeclination,
+                    BlackholeDistance = blackHoles.BlackholeDistance,
+                    BlackholeImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

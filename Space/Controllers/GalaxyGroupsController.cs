@@ -60,7 +60,6 @@ namespace Space.Controllers
                 SpaceContext spaceContext= new SpaceContext();
 
                 var data = new GalaxyGroups()
-
                 {
                     GlxgroupId= galaxyGroups.GlxgroupId,
                     ConsId = galaxyGroups.ConsId,

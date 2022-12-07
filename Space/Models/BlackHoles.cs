@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace Space.Models
 {
     public partial class BlackHoles

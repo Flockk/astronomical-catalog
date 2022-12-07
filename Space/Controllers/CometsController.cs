@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -60,7 +59,6 @@ namespace Space.Controllers
                 SpaceContext spaceContext = new SpaceContext();
 
                 var data = new Comets()
-
                 {
                     CometId = comets.CometId,
                     StarId = comets.StarId,

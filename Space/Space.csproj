@@ -254,6 +254,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Img\Ast\" />
     <Folder Include="wwwroot\Img\Comets\" />
+    <Folder Include="wwwroot\Img\BlackHoles\" />
   </ItemGroup>
 
 </Project>
