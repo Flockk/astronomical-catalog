@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -52,11 +53,34 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StarId,ConsId,GlxId,StarclusterId,PlanetsystemId,StarName,StarApparentMagnitude,StarStellarClass,StarDistance,StarDeclination")] Stars stars)
+        public async Task<IActionResult> Create(Stars stars, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(stars);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Stars/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/Stars/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Stars()
+                {
+                    StarId = stars.StarId,
+                    ConsId = stars.ConsId,
+                    GlxId = stars.GlxId,
+                    StarclusterId = stars.StarclusterId,
+                    PlanetsystemId = stars.PlanetsystemId,
+                    StarName = stars.StarName,
+                    StarApparentMagnitude = stars.StarApparentMagnitude,
+                    StarStellarClass = stars.StarStellarClass,
+                    StarDistance = stars.StarDistance,
+                    StarDeclination = stars.StarDeclination,
+                    StarImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
