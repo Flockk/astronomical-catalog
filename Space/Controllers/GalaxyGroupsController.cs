@@ -38,6 +38,7 @@ namespace Space.Controllers
             return View(galaxyGroups);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
@@ -46,12 +47,34 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GlxgroupId,ConsId,GlxgroupName,GlxgroupType,GlxgroupRightAscension,GlxgroupDeclination,GlxgroupRedshift")] GalaxyGroups galaxyGroups)
+        public async Task<IActionResult> Create(GalaxyGroups galaxyGroups, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(galaxyGroups);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/GlxGroups/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/GlxGroups/" + fileName;
+                SpaceContext spaceContext= new SpaceContext();
+
+                var data = new GalaxyGroups()
+
+                {
+                    GlxgroupId= galaxyGroups.GlxgroupId,
+                    ConsId = galaxyGroups.ConsId,
+                    GlxgroupName = galaxyGroups.GlxgroupName,
+                    GlxgroupType = galaxyGroups.GlxgroupType,
+                    GlxgroupRightAscension = galaxyGroups.GlxgroupRightAscension,
+                    GlxgroupDeclination = galaxyGroups.GlxgroupDeclination,
+                    GlxgroupRedshift = galaxyGroups.GlxgroupRedshift,
+                    GlxgroupImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
+                ViewBag.Image = uploadedDBpath;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", galaxyGroups.ConsId);
