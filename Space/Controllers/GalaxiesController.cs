@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -40,6 +41,7 @@ namespace Space.Controllers
             return View(galaxies);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
@@ -50,11 +52,38 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GlxId,ConsId,GlxclusterId,GlxgroupId,GlxName,GlxType,GlxRightAscension,GlxDeclination,GlxRedshift,GlxDistance,GlxApparentMagnitude,GlxRadialVelocity,GlxRadius")] Galaxies galaxies)
+        public async Task<IActionResult> Create(Galaxies galaxies, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(galaxies);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Glx/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/Glx/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Galaxies()
+
+                {
+                    GlxId = galaxies.GlxId,
+                    ConsId = galaxies.ConsId,
+                    GlxclusterId = galaxies.GlxclusterId,
+                    GlxgroupId = galaxies.GlxgroupId,
+                    GlxName = galaxies.GlxName,
+                    GlxType = galaxies.GlxType,
+                    GlxRightAscension = galaxies.GlxRightAscension,
+                    GlxDeclination = galaxies.GlxDeclination,
+                    GlxRedshift = galaxies.GlxRedshift,
+                    GlxDistance = galaxies.GlxDistance,
+                    GlxApparentMagnitude = galaxies.GlxApparentMagnitude,
+                    GlxRadialVelocity = galaxies.GlxRadialVelocity,
+                    GlxRadius = galaxies.GlxRadius,
+                    GlxImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
