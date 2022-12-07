@@ -39,6 +39,7 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
@@ -48,12 +49,37 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StarclusterId,ConsId,GlxId,StarclusterName,StarclusterType,StarclusterRightAscension,StarclusterDeclination,StarclusterDistance,StarclusterAge,StarclusterDiameter,StarclusterImage")] StarClusters starClusters)
+        public async Task<IActionResult> Create(StarClusters starClusters, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(starClusters);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/StarClusters/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/StarClusters/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new StarClusters()
+
+                {
+                    StarclusterId = starClusters.StarclusterId,
+                    ConsId = starClusters.ConsId,
+                    GlxId = starClusters.GlxId,
+                    StarclusterName = starClusters.StarclusterName,
+                    StarclusterType = starClusters.StarclusterType,
+                    StarclusterRightAscension = starClusters.StarclusterRightAscension,
+                    StarclusterDeclination = starClusters.StarclusterDeclination,
+                    StarclusterDistance = starClusters.StarclusterDistance,
+                    StarclusterAge = starClusters.StarclusterAge,
+                    StarclusterDiameter = starClusters.StarclusterDiameter,
+                    StarclusterImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
+                ViewBag.Image = uploadedDBpath;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", starClusters.ConsId);
