@@ -44,9 +44,5 @@ namespace Space.Models
         public virtual Constellations Cons { get; set; }
         [DisplayName("Звезда")]
         public virtual Stars Star { get; set; }
-
-        [DisplayName("Изображение")]
-        [NotMapped]
-        public IFormFile UploadedImage { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -51,11 +52,33 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlntId,ConsId,StarId,PlntName,PlntEccentricity,PlntSemiMajorAxis,PlntOrbitalPeriod,PlntArgumentOfPerihelion,PlntMass")] Planets planets)
+        public async Task<IActionResult> Create(Planets planets, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(planets);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Plnt/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/Plnt/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Planets()
+
+                {
+                    PlntId = planets.PlntId,
+                    ConsId = planets.ConsId,
+                    StarId = planets.StarId,
+                    PlntName = planets.PlntName,
+                    PlntEccentricity = planets.PlntEccentricity,
+                    PlntSemiMajorAxis = planets.PlntSemiMajorAxis,
+                    PlntArgumentOfPerihelion = planets.PlntArgumentOfPerihelion,
+                    PlntMass = planets.PlntMass,
+                    PlntImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
