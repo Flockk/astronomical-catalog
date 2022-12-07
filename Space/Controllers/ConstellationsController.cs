@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 
@@ -44,11 +45,33 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConsId,ConsName,ConsAbbreviation,ConsSymbolism,ConsRightAscension,ConsDeclination,ConsSquare,ConsVisibleInLatitudes,ConsImage")] Constellations constellations)
+        public async Task<IActionResult> Create([Bind("ConsId,ConsName,ConsAbbreviation,ConsSymbolism,ConsRightAscension,ConsDeclination,ConsSquare,ConsVisibleInLatitudes,ConsImage")] Constellations constellations, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(constellations);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Cons/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/Cons/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Constellations()
+
+                {
+                    ConsId = constellations.ConsId,
+                    ConsName = constellations.ConsName,
+                    ConsAbbreviation = constellations.ConsAbbreviation,
+                    ConsSymbolism = constellations.ConsSymbolism,
+                    ConsRightAscension = constellations.ConsRightAscension,
+                    ConsDeclination = constellations.ConsDeclination,
+                    ConsSquare = constellations.ConsSquare,
+                    ConsVisibleInLatitudes = constellations.ConsVisibleInLatitudes,
+                    ConsImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
