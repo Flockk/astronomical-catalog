@@ -253,6 +253,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Img\Ast\" />
+    <Folder Include="wwwroot\Img\Comets\" />
   </ItemGroup>
 
 </Project>

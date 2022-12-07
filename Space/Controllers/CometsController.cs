@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -46,11 +47,33 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CometId,StarId,CometName,CometOrbitalPeriod,CometSemiMajorAxis,CometPerihelion,CometEccentricity,CometOrbitalInclination")] Comets comets)
+        public async Task<IActionResult> Create(Comets comets, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comets);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Comets/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/Comets/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Comets()
+
+                {
+                    CometId = comets.CometId,
+                    StarId = comets.StarId,
+                    CometName = comets.CometName,
+                    CometOrbitalPeriod = comets.CometOrbitalPeriod,
+                    CometSemiMajorAxis = comets.CometSemiMajorAxis,
+                    CometPerihelion = comets.CometPerihelion,
+                    CometEccentricity = comets.CometEccentricity,
+                    CometOrbitalInclination = comets.CometOrbitalInclination,
+                    CometImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

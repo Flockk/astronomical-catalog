@@ -26,7 +26,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="StarId" class="control-label"></label>
@@ -61,6 +61,10 @@
                 <label asp-for="CometOrbitalInclination" class="control-label"></label>
                 <input asp-for="CometOrbitalInclination" class="form-control" />
                 <span asp-validation-for="CometOrbitalInclination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="formFile" class="form-label">Выберите изображение</label>
+                <input class="form-control" type="file" name="formFile">
             </div>
             <div class="form-group">
                 <input type="submit" value="Добавить" class="btn btn-primary" />

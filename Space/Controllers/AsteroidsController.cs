@@ -46,7 +46,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AstId,StarId,AstName,AstDiameter,AstOrbitalEccentricity,AstOrbitalInclination,AstArgumentOfPerihelion,AstMeanAnomaly")] Asteroids asteroids, IFormFile formFile)
+        public async Task<IActionResult> Create(Asteroids asteroids, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
