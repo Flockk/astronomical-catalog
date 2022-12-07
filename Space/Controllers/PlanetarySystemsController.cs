@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -48,11 +49,29 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets,PlanetsystemImage")] PlanetarySystems planetarySystems)
+        public async Task<IActionResult> Create(PlanetarySystems planetarySystems, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(planetarySystems);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/PlntSystem/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/PlntSystem/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new PlanetarySystems()
+                {
+                    PlanetsystemId = planetarySystems.PlanetsystemId,
+                    ConsId = planetarySystems.ConsId,
+                    GlxId = planetarySystems.GlxId,
+                    PlanetsystemName = planetarySystems.PlanetsystemName,
+                    PlanetsystemConfirmedPlanets = planetarySystems.PlanetsystemConfirmedPlanets,
+                    PlanetsystemImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
