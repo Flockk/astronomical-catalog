@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -9,12 +10,9 @@ namespace Space.Controllers
     {
         private readonly SpaceContext _context;
 
-        private readonly IWebHostEnvironment _webhost;
-
-        public NebulaeController(SpaceContext context, IWebHostEnvironment webhost)
+        public NebulaeController(SpaceContext context)
         {
             _context = context;
-            _webhost = webhost;
         }
 
         public async Task<IActionResult> Index()
@@ -42,6 +40,7 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
@@ -51,18 +50,33 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance,NebulaImage")] Nebulae nebulae, IFormFile image)
+        public async Task<IActionResult> Create(Nebulae nebulae, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                if(image != null)
-                {
-                    var name = Path.Combine(_webhost.WebRootPath + "/Img", Path.GetFileName(image.FileName));
-                    await image.CopyToAsync(new FileStream(name, FileMode.Create));
-                    nebulae.NebulaImage = "Img/" + image.FileName;
-                }
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Nebulae/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
 
-                _context.Add(nebulae);
+                string uploadedDBpath = "/Img/Nebulae/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Nebulae()
+
+                {
+                    NebulaId = nebulae.NebulaId,
+                    ConsId = nebulae.ConsId,
+                    GlxId = nebulae.GlxId,
+                    NebulaName = nebulae.NebulaName,
+                    NebulaType = nebulae.NebulaType,
+                    NebulaRightAscension = nebulae.NebulaRightAscension,
+                    NebulaDeclination = nebulae.NebulaDeclination,
+                    NebulaDistance = nebulae.NebulaDistance,
+                    NebulaImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
