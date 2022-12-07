@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -46,11 +47,31 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GlxclusterId,ConsId,GlxclusterName,GlxclusterType,GlxclusterRightAscension,GlxclusterDeclination,GlxclusterRedshift")] GalaxyClusters galaxyClusters)
+        public async Task<IActionResult> Create([Bind("GlxclusterId,ConsId,GlxclusterName,GlxclusterType,GlxclusterRightAscension,GlxclusterDeclination,GlxclusterRedshift")] GalaxyClusters galaxyClusters, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(galaxyClusters);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/GlxClusters/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/GlxClusters/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new GalaxyClusters()
+                {
+                    GlxclusterId = galaxyClusters.GlxclusterId,
+                    ConsId = galaxyClusters.ConsId,
+                    GlxclusterName = galaxyClusters.GlxclusterName,
+                    GlxclusterType = galaxyClusters.GlxclusterType,
+                    GlxclusterRightAscension = galaxyClusters.GlxclusterRightAscension,
+                    GlxclusterDeclination = galaxyClusters.GlxclusterDeclination,
+                    GlxclusterRedshift = galaxyClusters.GlxclusterRedshift,
+                    GlxclusterImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
