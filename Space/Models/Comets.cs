@@ -36,6 +36,8 @@ namespace Space.Models
         [DisplayName("Наклонение орбиты (°)")]
         public double? CometOrbitalInclination { get; set; }
 
+        public string CometImage { get; set; }
+
         [DisplayName("Звезда")]
         public virtual Stars Star { get; set; }
     }

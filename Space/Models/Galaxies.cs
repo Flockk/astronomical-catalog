@@ -67,7 +67,6 @@ namespace Space.Models
 
 		public string GlxImage { get; set; }
 
-
 		public virtual ICollection<BlackHoles> BlackHoles { get; set; }
         public virtual ICollection<Nebulae> Nebulae { get; set; }
         public virtual ICollection<PlanetarySystems> PlanetarySystems { get; set; }

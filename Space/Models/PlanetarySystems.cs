@@ -30,7 +30,6 @@ namespace Space.Models
 
         public string PlanetsystemImage { get; set; }
 
-
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Галактика")]

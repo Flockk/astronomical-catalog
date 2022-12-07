@@ -35,6 +35,8 @@ namespace Space.Models
         [DisplayName("Расстояние (кпк)")]
         public double? BlackholeDistance { get; set; }
 
+        public string BlackholeImage { get; set; }
+
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Галактика")]

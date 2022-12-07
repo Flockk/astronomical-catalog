@@ -44,6 +44,8 @@ namespace Space.Models
         [DisplayName("Склонение")]
         public string StarDeclination { get; set; }
 
+        public string StarImage { get; set; }
+
         [DisplayName("Созвездие")]
         public virtual Constellations Cons { get; set; }
         [DisplayName("Галактика")]

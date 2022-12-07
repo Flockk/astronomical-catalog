@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -45,11 +46,33 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AstId,StarId,AstName,AstDiameter,AstOrbitalEccentricity,AstOrbitalInclination,AstArgumentOfPerihelion,AstMeanAnomaly")] Asteroids asteroids)
+        public async Task<IActionResult> Create([Bind("AstId,StarId,AstName,AstDiameter,AstOrbitalEccentricity,AstOrbitalInclination,AstArgumentOfPerihelion,AstMeanAnomaly")] Asteroids asteroids, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(asteroids);
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
+                var filestream = new FileStream(uploadfilepath, FileMode.Create);
+                await formFile.CopyToAsync(filestream);
+
+                string uploadedDBpath = "/Img/Ast/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Asteroids()
+
+                {
+                    AstId = asteroids.AstId,
+                    StarId = asteroids.StarId,
+                    AstName = asteroids.AstName,
+                    AstDiameter = asteroids.AstDiameter,
+                    AstOrbitalEccentricity = asteroids.AstOrbitalEccentricity,
+                    AstOrbitalInclination = asteroids.AstOrbitalInclination,
+                    AstArgumentOfPerihelion = asteroids.AstArgumentOfPerihelion,
+                    AstMeanAnomaly = asteroids.AstMeanAnomaly,
+                    AstImage = uploadedDBpath
+                };
+
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

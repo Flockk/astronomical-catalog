@@ -34,6 +34,9 @@ namespace Space.Models
         [Range(0.000001, double.MaxValue, ErrorMessage = "Средняя аномалия должна быть положительна")]
         [DisplayName("Средняя аномалия (°)")]
         public double? AstMeanAnomaly { get; set; }
+
+        public string AstImage { get; set; }    
+
         [DisplayName("Звезда")]
         public virtual Stars Star { get; set; }
     }

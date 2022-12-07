@@ -70,6 +70,10 @@ namespace Space.Models
                     .HasForeignKey(d => d.StarId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Asteroids_Stars");
+
+                entity.Property(e => e.AstImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("ast_image");
             });
 
             modelBuilder.Entity<BlackHoles>(entity =>
@@ -103,6 +107,10 @@ namespace Space.Models
                 entity.Property(e => e.ConsId).HasColumnName("cons_id");
 
                 entity.Property(e => e.GlxId).HasColumnName("glx_id");
+
+                entity.Property(e => e.BlackholeImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("blackhole_image");
 
                 entity.HasOne(d => d.Cons)
                     .WithMany(p => p.BlackHoles)
@@ -142,6 +150,10 @@ namespace Space.Models
                 entity.Property(e => e.CometSemiMajorAxis).HasColumnName("comet_semi_major_axis");
 
                 entity.Property(e => e.StarId).HasColumnName("star_id");
+
+                entity.Property(e => e.CometImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("comet_image");
 
                 entity.HasOne(d => d.Star)
                     .WithMany(p => p.Comets)
@@ -565,6 +577,10 @@ namespace Space.Models
                 entity.Property(e => e.StarStellarClass)
                     .HasMaxLength(10)
                     .HasColumnName("star_stellar_class");
+
+                entity.Property(e => e.StarImage)
+                    .HasMaxLength(255)
+                    .HasColumnName("star_image");
 
                 entity.Property(e => e.StarclusterId).HasColumnName("starcluster_id");
 
