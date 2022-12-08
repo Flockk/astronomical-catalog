@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -18,6 +19,11 @@ namespace Space.Controllers
         {
             var spaceContext = _context.Comets.Include(c => c.Star);
             return View(await spaceContext.ToListAsync());
+        }
+
+        public JsonResult IsCometNameExist(string CometName)
+        {
+            return Json(!_context.Comets.Any(c => c.CometName == CometName));
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -46,14 +52,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Comets comets, IFormFile formFile)
+        public async Task<IActionResult> Create(Comets comets, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(comets);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Comets/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/Comets/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -97,7 +112,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CometId,StarId,CometName,CometOrbitalPeriod,CometSemiMajorAxis,CometPerihelion,CometEccentricity,CometOrbitalInclination")] Comets comets)
+        public async Task<IActionResult> Edit(int id, Comets comets, IFormFile? formFile)
         {
             if (id != comets.CometId)
             {
@@ -108,7 +123,37 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(comets);
+                    if (formFile == null)
+                    {
+                        _context.Update(comets);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Comets/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Comets/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Comets()
+                    {
+                        CometId = comets.CometId,
+                        StarId = comets.StarId,
+                        CometName = comets.CometName,
+                        CometOrbitalPeriod = comets.CometOrbitalPeriod,
+                        CometSemiMajorAxis = comets.CometSemiMajorAxis,
+                        CometPerihelion = comets.CometPerihelion,
+                        CometEccentricity = comets.CometEccentricity,
+                        CometOrbitalInclination = comets.CometOrbitalInclination,
+                        CometImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

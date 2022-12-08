@@ -1,0 +1,8 @@
+﻿@model Space.Models.Comets
+
+@{
+	var imgText = "";
+	imgText = "Комета" + " " + Model.CometName.Trim();
+}
+
+<img src="@Model.CometImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />
