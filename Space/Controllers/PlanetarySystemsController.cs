@@ -21,6 +21,11 @@ namespace Space.Controllers
             return View(await spaceContext.ToListAsync());
         }
 
+        public JsonResult IsPlanetsystemNameExist(string PlanetsystemName)
+        {
+            return Json(!_context.PlanetarySystems.Any(p => p.PlanetsystemName == PlanetsystemName));
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.PlanetarySystems == null)
@@ -49,14 +54,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PlanetarySystems planetarySystems, IFormFile formFile)
+        public async Task<IActionResult> Create(PlanetarySystems planetarySystems, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(planetarySystems);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/PlntSystem/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/PlntSystem/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -99,7 +113,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlanetsystemId,ConsId,GlxId,PlanetsystemName,PlanetsystemConfirmedPlanets,PlanetsystemImage")] PlanetarySystems planetarySystems)
+        public async Task<IActionResult> Edit(int id, PlanetarySystems planetarySystems, IFormFile? formFile)
         {
             if (id != planetarySystems.PlanetsystemId)
             {
@@ -110,7 +124,34 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(planetarySystems);
+                    if (formFile == null)
+                    {
+                        _context.Update(planetarySystems);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/PlntSystem/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/PlntSystem/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new PlanetarySystems()
+                    {
+                        PlanetsystemId = planetarySystems.PlanetsystemId,
+                        ConsId = planetarySystems.ConsId,
+                        GlxId = planetarySystems.GlxId,
+                        PlanetsystemName = planetarySystems.PlanetsystemName,
+                        PlanetsystemConfirmedPlanets = planetarySystems.PlanetsystemConfirmedPlanets,
+                        PlanetsystemImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
