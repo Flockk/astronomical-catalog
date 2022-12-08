@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,6 +18,7 @@ namespace Space.Models
         [DisplayName("Созвездие")]
         public int? ConsId { get; set; }
 
+        [Remote("IsGlxgroupNameExist", "GalaxyGroups", ErrorMessage = "Данное название группы галактик уже существует!")]
         [Required(ErrorMessage = "Не указано название группы галактик")]
         [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         [DisplayName("Название")]
