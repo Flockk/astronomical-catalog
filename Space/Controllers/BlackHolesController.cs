@@ -54,10 +54,17 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BlackHoles blackHoles, IFormFile formFile)
+        public async Task<IActionResult> Create(BlackHoles blackHoles, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(blackHoles);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/BlackHoles/", fileName);
                 using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
@@ -108,7 +115,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, BlackHoles blackHoles, IFormFile formFile)
+        public async Task<IActionResult> Edit(int id, BlackHoles blackHoles, IFormFile? formFile)
         {
             if (id != blackHoles.BlackHoleId)
             {
@@ -119,6 +126,13 @@ namespace Space.Controllers
             {
                 try
                 {
+                    if (formFile == null)
+                    {
+                        _context.Update(blackHoles);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
                     string fileName = Path.GetFileName(formFile.FileName);
                     string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/BlackHoles/", fileName);
                     using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
@@ -141,7 +155,7 @@ namespace Space.Controllers
                         BlackholeImage = uploadedDBpath
                     };
 
-                    _context.Update(blackHoles);
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

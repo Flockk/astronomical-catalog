@@ -52,10 +52,16 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Asteroids asteroids, IFormFile formFile)
+        public async Task<IActionResult> Create(Asteroids asteroids, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(asteroids);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
                 using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
@@ -105,7 +111,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Asteroids asteroids, IFormFile formFile)
+        public async Task<IActionResult> Edit(int id, Asteroids asteroids, IFormFile? formFile)
         {
             if (id != asteroids.AstId)
             {
@@ -116,6 +122,13 @@ namespace Space.Controllers
             {
                 try
                 {
+                    if (formFile == null)
+                    {
+                        _context.Update(asteroids);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
                     string fileName = Path.GetFileName(formFile.FileName);
                     string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
                     using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
