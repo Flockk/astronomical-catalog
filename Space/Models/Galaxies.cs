@@ -20,7 +20,7 @@ namespace Space.Models
         public int GlxId { get; set; }
         [DisplayName("Созвездие")]
         public int? ConsId { get; set; }
-        [DisplayName("Звёздное скопление")]
+        [DisplayName("Скопление галактик")]
         public int? GlxclusterId { get; set; }
         [DisplayName("Группа галактик")]
         public int? GlxgroupId { get; set; }

@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,6 +17,7 @@ namespace Space.Models
         [DisplayName("Созвездие")]
         public int ConsId { get; set; }
 
+        [Remote("IsGlxclusterNameExist", "GalaxyClusters", ErrorMessage = "Данное название скопления галактик уже существует!")]
         [Required(ErrorMessage = "Не указано название скопления галактик")]
         [StringLength(30, ErrorMessage = "Длина строки должна быть до 30 символов")]
         [DisplayName("Название")]

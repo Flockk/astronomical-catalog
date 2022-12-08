@@ -21,6 +21,11 @@ namespace Space.Controllers
             return View(await spaceContext.ToListAsync());
         }
 
+        public JsonResult IsGlxclusterNameExist(string GlxclusterName)
+        {
+            return Json(!_context.GalaxyClusters.Any(g => g.GlxclusterName == GlxclusterName));
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.GalaxyClusters == null)
@@ -47,14 +52,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GlxclusterId,ConsId,GlxclusterName,GlxclusterType,GlxclusterRightAscension,GlxclusterDeclination,GlxclusterRedshift")] GalaxyClusters galaxyClusters, IFormFile formFile)
+        public async Task<IActionResult> Create(GalaxyClusters galaxyClusters, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(galaxyClusters);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/GlxClusters/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/GlxClusters/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -97,7 +111,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GlxclusterId,ConsId,GlxclusterName,GlxclusterType,GlxclusterRightAscension,GlxclusterDeclination,GlxclusterRedshift")] GalaxyClusters galaxyClusters)
+        public async Task<IActionResult> Edit(int id, GalaxyClusters galaxyClusters, IFormFile? formFile)
         {
             if (id != galaxyClusters.GlxclusterId)
             {
@@ -108,7 +122,36 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(galaxyClusters);
+                    if (formFile == null)
+                    {
+                        _context.Update(galaxyClusters);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/GlxClusters/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/GlxClusters/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new GalaxyClusters()
+                    {
+                        GlxclusterId = galaxyClusters.GlxclusterId,
+                        ConsId = galaxyClusters.ConsId,
+                        GlxclusterName = galaxyClusters.GlxclusterName,
+                        GlxclusterType = galaxyClusters.GlxclusterType,
+                        GlxclusterRightAscension = galaxyClusters.GlxclusterRightAscension,
+                        GlxclusterDeclination = galaxyClusters.GlxclusterDeclination,
+                        GlxclusterRedshift = galaxyClusters.GlxclusterRedshift,
+                        GlxclusterImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
