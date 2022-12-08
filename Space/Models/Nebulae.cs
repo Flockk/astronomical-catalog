@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,7 @@ namespace Space.Models
         [DisplayName("Галактика")]
         public int? GlxId { get; set; }
 
+        [Remote("IsNebulaNameExist", "Nebulae", ErrorMessage = "Данное название туманности уже существует!")]
         [Required(ErrorMessage = "Не указано название туманности")]
         [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         [DisplayName("Название")]

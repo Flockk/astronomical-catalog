@@ -20,6 +20,11 @@ namespace Space.Controllers
             return View(await spaceContext.ToListAsync());
         }
 
+        public JsonResult IsNebulaNameExist(string NebulaName)
+        {
+            return Json(!_context.Nebulae.Any(n => n.NebulaName == NebulaName));
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Nebulae == null)
@@ -49,14 +54,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Nebulae nebulae, IFormFile formFile)
+        public async Task<IActionResult> Create(Nebulae nebulae, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(nebulae);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Nebulae/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/Nebulae/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -102,7 +116,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NebulaId,ConsId,GlxId,NebulaName,NebulaType,NebulaRightAscension,NebulaDeclination,NebulaDistance,NebulaImage")] Nebulae nebulae)
+        public async Task<IActionResult> Edit(int id, Nebulae nebulae, IFormFile? formFile)
         {
             if (id != nebulae.NebulaId)
             {
@@ -113,7 +127,37 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(nebulae);
+                    if (formFile == null)
+                    {
+                        _context.Update(nebulae);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Nebulae/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Nebulae/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Nebulae()
+                    {
+                        NebulaId = nebulae.NebulaId,
+                        ConsId = nebulae.ConsId,
+                        GlxId = nebulae.GlxId,
+                        NebulaName = nebulae.NebulaName,
+                        NebulaType = nebulae.NebulaType,
+                        NebulaRightAscension = nebulae.NebulaRightAscension,
+                        NebulaDeclination = nebulae.NebulaDeclination,
+                        NebulaDistance = nebulae.NebulaDistance,
+                        NebulaImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
