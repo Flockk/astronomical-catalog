@@ -26,9 +26,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form method="post" asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BlackHoleId" />
+            <div class="form-group">
+                <partial name="_BlackHoleImage" />
+            </div>
             <div class="form-group">
                 <label asp-for="ConsId" class="control-label"></label>
                 <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
@@ -36,7 +39,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="GlxId" class="control-label"></label>
-                <select asp-for="GlxId" class="form-control" asp-items="ViewBag.GlxId"></select>
+                <select asp-for="GlxId" class="form-control" asp-items="ViewBag.GlxId">
+                    <option value="">Выберите галактику</option>
+                </select>
                 <span asp-validation-for="GlxId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="BlackholeRightAscension" class="control-label"></label>
-                <input asp-for="BlackholeRightAscension" class="form-control" />
+                <input asp-for="BlackholeRightAscension" type="time" name="BlackholeRightAscension" step="2" class="form-control" />
                 <span asp-validation-for="BlackholeRightAscension" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,6 +68,10 @@
                 <label asp-for="BlackholeDistance" class="control-label"></label>
                 <input asp-for="BlackholeDistance" class="form-control" />
                 <span asp-validation-for="BlackholeDistance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="formFile" class="form-label">Выберите изображение</label>
+                <input class="form-control" type="file" name="formFile">
             </div>
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-primary" />

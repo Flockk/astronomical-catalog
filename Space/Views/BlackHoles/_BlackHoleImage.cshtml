@@ -1,0 +1,8 @@
+﻿@model Space.Models.BlackHoles
+
+@{
+	var imgText = "";
+	imgText = "Чёрная дыра" + " " + Model.BlackholeName.Trim();
+}
+
+<img src="@Model.BlackholeImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />
