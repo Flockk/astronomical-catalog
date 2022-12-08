@@ -20,6 +20,21 @@ namespace Space.Controllers
                         Problem("Entity set 'SpaceContext.Constellations'  is null.");
         }
 
+        public JsonResult IsConsNameExist(string ConsName)
+        {
+            return Json(!_context.Constellations.Any(c => c.ConsName == ConsName));
+        }
+
+        public JsonResult IsConsAbbreviationExist(string ConsAbbreviation)
+        {
+            return Json(!_context.Constellations.Any(c => c.ConsAbbreviation == ConsAbbreviation));
+        }
+
+        public JsonResult IsConsSymbolismExist(string ConsSymbolism)
+        {
+            return Json(!_context.Constellations.Any(c => c.ConsSymbolism == ConsSymbolism));
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Constellations == null)
@@ -44,14 +59,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConsId,ConsName,ConsAbbreviation,ConsSymbolism,ConsRightAscension,ConsDeclination,ConsSquare,ConsVisibleInLatitudes,ConsImage")] Constellations constellations, IFormFile formFile)
+        public async Task<IActionResult> Create(Constellations constellations, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(constellations);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Cons/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/Cons/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -93,7 +117,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConsId,ConsName,ConsAbbreviation,ConsSymbolism,ConsRightAscension,ConsDeclination,ConsSquare,ConsVisibleInLatitudes,ConsImage")] Constellations constellations)
+        public async Task<IActionResult> Edit(int id, Constellations constellations, IFormFile? formFile)
         {
             if (id != constellations.ConsId)
             {
@@ -104,7 +128,37 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(constellations);
+                    if (formFile == null)
+                    {
+                        _context.Update(constellations);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Cons/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Cons/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Constellations()
+                    {
+                        ConsId = constellations.ConsId,
+                        ConsName = constellations.ConsName,
+                        ConsAbbreviation = constellations.ConsAbbreviation,
+                        ConsSymbolism = constellations.ConsSymbolism,
+                        ConsRightAscension = constellations.ConsRightAscension,
+                        ConsDeclination = constellations.ConsDeclination,
+                        ConsSquare = constellations.ConsSquare,
+                        ConsVisibleInLatitudes = constellations.ConsVisibleInLatitudes,
+                        ConsImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,16 +23,19 @@ namespace Space.Models
         [DisplayName("Созвездие")]
         public int ConsId { get; set; }
 
+        [Remote("IsConsNameExist", "Constellations", ErrorMessage = "Данное название созвездия уже существует!")]
         [Required(ErrorMessage = "Не указано название созвездия")]
         [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         [DisplayName("Название")]
         public string ConsName { get; set; }
 
+        [Remote("IsConsAbbreviationExist", "Constellations", ErrorMessage = "Данное сокращение созвездия уже существует!")]
         [Required(ErrorMessage = "Не указано сокращение созвездия")]
         [StringLength(3, ErrorMessage = "Длина строки должна быть до 3 символов")]
         [DisplayName("Сокращение")]
         public string ConsAbbreviation { get; set; }
 
+        [Remote("IsConsSymbolismExist", "Constellations", ErrorMessage = "Данный символ созвездия уже существует!")]
         [Required(ErrorMessage = "Не указан символ созвездия")]
         [StringLength(22, ErrorMessage = "Длина строки должна быть до 22 символов")]
         [DisplayName("Символ")]
@@ -45,7 +49,7 @@ namespace Space.Models
         [DisplayName("Склонение")]
         public string ConsDeclination { get; set; }
 
-        [Range(0.000001, int.MaxValue, ErrorMessage = "Плоащдь должна быть положительна")]
+        [Range(0.000001, int.MaxValue, ErrorMessage = "Площадь должна быть положительна")]
         [DisplayName("Площадь (кв. °)")]
         public int? ConsSquare { get; set; }
 
