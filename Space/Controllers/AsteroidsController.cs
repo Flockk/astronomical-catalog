@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -18,7 +20,12 @@ namespace Space.Controllers
             var spaceContext = _context.Asteroids.Include(c => c.Star);
             return View(await spaceContext.ToListAsync());
         }
-
+         
+        public JsonResult IsAstNameExist(string AstName)
+        {
+            return Json(!_context.Asteroids.Any(a => a.AstName == AstName));
+        }  
+          
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Asteroids == null)
@@ -51,8 +58,10 @@ namespace Space.Controllers
             {
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/Ast/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -96,7 +105,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AstId,StarId,AstName,AstDiameter,AstOrbitalEccentricity,AstOrbitalInclination,AstArgumentOfPerihelion,AstMeanAnomaly")] Asteroids asteroids)
+        public async Task<IActionResult> Edit(int id, Asteroids asteroids, IFormFile formFile)
         {
             if (id != asteroids.AstId)
             {
@@ -107,7 +116,30 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(asteroids);
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Ast/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Asteroids()
+                    {
+                        AstId = asteroids.AstId,
+                        StarId = asteroids.StarId,
+                        AstName = asteroids.AstName,
+                        AstDiameter = asteroids.AstDiameter,
+                        AstOrbitalEccentricity = asteroids.AstOrbitalEccentricity,
+                        AstOrbitalInclination = asteroids.AstOrbitalInclination,
+                        AstArgumentOfPerihelion = asteroids.AstArgumentOfPerihelion,
+                        AstMeanAnomaly = asteroids.AstMeanAnomaly,
+                        AstImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

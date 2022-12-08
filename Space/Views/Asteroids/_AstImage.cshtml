@@ -1,0 +1,8 @@
+﻿@model Space.Models.Asteroids
+
+@{
+	var imgText = "";
+	imgText = "Астероид" + " " + Model.AstName.Trim();
+}
+
+<img src="@Model.AstImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />
