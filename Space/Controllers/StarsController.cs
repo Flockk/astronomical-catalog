@@ -21,6 +21,11 @@ namespace Space.Controllers
             return View(await spaceContext.ToListAsync());
         }
 
+        public JsonResult IsStarNameExist(string StarName)
+        {
+            return Json(!_context.Stars.Any(s => s.StarName == StarName));
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Stars == null)
@@ -53,14 +58,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Stars stars, IFormFile formFile)
+        public async Task<IActionResult> Create(Stars stars, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(stars);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Stars/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/Stars/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -112,7 +126,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StarId,ConsId,GlxId,StarclusterId,PlanetsystemId,StarName,StarApparentMagnitude,StarStellarClass,StarDistance,StarDeclination")] Stars stars)
+        public async Task<IActionResult> Edit(int id, Stars stars, IFormFile? formFile)
         {
             if (id != stars.StarId)
             {
@@ -123,7 +137,39 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(stars);
+                    if (formFile == null)
+                    {
+                        _context.Update(stars);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Stars/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Stars/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Stars()
+                    {
+                        StarId = stars.StarId,
+                        ConsId = stars.ConsId,
+                        GlxId = stars.GlxId,
+                        StarclusterId = stars.StarclusterId,
+                        PlanetsystemId = stars.PlanetsystemId,
+                        StarName = stars.StarName,
+                        StarApparentMagnitude = stars.StarApparentMagnitude,
+                        StarStellarClass = stars.StarStellarClass,
+                        StarDistance = stars.StarDistance,
+                        StarDeclination = stars.StarDeclination,
+                        StarImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
