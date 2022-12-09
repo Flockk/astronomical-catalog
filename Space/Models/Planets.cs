@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,6 +15,7 @@ namespace Space.Models
         [DisplayName("Звезда")]
         public int? StarId { get; set; }
 
+        [Remote("IsPlntNameExist", "Planets", ErrorMessage = "Данное название планеты уже существует!")]
         [Required(ErrorMessage = "Не указано название планеты")]
         [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         [DisplayName("Название")]

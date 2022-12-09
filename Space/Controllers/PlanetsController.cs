@@ -22,6 +22,11 @@ namespace Space.Controllers
             return View(await spaceContext.ToListAsync());
         }
 
+        public JsonResult IsPlntNameExist(string PlntName)
+        {
+            return Json(!_context.Planets.Any(p => p.PlntName == PlntName));
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Planets == null)
@@ -51,14 +56,23 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Planets planets, IFormFile formFile)
+        public async Task<IActionResult> Create(Planets planets, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                if (formFile == null)
+                {
+                    _context.Add(planets);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
                 string fileName = Path.GetFileName(formFile.FileName);
                 string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Plnt/", fileName);
-                var filestream = new FileStream(uploadfilepath, FileMode.Create);
-                await formFile.CopyToAsync(filestream);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
 
                 string uploadedDBpath = "/Img/Plnt/" + fileName;
                 SpaceContext spaceContext = new SpaceContext();
@@ -104,7 +118,7 @@ namespace Space.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlntId,ConsId,StarId,PlntName,PlntEccentricity,PlntSemiMajorAxis,PlntOrbitalPeriod,PlntArgumentOfPerihelion,PlntMass")] Planets planets)
+        public async Task<IActionResult> Edit(int id, Planets planets, IFormFile? formFile)
         {
             if (id != planets.PlntId)
             {
@@ -115,7 +129,37 @@ namespace Space.Controllers
             {
                 try
                 {
-                    _context.Update(planets);
+                    if (formFile == null)
+                    {
+                        _context.Update(planets);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Plnt/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Plnt/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Planets()
+                    {
+                        PlntId = planets.PlntId,
+                        ConsId = planets.ConsId,
+                        StarId = planets.StarId,
+                        PlntName = planets.PlntName,
+                        PlntEccentricity = planets.PlntEccentricity,
+                        PlntSemiMajorAxis = planets.PlntSemiMajorAxis,
+                        PlntArgumentOfPerihelion = planets.PlntArgumentOfPerihelion,
+                        PlntMass = planets.PlntMass,
+                        PlntImage = uploadedDBpath
+                    };
+
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
