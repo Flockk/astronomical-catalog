@@ -8,7 +8,7 @@
 
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <p>
-    <a asp-action="Create">Добавить</a>
+    <a asp-action="Create" type="button" class="btn btn-primary">Добавить</a>
 </p>
 <hr />
 
@@ -65,9 +65,16 @@
                     @Html.DisplayFor(modelItem => item.Glx.GlxName)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.NebulaId">Изменить</a> |
-                    <a asp-action="Details" asp-route-id="@item.NebulaId">Детали</a> |
-                    <a asp-action="Delete" asp-route-id="@item.NebulaId">Удалить</a>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Действия
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a asp-action="Edit" asp-route-id="@item.NebulaId" class="dropdown-item">Изменить</a></li>
+                            <li><a asp-action="Details" asp-route-id="@item.NebulaId" class="dropdown-item">Детали</a></li>
+                            <li><a asp-action="Delete" asp-route-id="@item.NebulaId" class="dropdown-item">Удалить</a></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         }

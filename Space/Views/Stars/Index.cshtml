@@ -8,7 +8,7 @@
 
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <p>
-    <a asp-action="Create">Добавить</a>
+    <a asp-action="Create" type="button" class="btn btn-primary">Добавить</a>
 </p>
 <hr/>
 
@@ -46,42 +46,50 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="Поиск">
-            <td>
-                @Html.DisplayFor(modelItem => item.StarName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StarApparentMagnitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StarStellarClass)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StarDistance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StarDeclination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cons.ConsName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Glx.GlxName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Planetsystem.PlanetsystemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Starcluster.StarclusterName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.StarId">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.StarId">Детали</a> |
-                <a asp-action="Delete" asp-route-id="@item.StarId">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="Поиск">
+                <td>
+                    @Html.DisplayFor(modelItem => item.StarName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StarApparentMagnitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StarStellarClass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StarDistance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StarDeclination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cons.ConsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Glx.GlxName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Planetsystem.PlanetsystemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Starcluster.StarclusterName)
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Действия
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a asp-action="Edit" asp-route-id="@item.StarId" class="dropdown-item">Изменить</a></li>
+                            <li><a asp-action="Details" asp-route-id="@item.StarId" class="dropdown-item">Детали</a></li>
+                            <li><a asp-action="Delete" asp-route-id="@item.StarId" class="dropdown-item">Удалить</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

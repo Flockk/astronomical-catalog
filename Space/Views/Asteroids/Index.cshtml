@@ -8,7 +8,7 @@
 
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <p>
-    <a asp-action="Create">Добавить</a>
+    <a asp-action="Create" type="button" class="btn btn-primary">Добавить</a>
 </p>
 <hr />
 
@@ -40,36 +40,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="Поиск"> 
-            <td>
-                @Html.DisplayFor(modelItem => item.AstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AstDiameter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AstOrbitalEccentricity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AstOrbitalInclination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AstArgumentOfPerihelion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AstMeanAnomaly)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Star.StarName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AstId">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.AstId">Детали</a> |
-                <a asp-action="Delete" asp-route-id="@item.AstId">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="Поиск">
+                <td>
+                    @Html.DisplayFor(modelItem => item.AstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AstDiameter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AstOrbitalEccentricity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AstOrbitalInclination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AstArgumentOfPerihelion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AstMeanAnomaly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Star.StarName)
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Действия
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a asp-action="Edit" asp-route-id="@item.AstId" class="dropdown-item">Изменить</a></li>
+                            <li><a asp-action="Details" asp-route-id="@item.AstId" class="dropdown-item">Детали</a></li>
+                            <li><a asp-action="Delete" asp-route-id="@item.AstId" class="dropdown-item">Удалить</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
