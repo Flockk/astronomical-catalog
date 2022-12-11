@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -44,6 +45,7 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -52,6 +54,7 @@ namespace Space.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Nebulae nebulae, IFormFile? formFile)
@@ -97,6 +100,7 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Nebulae == null)
@@ -114,6 +118,7 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Nebulae nebulae, IFormFile? formFile)
@@ -178,6 +183,7 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Nebulae == null)
@@ -197,6 +203,7 @@ namespace Space.Controllers
             return View(nebulae);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
