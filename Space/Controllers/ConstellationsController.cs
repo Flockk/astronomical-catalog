@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 
@@ -57,6 +58,7 @@ namespace Space.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Constellations constellations, IFormFile? formFile)
@@ -100,6 +102,7 @@ namespace Space.Controllers
             return View(constellations);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Constellations == null)
@@ -115,6 +118,7 @@ namespace Space.Controllers
             return View(constellations);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Constellations constellations, IFormFile? formFile)
@@ -177,6 +181,7 @@ namespace Space.Controllers
             return View(constellations);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Constellations == null)
@@ -194,6 +199,7 @@ namespace Space.Controllers
             return View(constellations);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
