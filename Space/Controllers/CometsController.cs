@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,12 +45,14 @@ namespace Space.Controllers
             return View(comets);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName");
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Comets comets, IFormFile? formFile)
@@ -94,6 +97,7 @@ namespace Space.Controllers
             return View(comets);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Comets == null)
@@ -110,6 +114,7 @@ namespace Space.Controllers
             return View(comets);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Comets comets, IFormFile? formFile)
@@ -173,6 +178,7 @@ namespace Space.Controllers
             return View(comets);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Comets == null)
@@ -191,6 +197,7 @@ namespace Space.Controllers
             return View(comets);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

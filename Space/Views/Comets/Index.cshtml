@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Space.Models.Comets>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Кометы";
@@ -7,9 +9,12 @@
 <h1>Кометы</h1>
 
 <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-<p>
-    <a asp-action="Create" type="button" class="btn btn-primary">Добавить</a>
-</p>
+@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create" type="button" class="btn btn-primary">Добавить</a>
+    </p>
+}
 <hr />
 
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -65,16 +70,23 @@
                     @Html.DisplayFor(modelItem => item.Star.StarName)
                 </td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Действия
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a asp-action="Edit" asp-route-id="@item.CometId" class="dropdown-item">Изменить</a></li>
-                            <li><a asp-action="Details" asp-route-id="@item.CometId" class="dropdown-item">Детали</a></li>
-                            <li><a asp-action="Delete" asp-route-id="@item.CometId" class="dropdown-item">Удалить</a></li>
-                        </ul>
-                    </div>
+                    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Действия
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a asp-action="Edit" asp-route-id="@item.CometId" class="dropdown-item">Изменить</a></li>
+                                <li><a asp-action="Details" asp-route-id="@item.CometId" class="dropdown-item">Детали</a></li>
+                                <li><a asp-action="Delete" asp-route-id="@item.CometId" class="dropdown-item">Удалить</a></li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@item.CometId" type="button" class="btn btn-primary">Детали</a>
+                    }
                 </td>
             </tr>
         }
