@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace Space.Controllers
             return View(galaxies);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -55,6 +57,7 @@ namespace Space.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Galaxies galaxies, IFormFile? formFile)
@@ -106,6 +109,7 @@ namespace Space.Controllers
             return View(galaxies);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Galaxies == null)
@@ -124,6 +128,7 @@ namespace Space.Controllers
             return View(galaxies);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Galaxies galaxies, IFormFile? formFile)
@@ -194,6 +199,7 @@ namespace Space.Controllers
             return View(galaxies);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Galaxies == null)
@@ -214,6 +220,7 @@ namespace Space.Controllers
             return View(galaxies);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
