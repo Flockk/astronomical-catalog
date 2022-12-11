@@ -46,12 +46,14 @@ namespace Space.Controllers
             return View(asteroids);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName");
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Asteroids asteroids, IFormFile? formFile)
@@ -95,6 +97,7 @@ namespace Space.Controllers
             return View(asteroids);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Asteroids == null)
@@ -111,6 +114,7 @@ namespace Space.Controllers
             return View(asteroids);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Asteroids asteroids, IFormFile? formFile)
@@ -174,6 +178,7 @@ namespace Space.Controllers
             return View(asteroids);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Asteroids == null)
@@ -192,6 +197,7 @@ namespace Space.Controllers
             return View(asteroids);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
