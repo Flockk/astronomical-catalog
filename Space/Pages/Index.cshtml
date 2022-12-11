@@ -1,0 +1,21 @@
+﻿@page
+@using CookieSample.Pages;
+@model IndexModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+    ViewData["Title"] = "Главная страница";
+}
+
+@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Hello @HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "FullName")?.Value!</h1>
+            <p>Username: @HttpContextAccessor.HttpContext.User.Identity.Name</p>
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Здравствуйте!</h1>
+</div>
