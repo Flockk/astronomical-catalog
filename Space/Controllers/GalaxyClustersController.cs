@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,12 +44,14 @@ namespace Space.Controllers
             return View(galaxyClusters);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GalaxyClusters galaxyClusters, IFormFile? formFile)
@@ -93,6 +95,7 @@ namespace Space.Controllers
             return View(galaxyClusters);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.GalaxyClusters == null)
@@ -109,6 +112,7 @@ namespace Space.Controllers
             return View(galaxyClusters);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, GalaxyClusters galaxyClusters, IFormFile? formFile)
@@ -171,6 +175,7 @@ namespace Space.Controllers
             return View(galaxyClusters);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.GalaxyClusters == null)
@@ -189,6 +194,7 @@ namespace Space.Controllers
             return View(galaxyClusters);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
