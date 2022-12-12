@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -46,6 +47,7 @@ namespace Space.Controllers
             return View(planets);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
@@ -53,7 +55,7 @@ namespace Space.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Planets planets, IFormFile? formFile)
@@ -99,6 +101,7 @@ namespace Space.Controllers
             return View(planets);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Planets == null)
@@ -116,6 +119,7 @@ namespace Space.Controllers
             return View(planets);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Planets planets, IFormFile? formFile)
@@ -180,6 +184,7 @@ namespace Space.Controllers
             return View(planets);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Planets == null)
@@ -199,6 +204,7 @@ namespace Space.Controllers
             return View(planets);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
