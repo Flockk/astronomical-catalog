@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace Space.Controllers
             return View(stars);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName");
@@ -56,6 +58,7 @@ namespace Space.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Stars stars, IFormFile? formFile)
@@ -105,6 +108,7 @@ namespace Space.Controllers
             return View(stars);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Stars == null)
@@ -124,6 +128,7 @@ namespace Space.Controllers
             return View(stars);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Stars stars, IFormFile? formFile)
@@ -192,6 +197,7 @@ namespace Space.Controllers
             return View(stars);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Stars == null)
@@ -213,6 +219,7 @@ namespace Space.Controllers
             return View(stars);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
