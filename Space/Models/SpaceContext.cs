@@ -70,7 +70,7 @@ namespace Space.Models
                     .WithMany(p => p.Asteroids)
                     .HasForeignKey(d => d.StarId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Asteroids_Stars");
+                    .HasConstraintName("FK_Asteroids_To_Stars");
 
                 entity.Property(e => e.AstImage)
                     .HasMaxLength(255)
@@ -160,7 +160,7 @@ namespace Space.Models
                     .WithMany(p => p.Comets)
                     .HasForeignKey(d => d.StarId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Comets_Stars");
+                    .HasConstraintName("FK_Comets_To_Stars");
             });
 
             modelBuilder.Entity<Constellations>(entity =>
@@ -487,7 +487,7 @@ namespace Space.Models
                     .WithMany(p => p.Planets)
                     .HasForeignKey(d => d.StarId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Planets_Stars");
+                    .HasConstraintName("FK_Planets_To_Stars");
 
                 entity.Property(e => e.PlntImage)
                     .HasMaxLength(255)

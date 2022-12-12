@@ -213,7 +213,9 @@ namespace Space.Controllers
             {
                 return Problem("Entity set 'SpaceContext.Planets'  is null.");
             }
-            var planets = await _context.Planets.FindAsync(id);
+
+            var planets = await _context.Planets.FirstOrDefaultAsync(m => m.PlntId == id);
+
             if (planets != null)
             {
                 _context.Planets.Remove(planets);
