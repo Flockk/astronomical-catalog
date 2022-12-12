@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
@@ -44,6 +45,7 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -52,6 +54,7 @@ namespace Space.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StarClusters starClusters, IFormFile? formFile)
@@ -100,6 +103,7 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.StarClusters == null)
@@ -117,6 +121,7 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, StarClusters starClusters, IFormFile? formFile)
@@ -183,6 +188,7 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.StarClusters == null)
@@ -202,6 +208,7 @@ namespace Space.Controllers
             return View(starClusters);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
