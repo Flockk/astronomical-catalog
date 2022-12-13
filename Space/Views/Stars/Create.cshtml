@@ -4,8 +4,6 @@
     ViewData["Title"] = "Добавление звезды";
 }
 
-<h3>Добавление звезды</h3>
-
 <style>
     .field-validation-error {
         color: #b94a48;
@@ -24,74 +22,68 @@
     }
 </style>
 
+<p class="text-center fs-2">Добавление звезды</p>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ConsId" class="control-label"></label>
-                <select asp-for="ConsId" class ="form-control" asp-items="ViewBag.ConsId">
-                    <option value="">Выберите созвездие</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxId" class="control-label"></label>
-                <select asp-for="GlxId" class ="form-control" asp-items="ViewBag.GlxId">
-                    <option value="">Выберите галактику</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StarclusterId" class="control-label"></label>
-                <select asp-for="StarclusterId" class ="form-control" asp-items="ViewBag.StarclusterId">
-                    <option value="">Выберите звёздное скопление</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlanetsystemId" class="control-label"></label>
-                <select asp-for="PlanetsystemId" class ="form-control" asp-items="ViewBag.PlanetsystemId">
-                    <option value="">Выберите планетную систему</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StarName" class="control-label"></label>
-                <input asp-for="StarName" class="form-control" />
-                <span asp-validation-for="StarName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StarApparentMagnitude" class="control-label"></label>
-                <input asp-for="StarApparentMagnitude" class="form-control" />
-                <span asp-validation-for="StarApparentMagnitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StarStellarClass" class="control-label"></label>
-                <input asp-for="StarStellarClass" class="form-control" />
-                <span asp-validation-for="StarStellarClass" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StarDistance" class="control-label"></label>
-                <input asp-for="StarDistance" class="form-control" />
-                <span asp-validation-for="StarDistance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StarDeclination" class="control-label"></label>
-                <input asp-for="StarDeclination" class="form-control" />
-                <span asp-validation-for="StarDeclination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="formFile" class="form-label">Выберите изображение</label>
-                <input class="form-control" type="file" name="formFile">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Добавить" class="btn btn-primary" />
-            </div>
-        </form>
+<form class="row g-3" method="post" asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-6">
+        <label asp-for="ConsId" class="control-label"></label>
+        <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId">
+            <option value="">Выберите созвездие</option>
+        </select>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Назад</a>
-</div>
+    <div class="col-md-6">
+        <label asp-for="StarApparentMagnitude" class="control-label"></label>
+        <input asp-for="StarApparentMagnitude" class="form-control" />
+        <span asp-validation-for="StarApparentMagnitude" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="GlxId" class="control-label"></label>
+        <select asp-for="GlxId" class="form-control" asp-items="ViewBag.GlxId">
+            <option value="">Выберите галактику</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="StarStellarClass" class="control-label"></label>
+        <input asp-for="StarStellarClass" class="form-control" />
+        <span asp-validation-for="StarStellarClass" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="StarclusterId" class="control-label"></label>
+        <select asp-for="StarclusterId" class="form-control" asp-items="ViewBag.StarclusterId">
+            <option value="">Выберите звёздное скопление</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="StarDistance" class="control-label"></label>
+        <input asp-for="StarDistance" class="form-control" />
+        <span asp-validation-for="StarDistance" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="PlanetsystemId" class="control-label"></label>
+        <select asp-for="PlanetsystemId" class="form-control" asp-items="ViewBag.PlanetsystemId">
+            <option value="">Выберите планетную систему</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="StarDeclination" class="control-label"></label>
+        <input asp-for="StarDeclination" class="form-control" />
+        <span asp-validation-for="StarDeclination" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="StarName" class="control-label"></label>
+        <input asp-for="StarName" class="form-control" />
+        <span asp-validation-for="StarName" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label for="formFile" class="form-label"></label>
+        <input class="form-control" type="file" name="formFile">
+    </div>
+    <div class="col-12 d-flex justify-content-center gap-2">
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
+        <input type="submit" value="Добавить" class="btn btn-primary" />
+    </div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
