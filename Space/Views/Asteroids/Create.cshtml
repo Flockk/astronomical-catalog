@@ -23,62 +23,56 @@
     }
 </style>
 
-<h3>Добавление астероида</h3>
+<p class="text-center fs-2">Добавление астероида</p>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StarId" class="control-label"></label>
-                <select asp-for="StarId" class ="form-control" asp-items="ViewBag.StarId">
-                    <option value="">Выберите звезду</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstName" class="control-label"></label>
-                <input asp-for="AstName" class="form-control" />
-                <span asp-validation-for="AstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstDiameter" class="control-label"></label>
-                <input asp-for="AstDiameter" class="form-control" />
-                <span asp-validation-for="AstDiameter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstOrbitalEccentricity" class="control-label"></label>
-                <input asp-for="AstOrbitalEccentricity" class="form-control" />
-                <span asp-validation-for="AstOrbitalEccentricity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstOrbitalInclination" class="control-label"></label>
-                <input asp-for="AstOrbitalInclination" class="form-control" />
-                <span asp-validation-for="AstOrbitalInclination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstArgumentOfPerihelion" class="control-label"></label>
-                <input asp-for="AstArgumentOfPerihelion" class="form-control" />
-                <span asp-validation-for="AstArgumentOfPerihelion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstMeanAnomaly" class="control-label"></label>
-                <input asp-for="AstMeanAnomaly" class="form-control" />
-                <span asp-validation-for="AstMeanAnomaly" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="formFile" class="form-label">Выберите изображение</label>
-                <input class="form-control" type="file" name="formFile">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Добавить" class="btn btn-primary" />
-            </div>
-        </form>
+<form class="row g-3" method="post" asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-6">
+        <label asp-for="StarId" class="control-label"></label>
+        <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
+            <option value="">Выберите звезду</option>
+        </select>
     </div>
-</div>
+    <div class="col-md-3">
+        <label asp-for="AstDiameter" class="control-label"></label>
+        <input asp-for="AstDiameter" class="form-control" />
+        <span asp-validation-for="AstDiameter" class="text-danger"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="AstOrbitalEccentricity" class="control-label"></label>
+        <input asp-for="AstOrbitalEccentricity" class="form-control" />
+        <span asp-validation-for="AstOrbitalEccentricity" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="AstName" class="control-label"></label>
+        <input asp-for="AstName" class="form-control" />
+        <span asp-validation-for="AstName" class="text-danger"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="AstOrbitalInclination" class="control-label"></label>
+        <input asp-for="AstOrbitalInclination" class="form-control" />
+        <span asp-validation-for="AstOrbitalInclination" class="text-danger"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="AstArgumentOfPerihelion" class="control-label"></label>
+        <input asp-for="AstArgumentOfPerihelion" class="form-control" />
+        <span asp-validation-for="AstArgumentOfPerihelion" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label for="formFile" class="form-label"></label>
+        <input class="form-control" type="file" name="formFile">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="AstMeanAnomaly" class="control-label"></label>
+        <input asp-for="AstMeanAnomaly" class="form-control" />
+        <span asp-validation-for="AstMeanAnomaly" class="text-danger"></span>
+    </div>
+    <div class="col-12 d-flex justify-content-center gap-2">
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
+        <input type="submit" value="Добавить" class="btn btn-primary" />
+    </div>
+</form>
 
-<div>
-    <a asp-action="Index">Назад</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
