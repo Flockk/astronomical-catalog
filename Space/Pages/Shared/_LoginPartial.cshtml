@@ -3,11 +3,7 @@
 @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
 {
     <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-        <ul>
-            <li>
-                <button type="submit" class="nav-link text-dark">Выйти</button>
-            </li>
-        </ul>
+        <button type="submit" class="btn btn-light">Выйти</button>
     </form>
 }
 else
