@@ -61,10 +61,15 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Constellations constellations, IFormFile? formFile)
+        public async Task<IActionResult> Create(Constellations constellations, IFormFile? formFile, string ConsName, string ConsAbbreviation, string ConsSymbolism)
         {
             if (ModelState.IsValid)
             {
+                if (_context.Constellations.Any(c => c.ConsName == ConsName) || _context.Constellations.Any(c => c.ConsAbbreviation == ConsAbbreviation) || _context.Constellations.Any(c => c.ConsSymbolism == ConsSymbolism))
+                {
+                    return View(constellations);
+                }
+
                 if (formFile == null)
                 {
                     _context.Add(constellations);
