@@ -57,42 +57,49 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BlackHoles blackHoles, IFormFile? formFile)
+        public async Task<IActionResult> Create(BlackHoles blackHoles, IFormFile? formFile, string BlackholeName)
         {
             if (ModelState.IsValid)
             {
-                if (formFile == null)
+                if (_context.BlackHoles.Any(a => a.BlackholeName == BlackholeName))
                 {
-                    _context.Add(blackHoles);
+                    return View(blackHoles);
+                }
+                else
+                {
+                    if (formFile == null)
+                    {
+                        _context.Add(blackHoles);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/BlackHoles/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/BlackHoles/" + fileName;
+
+                    var data = new BlackHoles()
+                    {
+                        BlackHoleId = blackHoles.BlackHoleId,
+                        ConsId = blackHoles.ConsId,
+                        GlxId = blackHoles.GlxId,
+                        BlackholeName = blackHoles.BlackholeName,
+                        BlackholeType = blackHoles.BlackholeType,
+                        BlackholeRightAscension = blackHoles.BlackholeRightAscension,
+                        BlackholeDeclination = blackHoles.BlackholeDeclination,
+                        BlackholeDistance = blackHoles.BlackholeDistance,
+                        BlackholeImage = uploadedDBpath
+                    };
+
+                    _context.Add(data);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-
-                string fileName = Path.GetFileName(formFile.FileName);
-                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/BlackHoles/", fileName);
-                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
-                {
-                    await formFile.CopyToAsync(filestream);
-                }
-
-                string uploadedDBpath = "/Img/BlackHoles/" + fileName;
-
-                var data = new BlackHoles()
-                {
-                    BlackHoleId = blackHoles.BlackHoleId,
-                    ConsId = blackHoles.ConsId,
-                    GlxId = blackHoles.GlxId,
-                    BlackholeName = blackHoles.BlackholeName,
-                    BlackholeType = blackHoles.BlackholeType,
-                    BlackholeRightAscension = blackHoles.BlackholeRightAscension,
-                    BlackholeDeclination = blackHoles.BlackholeDeclination,
-                    BlackholeDistance = blackHoles.BlackholeDistance,
-                    BlackholeImage = uploadedDBpath
-                };
-
-                _context.Add(data);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
             ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", blackHoles.ConsId);
             ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", blackHoles.GlxId);
