@@ -1,60 +1,114 @@
 ﻿@model Space.Models.Comets
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Детали кометы";
 }
 
-<h3>Детали кометы</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <div class="form-group">
-            <partial name="_CometImage" />
+<p class="text-center fs-2 font-monospace">Детали кометы</p>
+<hr />
+
+<div class="container clearfix">
+    <partial name="_CometImage" />
+    <dvi class="row">
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
         </div>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CometName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CometName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CometOrbitalPeriod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CometOrbitalPeriod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CometSemiMajorAxis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CometSemiMajorAxis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CometPerihelion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CometPerihelion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CometEccentricity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CometEccentricity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CometOrbitalInclination)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CometOrbitalInclination)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Star)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Star.StarName)
-        </dd>
-    </dl>
+
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.CometName)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.CometName)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.CometOrbitalPeriod)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.CometOrbitalPeriod)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.CometSemiMajorAxis)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.CometSemiMajorAxis)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.CometPerihelion)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.CometPerihelion)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.CometEccentricity)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.CometEccentricity)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.CometOrbitalInclination)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.CometOrbitalInclination)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.Star)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.Star.StarName)</div>
+            </div>
+        </div>
+    </dvi>
 </div>
-<div>
-    <a asp-action="Index">Назад</a>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
 </div>
+<hr />
+
+@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
+{
+    <div class="d-flex gap-2">
+        <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
+        <a asp-action="Edit" asp-route-id="@Model?.CometId" class="btn btn-success btn-sm">Изменить</a>
+    </div>
+}
+else
+{
+    <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
+}
