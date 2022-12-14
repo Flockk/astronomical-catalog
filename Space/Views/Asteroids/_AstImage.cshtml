@@ -5,4 +5,11 @@
 	imgText = "Астероид" + " " + Model.AstName.Trim();
 }
 
-<img src="@Model.AstImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />
+@if (Model.AstImage == null)
+{
+		<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+}
+else
+{
+		<img src="@Model.AstImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+}
