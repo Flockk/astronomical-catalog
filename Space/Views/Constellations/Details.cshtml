@@ -1,57 +1,107 @@
 ﻿@model Space.Models.Constellations
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Детали созвездия";
 }
 
-<p class="text-center fs-2">Детали созвездия</p>
+<p class="text-center fs-2 font-monospace">Детали созвездия</p>
 <hr />
 
-<div class="clearfix">
+<div class="container clearfix">
     <partial name="_ConsImage" />
-    <div class="container">
-        <div class="row align-self-lg-center">
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsName)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsName)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsAbbreviation)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsAbbreviation)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsSymbolism)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsSymbolism)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsDeclination)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsDeclination)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsSquare)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsSquare)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsVisibleInLatitudes)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsAbbreviation)</div>
-            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsAbbreviation)</div>
-
-            <div class="w-100"></div>
-
-            <div class="col-12 d-flex justify-content-center gap-2">
-                <a asp-action="Index" class="btn btn-secondary">Назад</a>
-                <input type="submit" value="Добавить" class="btn btn-primary" />
-            </div>
-
+    <dvi class="row">
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
         </div>
-    </div>
+
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.ConsName)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsName)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.ConsAbbreviation)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsAbbreviation)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.ConsSymbolism)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsSymbolism)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.ConsDeclination)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsDeclination)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.ConsSquare)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsSquare)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsVisibleInLatitudes)</div>
+            </div>
+        </div>
+    </dvi>
 </div>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
+</div>
+<hr />
+
+@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
+{
+    <div class="d-flex gap-2">
+        <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
+        <a asp-action="Edit" asp-route-id="@Model?.ConsId" class="btn btn-success btn-sm">Изменить</a>
+    </div>
+}
+else
+{
+    <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
+}
+

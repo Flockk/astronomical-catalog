@@ -50,7 +50,7 @@ namespace Space.Models
         public string ConsDeclination { get; set; }
 
         [Range(0.000001, int.MaxValue, ErrorMessage = "Площадь должна быть положительна")]
-        [DisplayName("Площадь (кв. °)")]
+        [DisplayName("Площадь (кв.°)")]
         public int? ConsSquare { get; set; }
 
         [StringLength(20, ErrorMessage = "Длина строки должна быть до 20 символов")]
