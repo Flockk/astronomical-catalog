@@ -55,43 +55,50 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Comets comets, IFormFile? formFile)
+        public async Task<IActionResult> Create(Comets comets, IFormFile? formFile, string CometName)
         {
             if (ModelState.IsValid)
             {
-                if (formFile == null)
+                if (_context.Comets.Any(c => c.CometName == CometName))
                 {
-                    _context.Add(comets);
+                    return View(comets);
+                }
+                else
+                {
+                    if (formFile == null)
+                    {
+                        _context.Add(comets);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Comets/", fileName);
+                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(filestream);
+                    }
+
+                    string uploadedDBpath = "/Img/Comets/" + fileName;
+                    SpaceContext spaceContext = new SpaceContext();
+
+                    var data = new Comets()
+                    {
+                        CometId = comets.CometId,
+                        StarId = comets.StarId,
+                        CometName = comets.CometName,
+                        CometOrbitalPeriod = comets.CometOrbitalPeriod,
+                        CometSemiMajorAxis = comets.CometSemiMajorAxis,
+                        CometPerihelion = comets.CometPerihelion,
+                        CometEccentricity = comets.CometEccentricity,
+                        CometOrbitalInclination = comets.CometOrbitalInclination,
+                        CometImage = uploadedDBpath
+                    };
+
+                    _context.Add(data);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-
-                string fileName = Path.GetFileName(formFile.FileName);
-                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Comets/", fileName);
-                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
-                {
-                    await formFile.CopyToAsync(filestream);
-                }
-
-                string uploadedDBpath = "/Img/Comets/" + fileName;
-                SpaceContext spaceContext = new SpaceContext();
-
-                var data = new Comets()
-                {
-                    CometId = comets.CometId,
-                    StarId = comets.StarId,
-                    CometName = comets.CometName,
-                    CometOrbitalPeriod = comets.CometOrbitalPeriod,
-                    CometSemiMajorAxis = comets.CometSemiMajorAxis,
-                    CometPerihelion = comets.CometPerihelion,
-                    CometEccentricity = comets.CometEccentricity,
-                    CometOrbitalInclination = comets.CometOrbitalInclination,
-                    CometImage = uploadedDBpath
-                };
-
-                _context.Add(data);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", comets.StarId);
             return View(comets);
