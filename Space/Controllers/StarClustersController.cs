@@ -57,10 +57,17 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(StarClusters starClusters, IFormFile? formFile)
+        public async Task<IActionResult> Create(StarClusters starClusters, IFormFile? formFile, string StarclusterName)
         {
             if (ModelState.IsValid)
             {
+                if (_context.StarClusters.Any(s => s.StarclusterName == StarclusterName))
+                {
+                    ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", starClusters.ConsId);
+                    ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", starClusters.GlxId);
+                    return View(starClusters);
+                }
+
                 if (formFile == null)
                 {
                     _context.Add(starClusters);

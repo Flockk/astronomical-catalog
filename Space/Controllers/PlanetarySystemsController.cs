@@ -57,10 +57,17 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PlanetarySystems planetarySystems, IFormFile? formFile)
+        public async Task<IActionResult> Create(PlanetarySystems planetarySystems, IFormFile? formFile, string PlanetsystemName)
         {
             if (ModelState.IsValid)
             {
+                if (_context.PlanetarySystems.Any(p => p.PlanetsystemName == PlanetsystemName))
+                {
+                    ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", planetarySystems.ConsId);
+                    ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", planetarySystems.GlxId);
+                    return View(planetarySystems);
+                }
+
                 if (formFile == null)
                 {
                     _context.Add(planetarySystems);

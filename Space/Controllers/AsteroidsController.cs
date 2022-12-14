@@ -60,45 +60,44 @@ namespace Space.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(_context.Asteroids.Any(a => a.AstName == AstName))
+                if (_context.Asteroids.Any(a => a.AstName == AstName))
                 {
+                    ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", asteroids.StarId);
                     return View(asteroids);
                 }
-                else
+
+                if (formFile == null)
                 {
-                    if (formFile == null)
-                    {
-                        _context.Add(asteroids);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
-                    }
-                    string fileName = Path.GetFileName(formFile.FileName);
-                    string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
-                    using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(filestream);
-                    }
-
-                    string uploadedDBpath = "/Img/Ast/" + fileName;
-                    SpaceContext spaceContext = new SpaceContext();
-
-                    var data = new Asteroids()
-                    {
-                        AstId = asteroids.AstId,
-                        StarId = asteroids.StarId,
-                        AstName = asteroids.AstName,
-                        AstDiameter = asteroids.AstDiameter,
-                        AstOrbitalEccentricity = asteroids.AstOrbitalEccentricity,
-                        AstOrbitalInclination = asteroids.AstOrbitalInclination,
-                        AstArgumentOfPerihelion = asteroids.AstArgumentOfPerihelion,
-                        AstMeanAnomaly = asteroids.AstMeanAnomaly,
-                        AstImage = uploadedDBpath
-                    };
-
-                    _context.Add(data);
+                    _context.Add(asteroids);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
+                string fileName = Path.GetFileName(formFile.FileName);
+                string uploadfilepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img/Ast/", fileName);
+                using (var filestream = new FileStream(uploadfilepath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(filestream);
+                }
+
+                string uploadedDBpath = "/Img/Ast/" + fileName;
+                SpaceContext spaceContext = new SpaceContext();
+
+                var data = new Asteroids()
+                {
+                    AstId = asteroids.AstId,
+                    StarId = asteroids.StarId,
+                    AstName = asteroids.AstName,
+                    AstDiameter = asteroids.AstDiameter,
+                    AstOrbitalEccentricity = asteroids.AstOrbitalEccentricity,
+                    AstOrbitalInclination = asteroids.AstOrbitalInclination,
+                    AstArgumentOfPerihelion = asteroids.AstArgumentOfPerihelion,
+                    AstMeanAnomaly = asteroids.AstMeanAnomaly,
+                    AstImage = uploadedDBpath
+                };
+
+                _context.Add(data);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
 
             }
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", asteroids.StarId);
@@ -125,7 +124,7 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Asteroids asteroids, IFormFile? formFile)
+        public async Task<IActionResult> Edit(int id, Asteroids asteroids, IFormFile? formFile, string AstName)
         {
             if (id != asteroids.AstId)
             {
@@ -168,6 +167,7 @@ namespace Space.Controllers
 
                     _context.Update(data);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

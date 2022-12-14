@@ -61,6 +61,7 @@ namespace Space.Controllers
             {
                 if (_context.Comets.Any(c => c.CometName == CometName))
                 {
+                    ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", comets.StarId);
                     return View(comets);
                 }
                 else

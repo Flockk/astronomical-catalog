@@ -57,10 +57,17 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Nebulae nebulae, IFormFile? formFile)
+        public async Task<IActionResult> Create(Nebulae nebulae, IFormFile? formFile, string NebulaName)
         {
             if (ModelState.IsValid)
             {
+                if (_context.Nebulae.Any(n => n.NebulaName == NebulaName))
+                {
+                    ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", nebulae.ConsId);
+                    ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", nebulae.GlxId);
+                    return View(nebulae);
+                }
+
                 if (formFile == null)
                 {
                     _context.Add(nebulae);

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Space.Controllers
 {
@@ -61,10 +62,19 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Stars stars, IFormFile? formFile)
+        public async Task<IActionResult> Create(Stars stars, IFormFile? formFile, string StarName)
         {
             if (ModelState.IsValid)
             {
+                if (_context.Stars.Any(s => s.StarName == StarName))
+                {
+                    ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", stars.ConsId);
+                    ViewData["GlxId"] = new SelectList(_context.Galaxies, "GlxId", "GlxName", stars.GlxId);
+                    ViewData["PlanetsystemId"] = new SelectList(_context.PlanetarySystems, "PlanetsystemId", "PlanetsystemName", stars.PlanetsystemId);
+                    ViewData["StarclusterId"] = new SelectList(_context.StarClusters, "StarclusterId", "StarclusterName", stars.StarclusterId);
+                    return View(stars);
+                }
+
                 if (formFile == null)
                 {
                     _context.Add(stars);

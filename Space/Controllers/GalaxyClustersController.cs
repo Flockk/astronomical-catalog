@@ -54,10 +54,16 @@ namespace Space.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(GalaxyClusters galaxyClusters, IFormFile? formFile)
+        public async Task<IActionResult> Create(GalaxyClusters galaxyClusters, IFormFile? formFile, string GlxclusterName)
         {
             if (ModelState.IsValid)
             {
+                if (_context.GalaxyClusters.Any(g => g.GlxclusterName == GlxclusterName))
+                {
+                    ViewData["ConsId"] = new SelectList(_context.Constellations, "ConsId", "ConsName", galaxyClusters.ConsId);
+                    return View(galaxyClusters);
+                }
+
                 if (formFile == null)
                 {
                     _context.Add(galaxyClusters);
