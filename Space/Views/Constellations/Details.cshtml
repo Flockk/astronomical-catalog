@@ -4,58 +4,54 @@
     ViewData["Title"] = "Детали созвездия";
 }
 
-<h3>Детали созвездия</h3>
+<p class="text-center fs-2">Детали созвездия</p>
+<hr />
 
-<div>
-    <hr />
-    <dl class="row">
-        <div class="form-group">
-            <partial name="_ConsImage" />
+<div class="clearfix">
+    <partial name="_ConsImage" />
+    <div class="container">
+        <div class="row align-self-lg-center">
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsName)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsName)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsAbbreviation)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsAbbreviation)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsSymbolism)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsSymbolism)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsDeclination)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsDeclination)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsSquare)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsSquare)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsVisibleInLatitudes)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayNameFor(model => model.ConsAbbreviation)</div>
+            <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.ConsAbbreviation)</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-12 d-flex justify-content-center gap-2">
+                <a asp-action="Index" class="btn btn-secondary">Назад</a>
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+
         </div>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsAbbreviation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsAbbreviation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsSymbolism)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsSymbolism)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsRightAscension)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsRightAscension)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsDeclination)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsDeclination)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsSquare)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsSquare)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsVisibleInLatitudes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsVisibleInLatitudes)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Назад</a>
+    </div>
 </div>
