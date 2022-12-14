@@ -2,7 +2,14 @@
 
 @{
 	var imgText = "";
-	imgText = "Галактика" + " " + Model.GlxName.Trim();
+	imgText = Model.GlxName.Trim();
 }
 
-<img src="@Model.GlxImage" width="400" height="400" class="img-fluid"  alt="@imgText" title="@imgText"/>
+@if (Model.GlxImage == null)
+{
+	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
+}
+else
+{
+	<img src="@Model.GlxImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+}

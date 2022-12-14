@@ -2,12 +2,12 @@
 
 @{
 	var imgText = "";
-	imgText = "Астероид" + " " + Model.AstName.Trim();
+	imgText = Model.AstName.Trim();
 }
 
 @if (Model.AstImage == null)
 {
-		<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+		<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
 }
 else
 {

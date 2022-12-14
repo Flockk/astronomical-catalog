@@ -2,14 +2,14 @@
 
 @{
 	var imgText = "";
-	imgText = "Созвездие" + " " + Model.ConsName.Trim();
+	imgText = Model.ConsName.Trim();
 }
 
 @if (Model.ConsImage == null)
 {
-	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
 }
 else
 {
-    <img src="@Model.ConsImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+	<img src="@Model.ConsImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
 }

@@ -5,4 +5,11 @@
 	imgText = Model.PlanetsystemName.Trim();
 }
 
-<img src="@Model.PlanetsystemImage" width="400" height="400" class="img-fluid" alt="@imgText" title="@imgText" />
+@if (Model.PlanetsystemImage == null)
+{
+	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
+}
+else
+{
+	<img src="@Model.PlanetsystemImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+}
