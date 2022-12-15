@@ -10,9 +10,6 @@ namespace Space.Models
         [DisplayName("Астероид")]
         public int AstId { get; set; }
 
-        [DisplayName("Звезда")]
-        public int? StarId { get; set; }
-
         [Remote("IsAstNameExist", "Asteroids", ErrorMessage = "Данное название астероида уже существует!")]
         [Required(ErrorMessage = "Не указано название астероида")]
         [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
@@ -38,7 +35,9 @@ namespace Space.Models
         [DisplayName("Средняя аномалия (°)")]
         public double? AstMeanAnomaly { get; set; }
 
-        public string AstImage { get; set; }    
+        public string AstImage { get; set; }
+
+        public int? StarId { get; set; }
 
         [DisplayName("Звезда")]
         public virtual Stars Star { get; set; }
