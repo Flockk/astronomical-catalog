@@ -1,73 +1,128 @@
 ﻿@model Space.Models.StarClusters
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Детали звёздного скопления";
 }
 
-<h3>Детали зёздного скопления</h3>
+<p class="text-center fs-2 font-monospace">Детали звёздного скопления</p>
+<hr />
 
-<div>
-    <hr />
-    <dl class="row">
-        <div class="form-group">
-            <partial name="_StarclusterImage" />
+<div class="container clearfix">
+    <partial name="_StarclusterImage" />
+    <dvi class="row">
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterName)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterName)</div>
+            </div>
         </div>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterRightAscension)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterRightAscension)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterDeclination)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterDeclination)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterDistance)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterDistance)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterAge)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterAge)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarclusterDiameter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarclusterDiameter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cons)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cons.ConsName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Glx)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Glx.GlxName)
-        </dd>
-    </dl>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterType)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterType)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterRightAscension)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterRightAscension)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterDeclination)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterDeclination)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterDistance)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterDistance)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterAge)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterAge)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.StarclusterDiameter)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.StarclusterDiameter)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.Cons)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.Cons.ConsName)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.Glx)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.Glx.GlxName)</div>
+            </div>
+        </div>
+    </dvi>
 </div>
-<div>
-    <a asp-action="Index">Назад</a>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
 </div>
+<hr />
+
+@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
+{
+    <div class="d-flex gap-2">
+        <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
+        <a asp-action="Edit" asp-route-id="@Model?.StarclusterId" class="btn btn-success btn-sm">Изменить</a>
+    </div>
+}
+else
+{
+    <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
+}
