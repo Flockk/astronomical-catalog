@@ -5,19 +5,38 @@
 @{
     ViewData["Title"] = "Главная страница";
 }
+<style>
+    body {
+        background: white
+    }
+
+    section {
+        color: black;
+        border-radius: 1em;
+        padding: 1em;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+</style>
 
 @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
 {
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Hello @HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "FullName")?.Value!</h1>
-            <p>Username: @HttpContextAccessor.HttpContext.User.Identity.Name</p>
-        </div>
-    </div>
+    <section>
+        <h1 class="display-4">Здравствуйте, @HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "FullName")?.Value!</h1>
+    </section>
 }
 else
 {
-    <div class="text-center">
+  <section>
         <h1 class="display-4">Здравствуйте!</h1>
-    </div>
+  </section>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,10 +1,10 @@
 ﻿@model Space.Models.Nebulae
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Изменение туманности";
 }
-
-<h3>Изменение туманности</h3>
 
 <style>
     .field-validation-error {
@@ -24,66 +24,65 @@
     }
 </style>
 
+<p class="text-center fs-2 font-monospace">Изменение туманности</p>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="NebulaId" />
-            <div class="form-group">
-                <partial name="_NebulaImage" />
-            </div>
-            <div class="form-group">
-                <label asp-for="ConsId" class="control-label"></label>
-                <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
-                <span asp-validation-for="ConsId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxId" class="control-label"></label>
-                <select asp-for="GlxId" class="form-control" asp-items="ViewBag.GlxId">
-                    <option value="">Выберите созвездие</option>
-                </select>
-                <span asp-validation-for="GlxId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NebulaName" class="control-label"></label>
-                <input asp-for="NebulaName" class="form-control" />
-                <span asp-validation-for="NebulaName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NebulaType" class="control-label"></label>
-                <input asp-for="NebulaType" class="form-control" />
-                <span asp-validation-for="NebulaType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NebulaRightAscension" class="control-label"></label>
-                <input asp-for="NebulaRightAscension" type="time" name="NebulaRightAscension" step="2" class="form-control" />
-                <span asp-validation-for="NebulaRightAscension" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NebulaDeclination" class="control-label"></label>
-                <input asp-for="NebulaDeclination" class="form-control" />
-                <span asp-validation-for="NebulaDeclination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NebulaDistance" class="control-label"></label>
-                <input asp-for="NebulaDistance" class="form-control" />
-                <span asp-validation-for="NebulaDistance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="formFile" class="form-label">Выберите изображение</label>
-                <input class="form-control" type="file" name="formFile">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Назад</a>
+<div class="container clearfix">
+    <partial name="_NebulaImage" />
+    <form class="row g-3 justify-content-start" method="post" asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="NebulaId" />
+        <div class="col-md-6">
+            <label asp-for="ConsId" class="control-label"></label>
+            <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NebulaType" class="control-label"></label>
+            <input asp-for="NebulaType" class="form-control" />
+            <span asp-validation-for="NebulaType" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="GlxId" class="control-label"></label>
+            <select asp-for="GlxId" class="form-control" asp-items="ViewBag.GlxId">
+                <option value="">Выберите галактику</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NebulaRightAscension" class="control-label"></label>
+            <input asp-for="NebulaRightAscension" type="time" name="NebulaRightAscension" step="2" class="form-control" />
+            <span asp-validation-for="NebulaRightAscension" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NebulaName" class="control-label"></label>
+            <input asp-for="NebulaName" class="form-control" />
+            <span asp-validation-for="NebulaName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NebulaDeclination" class="control-label"></label>
+            <input asp-for="NebulaDeclination" class="form-control" />
+            <span asp-validation-for="NebulaDeclination" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="formFile" class="form-label"></label>
+            <input class="form-control" type="file" name="formFile">
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NebulaDistance" class="control-label"></label>
+            <input asp-for="NebulaDistance" class="form-control" />
+            <span asp-validation-for="NebulaDistance" class="text-danger"></span>
+        </div>
+        <div class="col-12 d-flex justify-content-center gap-2">
+            <a asp-action="Index" class="btn btn-secondary">Назад</a>
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+        </div>
+    </form>
+
 </div>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
+</div>
+<hr />
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

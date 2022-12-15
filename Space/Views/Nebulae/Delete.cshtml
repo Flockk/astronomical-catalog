@@ -97,17 +97,10 @@
 </div>
 <hr />
 
-@if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated!)
-{
-    <div class="d-flex gap-2">
-        <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="NebulaId" />
-            <input type="submit" value="Удалить" class="btn btn-danger btn-sm" /> 
-        </form>
-    </div>
-}
-else
-{
+<div class="d-flex gap-2">
     <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
-}
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="NebulaId" />
+        <input type="submit" value="Удалить" class="btn btn-danger btn-sm" />
+    </form>
+</div>
