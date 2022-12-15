@@ -37,6 +37,7 @@ namespace Space.Models
 
         public string AstImage { get; set; }
 
+        [DisplayName("Звезда")]
         public int? StarId { get; set; }
 
         [DisplayName("Звезда")]

@@ -1,4 +1,6 @@
 ﻿@model Space.Models.Asteroids
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Изменение астероида";
@@ -22,86 +24,70 @@
     }
 </style>
 
-<h3>Изменение астероида</h3>
+<p class="text-center fs-2 font-monospace">Изменение астероида</p>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AstId" />
-            <div class="form-group">
-                <partial name="_AstImage" />
-            </div>
-            <div class="form-group">
-                <label asp-for="StarId" class="control-label"></label>
-                <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
-                    <option value="">Выберите звезду</option>
-                </select>
-                <span asp-validation-for="StarId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstName" class="control-label"></label>
-                <input asp-for="AstName" class="form-control" />
-                <span asp-validation-for="AstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstDiameter" class="control-label"></label>
-                <input asp-for="AstDiameter" class="form-control" />
-                <span asp-validation-for="AstDiameter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstOrbitalEccentricity" class="control-label"></label>
-                <input asp-for="AstOrbitalEccentricity" class="form-control" />
-                <span asp-validation-for="AstOrbitalEccentricity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstOrbitalInclination" class="control-label"></label>
-                <input asp-for="AstOrbitalInclination" class="form-control" />
-                <span asp-validation-for="AstOrbitalInclination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AstArgumentOfPerihelion" class="control-label"></label>
-                <input asp-for="AstArgumentOfPerihelion" class="form-control" />
-                <span asp-validation-for="AstArgumentOfPerihelion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+
+<div class="container clearfix">
+    <partial name="_AstImage" />
+    <form class="row g-3 justify-content-start" method="post" asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="AstId" />
+        <div class="col-md-6">
+            <label asp-for="StarId" class="control-label"></label>
+            <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
+                <option value="">Выберите звезду</option>
+            </select>
+            <span asp-validation-for="StarId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="AstDiameter" class="control-label"></label>
+            <input asp-for="AstDiameter" class="form-control" />
+            <span asp-validation-for="AstDiameter" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="AstName" class="control-label"></label>
+            <input asp-for="AstName" class="form-control" />
+            <span asp-validation-for="AstName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="AstOrbitalEccentricity" class="control-label"></label>
+            <input asp-for="AstOrbitalEccentricity" class="form-control" />
+            <span asp-validation-for="AstOrbitalEccentricity" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="AstOrbitalInclination" class="control-label"></label>
+            <input asp-for="AstOrbitalInclination" class="form-control" />
+            <span asp-validation-for="AstOrbitalInclination" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="AstArgumentOfPerihelion" class="control-label"></label>
+            <input asp-for="AstArgumentOfPerihelion" class="form-control" />
+            <span asp-validation-for="AstArgumentOfPerihelion" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="formFile" class="form-label"></label>
+            <input class="form-control" type="file" name="formFile">
+        </div>
+        <div class="col-md-6">
                 <label asp-for="AstMeanAnomaly" class="control-label"></label>
                 <input asp-for="AstMeanAnomaly" class="form-control" />
                 <span asp-validation-for="AstMeanAnomaly" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="formFile" class="form-label">Выберите изображение</label>
-                <input class="form-control" type="file" name="formFile">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+        <div class="col-12 d-flex justify-content-center gap-2">
+            <a asp-action="Index" class="btn btn-secondary">Назад</a>
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+        </div>
+    </form>
 
-<div>
-    <a asp-action="Index">Назад</a>
 </div>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
+</div>
+<hr />
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script>
-    $.validator.methods.range = function (value, element, param) {
-        var globalizedValue = value.replace(",", ".");
-        return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
-    $.validator.methods.number = function (value, element) {
-        return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
-    }
-
-    $.validator.methods.date = function (value, element) {
-        var date = value.split("/");
-        return this.optional(element) || !/Invalid|NaN/.test(new Date(date[2], date[1], date[0]).toString());
-    }
-</script>
 }
