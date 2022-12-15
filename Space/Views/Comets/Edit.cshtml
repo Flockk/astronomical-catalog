@@ -1,4 +1,6 @@
 ﻿@model Space.Models.Comets
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 
 @{
     ViewData["Title"] = "Изменение кометы";
@@ -22,68 +24,70 @@
     }
 </style>
 
-<h3>Изменение кометы</h3>
+<p class="text-center fs-2 font-monospace">Изменение кометы</p>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CometId" />
-            <div class="form-group">
-                <partial name="_CometImage" />
-            </div>
-            <div class="form-group">
-                <label asp-for="StarId" class="control-label"></label>
-                <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
-                    <option value="">Выберите звезду</option>
-                </select>
-                <span asp-validation-for="StarId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CometName" class="control-label"></label>
-                <input asp-for="CometName" class="form-control" />
-                <span asp-validation-for="CometName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CometOrbitalPeriod" class="control-label"></label>
-                <input asp-for="CometOrbitalPeriod" class="form-control" />
-                <span asp-validation-for="CometOrbitalPeriod" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CometSemiMajorAxis" class="control-label"></label>
-                <input asp-for="CometSemiMajorAxis" class="form-control" />
-                <span asp-validation-for="CometSemiMajorAxis" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CometPerihelion" class="control-label"></label>
-                <input asp-for="CometPerihelion" class="form-control" />
-                <span asp-validation-for="CometPerihelion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CometEccentricity" class="control-label"></label>
-                <input asp-for="CometEccentricity" class="form-control" />
-                <span asp-validation-for="CometEccentricity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CometOrbitalInclination" class="control-label"></label>
-                <input asp-for="CometOrbitalInclination" class="form-control" />
-                <span asp-validation-for="CometOrbitalInclination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="formFile" class="form-label">Выберите изображение</label>
-                <input class="form-control" type="file" name="formFile">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Назад</a>
+<div class="container clearfix">
+    <partial name="_CometImage" />
+    <form class="row g-3 justify-content-start" method="post" asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="CometId" />
+        <div class="col-md-6">
+            <label asp-for="StarId" class="control-label"></label>
+            <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
+                <option value="">Выберите звезду</option>
+            </select>
+            <span asp-validation-for="StarId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="CometOrbitalPeriod" class="control-label"></label>
+            <input asp-for="CometOrbitalPeriod" class="form-control" />
+            <span asp-validation-for="CometOrbitalPeriod" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="CometName" class="control-label"></label>
+            <input asp-for="CometName" class="form-control" />
+            <span asp-validation-for="CometName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="CometSemiMajorAxis" class="control-label"></label>
+            <input asp-for="CometSemiMajorAxis" class="form-control" />
+            <span asp-validation-for="CometSemiMajorAxis" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="CometPerihelion" class="control-label"></label>
+            <input asp-for="CometPerihelion" class="form-control" />
+            <span asp-validation-for="CometPerihelion" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="CometEccentricity" class="control-label"></label>
+            <input asp-for="CometEccentricity" class="form-control" />
+            <span asp-validation-for="CometEccentricity" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="formFile" class="form-label"></label>
+            <input class="form-control" type="file" name="formFile">
+        </div>
+        <div class="col-md-6">
+            <label asp-for="CometOrbitalInclination" class="control-label"></label>
+            <input asp-for="CometOrbitalInclination" class="form-control" />
+            <span asp-validation-for="CometOrbitalInclination" class="text-danger"></span>
+        </div>
+        <div class="col-12 d-flex justify-content-center gap-2">
+            <a asp-action="Index" class="btn btn-secondary">Назад</a>
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+        </div>
+    </form>
+
 </div>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
+</div>
+<hr />
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
