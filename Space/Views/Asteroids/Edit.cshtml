@@ -69,10 +69,22 @@
             <input class="form-control" type="file" name="formFile">
         </div>
         <div class="col-md-6">
-                <label asp-for="AstMeanAnomaly" class="control-label"></label>
-                <input asp-for="AstMeanAnomaly" class="form-control" />
-                <span asp-validation-for="AstMeanAnomaly" class="text-danger"></span>
+            <label asp-for="AstMeanAnomaly" class="control-label"></label>
+            <input asp-for="AstMeanAnomaly" class="form-control" />
+            <span asp-validation-for="AstMeanAnomaly" class="text-danger"></span>
         </div>
+        @if (Model.AstImage != null)
+        {
+            <div class="col-md-12">
+                <div class="input-group-text">
+                    <input asp-for="AstImage" class="form-check-input mt-0" type="radio" value="" aria-label="Radio button for following text input" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        ㅤУдалить изображение?
+                    </label>
+                </div>
+                <input asp-for="AstImage" type="text" class="form-control" aria-label="Text input with radio button" hidden>
+            </div>
+        }
         <div class="col-12 d-flex justify-content-center gap-2">
             <a asp-action="Index" class="btn btn-secondary">Назад</a>
             <input type="submit" value="Сохранить" class="btn btn-primary" />

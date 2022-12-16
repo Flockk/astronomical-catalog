@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
+using System.Diagnostics;
 
 namespace Space.Controllers
 {
@@ -172,7 +173,7 @@ namespace Space.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConstellationsExists(constellations.ConsId))
+                    if (!ConstellationsExists(constellations.ConsId) || constellations.ConsName == null)
                     {
                         return NotFound();
                     }
