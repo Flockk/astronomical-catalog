@@ -73,6 +73,18 @@
             <input asp-for="CometOrbitalInclination" class="form-control" />
             <span asp-validation-for="CometOrbitalInclination" class="text-danger"></span>
         </div>
+        @if (Model.CometImage != null)
+        {
+            <div class="col-md-12">
+                <div class="input-group-text">
+                    <input asp-for="CometImage" class="form-check-input mt-0" type="radio" value="" aria-label="Radio button for following text input" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        ㅤУдалить изображение?
+                    </label>
+                </div>
+                <input asp-for="CometImage" type="text" class="form-control" aria-label="Text input with radio button" hidden>
+            </div>
+        }
         <div class="col-12 d-flex justify-content-center gap-2">
             <a asp-action="Index" class="btn btn-secondary">Назад</a>
             <input type="submit" value="Сохранить" class="btn btn-primary" />

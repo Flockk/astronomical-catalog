@@ -1,15 +1,10 @@
 ﻿@model Space.Models.Galaxies
 
-@{
-	var imgText = "";
-	imgText = Model.GlxName.Trim();
-}
-
 @if (Model.GlxImage == null)
 {
 	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
 }
 else
 {
-	<img src="@Model.GlxImage" width="500" height="500" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+	<img src="@Model.GlxImage" width="500" height="500" class="img-fluid float-md-start"  />
 }

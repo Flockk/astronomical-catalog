@@ -1,15 +1,10 @@
 ﻿@model Space.Models.StarClusters
 
-@{
-	var imgText = "";
-	imgText = Model.StarclusterName.Trim();
-}
-
 @if (Model.StarclusterImage == null)
 {
 	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
 }
 else
 {
-	<img src="@Model.StarclusterImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+	<img src="@Model.StarclusterImage" width="450" height="450" class="img-fluid float-md-start" />
 }

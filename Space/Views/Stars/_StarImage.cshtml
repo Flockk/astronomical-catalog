@@ -1,15 +1,10 @@
 ﻿@model Space.Models.Stars
 
-@{
-	var imgText = "";
-	imgText = Model.StarName.Trim();
-}
-
 @if (Model.StarImage == null)
 {
 	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
 }
 else
 {
-	<img src="@Model.StarImage" width="450" height="450" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+	<img src="@Model.StarImage" width="450" height="450" class="img-fluid float-md-start" />
 }

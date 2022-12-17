@@ -1,15 +1,10 @@
 ﻿@model Space.Models.Nebulae
 
-@{
-	var imgText = "";
-	imgText = Model.NebulaName.Trim();
-}
-
 @if (Model.NebulaImage == null)
 {
 	<img src="/Img/NoImage.png" width="425" height="425" class="img-fluid float-md-start" />
 }
 else
 {
-	<img src="@Model.NebulaImage" width="600" height="600" class="img-fluid float-md-start" alt="@imgText" title="@imgText" />
+	<img src="@Model.NebulaImage" width="600" height="600" class="img-fluid float-md-start" />
 }
