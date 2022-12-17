@@ -4,8 +4,6 @@
     ViewData["Title"] = "Изменение скопления галактик";
 }
 
-<h3>Изменение скопления галактик</h3>
-
 <style>
     .field-validation-error {
         color: #b94a48;
@@ -24,60 +22,74 @@
     }
 </style>
 
+<p class="text-center fs-2 font-monospace">Изменение скопления галактик</p>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="GlxclusterId" />
-            <div class="form-group">
-                <partial name="_GlxclusterImage" />
-            </div>
-            <div class="form-group">
-                <label asp-for="ConsId" class="control-label"></label>
-                <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
-                <span asp-validation-for="ConsId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxclusterName" class="control-label"></label>
-                <input asp-for="GlxclusterName" class="form-control" />
-                <span asp-validation-for="GlxclusterName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxclusterType" class="control-label"></label>
-                <input asp-for="GlxclusterType" class="form-control" />
-                <span asp-validation-for="GlxclusterType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxclusterRightAscension" class="control-label"></label>
-                <input asp-for="GlxclusterRightAscension" type="time" name="GlxclusterRightAscension" step="2" class="form-control" />
-                <span asp-validation-for="GlxclusterRightAscension" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxclusterDeclination" class="control-label"></label>
-                <input asp-for="GlxclusterDeclination" class="form-control" />
-                <span asp-validation-for="GlxclusterDeclination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GlxclusterRedshift" class="control-label"></label>
-                <input asp-for="GlxclusterRedshift" class="form-control" />
-                <span asp-validation-for="GlxclusterRedshift" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="formFile" class="form-label">Выберите изображение</label>
-                <input class="form-control" type="file" name="formFile">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Назад</a>
+<div class="container clearfix">
+    <partial name="_GlxclusterImage" />
+    <form class="row g-3 justify-content-start" method="post" asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="GlxclusterId" />
+        <div class="col-md-6">
+            <label asp-for="ConsId" class="control-label"></label>
+            <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="GlxclusterType" class="control-label"></label>
+            <input asp-for="GlxclusterType" class="form-control" />
+            <span asp-validation-for="GlxclusterType" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="GlxclusterRightAscension" class="control-label"></label>
+            <input asp-for="GlxclusterRightAscension" type="time" name="GlxclusterRightAscension" step="2" class="form-control" />
+            <span asp-validation-for="GlxclusterRightAscension" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="GlxclusterName" class="control-label"></label>
+            <input asp-for="GlxclusterName" class="form-control" />
+            <span asp-validation-for="GlxclusterName" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="GlxclusterDeclination" class="control-label"></label>
+            <input asp-for="GlxclusterDeclination" class="form-control" />
+            <span asp-validation-for="GlxclusterDeclination" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="GlxclusterRedshift" class="control-label"></label>
+            <input asp-for="GlxclusterRedshift" class="form-control" />
+            <span asp-validation-for="GlxclusterRedshift" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label for="formFile" class="form-label"></label>
+            <input class="form-control" type="file" name="formFile">
+        </div>
+        @if (Model.GlxclusterImage != null)
+        {
+            <div class="col-md-12">
+                <div class="input-group-text">
+                    <input asp-for="GlxclusterImage" class="form-check-input mt-0" type="radio" value="" aria-label="Radio button for following text input" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        ㅤУдалить изображение?
+                    </label>
+                </div>
+                <input asp-for="GlxclusterImage" type="text" class="form-control" aria-label="Text input with radio button" hidden>
+            </div>
+        }
+        <div class="col-12 d-flex justify-content-center gap-2">
+            <a asp-action="Index" class="btn btn-secondary">Назад</a>
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+        </div>
+    </form>
+
 </div>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
+</div>
+<hr />
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
