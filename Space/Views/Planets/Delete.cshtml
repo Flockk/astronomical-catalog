@@ -4,67 +4,112 @@
     ViewData["Title"] = "Удаление планеты";
 }
 
-<h3>Удаление планеты</h3>
+<p class="text-center fs-2 font-monospace">Удаление планеты</p>
+<hr />
 
-<div>
-    <hr />
-    <dl class="row">
-        <div class="form-group">
-            <partial name="_PlntImage" />
+<div class="container clearfix">
+    <partial name="_PlntImage" />
+    <dvi class="row">
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
         </div>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlntName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlntName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlntEccentricity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlntEccentricity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlntSemiMajorAxis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlntSemiMajorAxis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlntOrbitalPeriod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlntOrbitalPeriod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlntArgumentOfPerihelion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlntArgumentOfPerihelion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlntMass)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlntMass)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cons)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cons.ConsName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Star)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Star.StarName)
-        </dd>
-    </dl>
-    
+
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.PlntName)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.PlntName)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.PlntEccentricity)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.PlntEccentricity)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.PlntSemiMajorAxis)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.PlntSemiMajorAxis)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.PlntOrbitalPeriod)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.PlntOrbitalPeriod)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.PlntArgumentOfPerihelion)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.PlntArgumentOfPerihelion)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.PlntMass)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.PlntMass)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.Cons)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.Cons.ConsName)</div>
+            </div>
+        </div>
+        <div class="text-nowrap row justify-content-center">
+            ㅤ
+        </div>
+        <div class="text-nowrap row justify-content-center font-monospace">
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5 fw-bold">@Html.DisplayNameFor(model => model.Star)</div>
+            </div>
+            <div class="col-4">
+                <div class="col-sm-5 col-md-6 fs-5">@Html.DisplayFor(model => model.Star.StarName)</div>
+            </div>
+        </div>
+    </dvi>
+</div>
+<div class="text-nowrap row justify-content-center">
+    ㅤ
+</div>
+<hr />
+
+<div class="d-flex gap-2">
+    <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
     <form asp-action="Delete">
         <input type="hidden" asp-for="PlntId" />
-        <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-action="Index">Назад</a>
+        <input type="submit" value="Удалить" class="btn btn-danger btn-sm" />
     </form>
 </div>
