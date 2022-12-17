@@ -35,29 +35,28 @@
             <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
                 <option value="">Выберите звезду</option>
             </select>
-            <span asp-validation-for="StarId" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label asp-for="AstDiameter" class="control-label"></label>
             <input asp-for="AstDiameter" class="form-control" />
             <span asp-validation-for="AstDiameter" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="AstOrbitalEccentricity" class="control-label"></label>
+            <input asp-for="AstOrbitalEccentricity" class="form-control" />
+            <span asp-validation-for="AstOrbitalEccentricity" class="text-danger"></span>
         </div>
         <div class="col-md-6">
             <label asp-for="AstName" class="control-label"></label>
             <input asp-for="AstName" class="form-control" />
             <span asp-validation-for="AstName" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
-            <label asp-for="AstOrbitalEccentricity" class="control-label"></label>
-            <input asp-for="AstOrbitalEccentricity" class="form-control" />
-            <span asp-validation-for="AstOrbitalEccentricity" class="text-danger"></span>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label asp-for="AstOrbitalInclination" class="control-label"></label>
             <input asp-for="AstOrbitalInclination" class="form-control" />
             <span asp-validation-for="AstOrbitalInclination" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label asp-for="AstArgumentOfPerihelion" class="control-label"></label>
             <input asp-for="AstArgumentOfPerihelion" class="form-control" />
             <span asp-validation-for="AstArgumentOfPerihelion" class="text-danger"></span>

@@ -1,6 +1,4 @@
 ﻿@model Space.Models.Comets
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-
 
 @{
     ViewData["Title"] = "Изменение кометы";
@@ -37,29 +35,28 @@
             <select asp-for="StarId" class="form-control" asp-items="ViewBag.StarId">
                 <option value="">Выберите звезду</option>
             </select>
-            <span asp-validation-for="StarId" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label asp-for="CometOrbitalPeriod" class="control-label"></label>
             <input asp-for="CometOrbitalPeriod" class="form-control" />
             <span asp-validation-for="CometOrbitalPeriod" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="CometSemiMajorAxis" class="control-label"></label>
+            <input asp-for="CometSemiMajorAxis" class="form-control" />
+            <span asp-validation-for="CometSemiMajorAxis" class="text-danger"></span>
         </div>
         <div class="col-md-6">
             <label asp-for="CometName" class="control-label"></label>
             <input asp-for="CometName" class="form-control" />
             <span asp-validation-for="CometName" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
-            <label asp-for="CometSemiMajorAxis" class="control-label"></label>
-            <input asp-for="CometSemiMajorAxis" class="form-control" />
-            <span asp-validation-for="CometSemiMajorAxis" class="text-danger"></span>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label asp-for="CometPerihelion" class="control-label"></label>
             <input asp-for="CometPerihelion" class="form-control" />
             <span asp-validation-for="CometPerihelion" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label asp-for="CometEccentricity" class="control-label"></label>
             <input asp-for="CometEccentricity" class="form-control" />
             <span asp-validation-for="CometEccentricity" class="text-danger"></span>
