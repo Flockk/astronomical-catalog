@@ -1,2 +1,3 @@
 app/* linguist-documentation=false
 app/* linguist-vendored
+*.cs text=auto diff=csharp 
