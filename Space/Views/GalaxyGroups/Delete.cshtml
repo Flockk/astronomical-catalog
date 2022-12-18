@@ -84,6 +84,26 @@
     <a asp-action="Index" class="btn btn-primary btn-sm">Назад</a>
     <form asp-action="Delete">
         <input type="hidden" asp-for="GlxgroupId" />
-        <input type="submit" value="Удалить" class="btn btn-danger btn-sm" />
+        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Удалить
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Внимание!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        После удаления главной сущности произойдет удаление дочерней сущности, если таковая имеется!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <input type="submit" value="Удалить" class="btn btn-danger" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>

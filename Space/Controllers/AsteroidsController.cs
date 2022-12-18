@@ -29,7 +29,7 @@ namespace Space.Controllers
         }  
           
         public async Task<IActionResult> Details(int? id)
-        {
+        { 
             if (id == null || _context.Asteroids == null)
             {
                 return NotFound();
@@ -105,7 +105,7 @@ namespace Space.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, string? AstName)
         {
             if (id == null || _context.Asteroids == null)
             {
@@ -117,6 +117,7 @@ namespace Space.Controllers
             {
                 return NotFound();
             }
+
             ViewData["StarId"] = new SelectList(_context.Stars, "StarId", "StarName", asteroids.StarId);
             return View(asteroids);
         }
@@ -171,6 +172,7 @@ namespace Space.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+
                     if (!AsteroidsExists(asteroids.AstId))
                     {
                         return NotFound();
