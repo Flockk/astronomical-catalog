@@ -1,4 +1,3 @@
 app/* linguist-documentation=false
 app/* linguist-vendored
-* linguist-vendored
-app/*.html linguist-vendored=false
+*.html linguist-vendored=false
