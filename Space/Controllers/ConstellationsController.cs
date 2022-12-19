@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
 using System.Diagnostics;
+using static Space.Controllers.ExceptionController;
 
 namespace Space.Controllers
 {
@@ -171,20 +173,46 @@ namespace Space.Controllers
                     _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!ConstellationsExists(constellations.ConsId) || constellations.ConsName == null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    HandleException(ex);
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(constellations);
+        }
+
+        public virtual void HandleException(Exception exception)
+        {
+            if (exception is DbUpdateConcurrencyException concurrencyEx)
+            {
+
+                throw new ConcurrencyException();
+            }
+            else if (exception is DbUpdateException dbUpdateEx)
+            {
+                if (dbUpdateEx.InnerException != null
+                        && dbUpdateEx.InnerException.InnerException != null)
+                {
+                    if (dbUpdateEx.InnerException.InnerException is SqlException sqlException)
+                    {
+                        switch (sqlException.Number)
+                        {
+                            case 2627:
+                            case 547:
+                            case 2601:
+
+
+                                throw new ConcurrencyException();
+                            default:
+                                throw new DatabaseAccessException(
+                                  dbUpdateEx.Message, dbUpdateEx.InnerException);
+                        }
+                    }
+
+                    throw new DatabaseAccessException(dbUpdateEx.Message, dbUpdateEx.InnerException);
+                }
+            }
         }
 
         [Authorize]
