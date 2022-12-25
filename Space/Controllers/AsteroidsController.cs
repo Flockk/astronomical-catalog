@@ -205,8 +205,7 @@ namespace Space.Controllers
                             case 2627:  
                             case 547:   
                             case 2601:  
-                                        
-                                        
+                                                                  
                                 throw new ConcurrencyException();
                             default:      
                                 throw new DatabaseAccessException(
