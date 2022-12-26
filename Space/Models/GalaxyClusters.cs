@@ -15,7 +15,7 @@ namespace Space.Models
         [DisplayName("Скопление галактик")]
         public int GlxclusterId { get; set; }
         [DisplayName("Созвездие")]
-        public int ConsId { get; set; }
+        public int? ConsId { get; set; }
 
         [Remote("IsGlxclusterNameExist", "GalaxyClusters", ErrorMessage = "Данное название скопления галактик уже существует!")]
         [Required(ErrorMessage = "Не указано название скопления галактик")]

@@ -10,7 +10,7 @@ namespace Space.Models
         [DisplayName("Туманность")]
         public int NebulaId { get; set; }
         [DisplayName("Созвездие")]
-        public int ConsId { get; set; }
+        public int? ConsId { get; set; }
         [DisplayName("Галактика")]
         public int? GlxId { get; set; }
 

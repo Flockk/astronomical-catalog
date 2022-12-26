@@ -10,7 +10,7 @@ namespace Space.Models
         [DisplayName("Чёрная дыра")]
         public int BlackHoleId { get; set; }
         [DisplayName("Созвездие")]
-        public int ConsId { get; set; }
+        public int? ConsId { get; set; }
         [DisplayName("Галактика")]
         public int? GlxId { get; set; }
 

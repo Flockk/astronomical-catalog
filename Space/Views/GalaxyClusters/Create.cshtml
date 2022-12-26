@@ -28,7 +28,9 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="col-md-6">
         <label asp-for="ConsId" class="control-label"></label>
-        <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId"></select>
+        <select asp-for="ConsId" class="form-control" asp-items="ViewBag.ConsId">
+            <option value="">Выберите созвездие</option>
+        </select>
     </div>
     <div class="col-md-3">
         <label asp-for="GlxclusterType" class="control-label"></label>
