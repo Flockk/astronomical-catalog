@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Space.Models;
-using System.Data;
-using System.Runtime.Serialization;
 using static Space.Controllers.ExceptionController;
 
 namespace Space.Controllers
 {
-    
+
     public class AsteroidsController : Controller
     {
         private readonly SpaceContext _context;
