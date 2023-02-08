@@ -147,7 +147,7 @@ Test.prototype = {
 			teardown: function() {}
 		}, this.moduleTestEnvironment );
 
-		this.started = +new Date();
+		this.started = Number(new Date());
 		runLoggingCallbacks( "testStart", QUnit, {
 			name: this.testName,
 			module: this.module
@@ -191,19 +191,19 @@ Test.prototype = {
 			QUnit.stop();
 		}
 
-		this.callbackStarted = +new Date();
+		this.callbackStarted = Number(new Date());
 
 		if ( config.notrycatch ) {
 			this.callback.call( this.testEnvironment, QUnit.assert );
-			this.callbackRuntime = +new Date() - this.callbackStarted;
+			this.callbackRuntime = Number(new Date()) - this.callbackStarted;
 			return;
 		}
 
 		try {
 			this.callback.call( this.testEnvironment, QUnit.assert );
-			this.callbackRuntime = +new Date() - this.callbackStarted;
+			this.callbackRuntime = Number(new Date()) - this.callbackStarted;
 		} catch( e ) {
-			this.callbackRuntime = +new Date() - this.callbackStarted;
+			this.callbackRuntime = Number(new Date()) - this.callbackStarted;
 
 			QUnit.pushFailure( "Died on test #" + (this.assertions.length + 1) + " " + this.stack + ": " + ( e.message || e ), extractStacktrace( e, 0 ) );
 			// else next test will carry the responsibility
@@ -219,7 +219,7 @@ Test.prototype = {
 		config.current = this;
 		if ( config.notrycatch ) {
 			if ( typeof this.callbackRuntime === "undefined" ) {
-				this.callbackRuntime = +new Date() - this.callbackStarted;
+				this.callbackRuntime = Number(new Date()) - this.callbackStarted;
 			}
 			this.testEnvironment.teardown.call( this.testEnvironment, QUnit.assert );
 			return;
@@ -248,7 +248,7 @@ Test.prototype = {
 			bad = 0,
 			tests = id( "qunit-tests" );
 
-		this.runtime = +new Date() - this.started;
+		this.runtime = Number(new Date()) - this.started;
 		config.stats.all += this.assertions.length;
 		config.moduleStats.all += this.assertions.length;
 
@@ -371,7 +371,7 @@ Test.prototype = {
 		// `bad` initialized at top of scope
 		// defer when previous test run passed, if storage is available
 		bad = QUnit.config.reorder && defined.sessionStorage &&
-						+sessionStorage.getItem( "qunit-test-" + this.module + "-" + this.testName );
+						Number(sessionStorage.getItem( "qunit-test-" + this.module + "-" + this.testName ));
 
 		if ( bad ) {
 			run();
@@ -517,7 +517,7 @@ assert = {
 		if ( !config.current ) {
 			throw new Error( "ok() assertion outside test context, was " + sourceFromStacktrace(2) );
 		}
-		result = !!result;
+		result = Boolean(result);
 		msg = msg || (result ? "okay" : "failed" );
 
 		var source,
@@ -801,7 +801,7 @@ extend( QUnit, {
 		extend( config, {
 			stats: { all: 0, bad: 0 },
 			moduleStats: { all: 0, bad: 0 },
-			started: +new Date(),
+			started: Number(new Date()),
 			updateRate: 1000,
 			blocking: false,
 			autostart: true,
@@ -954,7 +954,7 @@ extend( QUnit, {
 		runLoggingCallbacks( "log", QUnit, details );
 
 		config.current.assertions.push({
-			result: !!result,
+			result: Boolean(result),
 			message: output
 		});
 	},
@@ -1264,7 +1264,7 @@ function done() {
 	var i, key,
 		banner = id( "qunit-banner" ),
 		tests = id( "qunit-tests" ),
-		runtime = +new Date() - config.started,
+		runtime = Number(new Date()) - config.started,
 		passed = config.stats.all - config.stats.bad,
 		html = [
 			"Tests completed in ",
@@ -1415,7 +1415,7 @@ function escapeText( s ) {
 	if ( !s ) {
 		return "";
 	}
-	s = s + "";
+	s = String(s);
 	// Both single quotes and double quotes (for attributes)
 	return s.replace( /['"<>&]/g, function( s ) {
 		switch( s ) {
@@ -1578,7 +1578,7 @@ function removeClass( elem, name ) {
 }
 
 function id( name ) {
-	return !!( typeof document !== "undefined" && document && document.getElementById ) &&
+	return Boolean(typeof document !== "undefined" && document && document.getElementById) &&
 		document.getElementById( name );
 }
 
@@ -1824,7 +1824,7 @@ QUnit.jsDump = (function() {
 		return "\"" + str.toString().replace( /"/g, "\\\"" ) + "\"";
 	}
 	function literal( o ) {
-		return o + "";
+		return String(o);
 	}
 	function join( pre, arr, post ) {
 		var s = jsDump.separator(),
