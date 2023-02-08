@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -85,7 +85,7 @@ namespace Space.Controllers
                 }
 
                 string uploadedDBpath = "/Img/Plnt/" + fileName;
-                SpaceContext spaceContext = new SpaceContext();
+                SpaceContext spaceContext = new();
 
                 var data = new Planets()
                 {
@@ -156,7 +156,7 @@ namespace Space.Controllers
                     }
 
                     string uploadedDBpath = "/Img/Plnt/" + fileName;
-                    SpaceContext spaceContext = new SpaceContext();
+                    SpaceContext spaceContext = new();
 
                     var data = new Planets()
                     {

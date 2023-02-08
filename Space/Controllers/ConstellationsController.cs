@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -87,7 +87,7 @@ namespace Space.Controllers
                 }
 
                 string uploadedDBpath = "/Img/Cons/" + fileName;
-                SpaceContext spaceContext = new SpaceContext();
+                SpaceContext spaceContext = new();
 
                 var data = new Constellations()
                 {
@@ -154,7 +154,7 @@ namespace Space.Controllers
                     }
 
                     string uploadedDBpath = "/Img/Cons/" + fileName;
-                    SpaceContext spaceContext = new SpaceContext();
+                    SpaceContext spaceContext = new();
 
                     var data = new Constellations()
                     {
