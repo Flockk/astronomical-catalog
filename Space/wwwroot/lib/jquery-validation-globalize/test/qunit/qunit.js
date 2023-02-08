@@ -2112,7 +2112,7 @@ QUnit.diff = (function() {
 		}
 
 		for ( i = 0; i < n.length - 1; i++ ) {
-			if ( n[i].text != null && n[ i + 1 ].text == null && n[i].row + 1 < o.length && o[ n[i].row + 1 ].text == null &&
+			if ( n[i].text !== null && n[ i + 1 ].text === null && n[i].row + 1 < o.length && o[ n[i].row + 1 ].text === null &&
 						n[ i + 1 ] == o[ n[i].row + 1 ] ) {
 
 				n[ i + 1 ] = {
@@ -2127,7 +2127,7 @@ QUnit.diff = (function() {
 		}
 
 		for ( i = n.length - 1; i > 0; i-- ) {
-			if ( n[i].text != null && n[ i - 1 ].text == null && n[i].row > 0 && o[ n[i].row - 1 ].text == null &&
+			if ( n[i].text !== null && n[ i - 1 ].text === null && n[i].row > 0 && o[ n[i].row - 1 ].text === null &&
 						n[ i - 1 ] == o[ n[i].row - 1 ]) {
 
 				n[ i - 1 ] = {
@@ -2157,14 +2157,14 @@ QUnit.diff = (function() {
 			oSpace = o.match(/\s+/g),
 			nSpace = n.match(/\s+/g);
 
-		if ( oSpace == null ) {
+		if ( oSpace === null ) {
 			oSpace = [ " " ];
 		}
 		else {
 			oSpace.push( " " );
 		}
 
-		if ( nSpace == null ) {
+		if ( nSpace === null ) {
 			nSpace = [ " " ];
 		}
 		else {
@@ -2177,21 +2177,21 @@ QUnit.diff = (function() {
 			}
 		}
 		else {
-			if ( out.n[0].text == null ) {
-				for ( n = 0; n < out.o.length && out.o[n].text == null; n++ ) {
+			if ( out.n[0].text === null ) {
+				for ( n = 0; n < out.o.length && out.o[n].text === null; n++ ) {
 					str += "<del>" + out.o[n] + oSpace[n] + "</del>";
 				}
 			}
 
 			for ( i = 0; i < out.n.length; i++ ) {
-				if (out.n[i].text == null) {
+				if (out.n[i].text === null) {
 					str += "<ins>" + out.n[i] + nSpace[i] + "</ins>";
 				}
 				else {
 					// `pre` initialized at top of scope
 					pre = "";
 
-					for ( n = out.n[i].row + 1; n < out.o.length && out.o[n].text == null; n++ ) {
+					for ( n = out.n[i].row + 1; n < out.o.length && out.o[n].text === null; n++ ) {
 						pre += "<del>" + out.o[n] + oSpace[n] + "</del>";
 					}
 					str += " " + out.n[i].text + nSpace[i] + pre;
