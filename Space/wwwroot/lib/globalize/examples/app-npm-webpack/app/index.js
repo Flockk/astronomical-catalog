@@ -73,7 +73,7 @@ document.getElementById( "demo" ).style.display = "block";
 
 // Refresh elapsed time
 setInterval(function() {
-	var elapsedTime = +( ( startTime - new Date() ) / 1000 ).toFixed( 0 );
+	var elapsedTime = Number(( ( startTime - new Date() ) / 1000 ).toFixed( 0 ));
 	document.getElementById( "date" ).textContent = dateFormatter( new Date() );
 	document.getElementById( "date-time-zone" ).textContent = dateWithTimeZoneFormatter( new Date() );
 	document.getElementById( "date-to-parts" ).innerHTML = dateToPartsFormatter( new Date() );

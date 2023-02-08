@@ -1613,7 +1613,7 @@
 			return function () {
 				var
 					that = this,
-					now  = +new Date(),
+					now  = Number(new Date()),
 					args = arguments;
 	
 				if ( last && now < last + frequency ) {
@@ -3750,8 +3750,8 @@
 				     nCell.nodeName.toUpperCase() == "TH" )
 				{
 					/* Get the col and rowspan attributes from the DOM and sanitise them */
-					iColspan = nCell.getAttribute('colspan') * 1;
-					iRowspan = nCell.getAttribute('rowspan') * 1;
+					iColspan = Number(nCell.getAttribute('colspan'));
+					iRowspan = Number(nCell.getAttribute('rowspan'));
 					iColspan = (!iColspan || iColspan===0 || iColspan===1) ? 1 : iColspan;
 					iRowspan = (!iRowspan || iRowspan===0 || iRowspan===1) ? 1 : iRowspan;
 	
@@ -4114,10 +4114,10 @@
 	
 		if ( draw !== undefined ) {
 			// Protect against out of sequence returns
-			if ( draw*1 < settings.iDraw ) {
+			if ( Number(draw) < settings.iDraw ) {
 				return;
 			}
-			settings.iDraw = draw * 1;
+			settings.iDraw = Number(draw);
 		}
 	
 		_fnClearTable( settings );
@@ -5813,7 +5813,7 @@
 		var s, max=-1, maxIdx = -1;
 	
 		for ( var i=0, ien=settings.aoData.length ; i<ien ; i++ ) {
-			s = _fnGetCellData( settings, i, colIdx, 'display' )+'';
+			s = String(_fnGetCellData( settings, i, colIdx, 'display' ));
 			s = s.replace( __re_html_remove, '' );
 			s = s.replace( /&nbsp;/g, ' ' );
 	
@@ -6313,7 +6313,7 @@
 	
 		/* Store the interesting variables */
 		var state = {
-			time:    +new Date(),
+			time:    Number(new Date()),
 			start:   settings._iDisplayStart,
 			length:  settings._iDisplayLength,
 			order:   $.extend( true, [], settings.aaSorting ),
@@ -6360,7 +6360,7 @@
 	
 			// Reject old data
 			var duration = settings.iStateDuration;
-			if ( duration > 0 && s.time < +new Date() - (duration*1000) ) {
+			if ( duration > 0 && s.time < Number(new Date()) - (duration*1000) ) {
 				callback();
 				return;
 			}
@@ -9089,7 +9089,7 @@
 			}
 	
 			_fnFilterComplete( settings, $.extend( {}, settings.oPreviousSearch, {
-				"sSearch": input+"",
+				"sSearch": String(input),
 				"bRegex":  regex === null ? false : regex,
 				"bSmart":  smart === null ? true  : smart,
 				"bCaseInsensitive": caseInsen === null ? true : caseInsen
@@ -9116,7 +9116,7 @@
 				}
 	
 				$.extend( preSearch[ column ], {
-					"sSearch": input+"",
+					"sSearch": String(input),
 					"bRegex":  regex === null ? false : regex,
 					"bSmart":  smart === null ? true  : smart,
 					"bCaseInsensitive": caseInsen === null ? true : caseInsen
@@ -13772,7 +13772,7 @@
 		"fnRecordsTotal": function ()
 		{
 			return _fnDataSource( this ) == 'ssp' ?
-				this._iRecordsTotal * 1 :
+				Number(this._iRecordsTotal) :
 				this.aiDisplayMaster.length;
 		},
 	
@@ -13783,7 +13783,7 @@
 		"fnRecordsDisplay": function ()
 		{
 			return _fnDataSource( this ) == 'ssp' ?
-				this._iRecordsDisplay * 1 :
+				Number(this._iRecordsDisplay) :
 				this.aiDisplay.length;
 		},
 	
@@ -14789,7 +14789,7 @@
 			}
 		}
 	
-		return d * 1;
+		return Number(d);
 	};
 	
 	
@@ -14846,7 +14846,7 @@
 				'' :
 				a.replace ?
 					a.replace( /<.*?>/g, "" ).toLowerCase() :
-					a+'';
+					String(a);
 		},
 	
 		// string
