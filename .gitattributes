@@ -1,5 +1,2 @@
-*.cs linguist-language=C#
-*.html linguist-language=HTML
-*.css linguist-language=CSS
-*.js linguist-language=JavaScript
-*.tsql linguist-language=TSQL
+* linguist-vendored
+*.cs linguist-vendored=false
